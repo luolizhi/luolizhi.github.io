@@ -5,19 +5,20 @@
   
 
   
-  <title>Hello World | Fruit snack</title>
+  <title>kubernetes 常用命令 | Fruit snack</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
+<meta name="keywords" content="k8s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/hello-world/index.html">
+<meta property="og:title" content="kubernetes 常用命令">
+<meta property="og:url" content="http://yoursite.com/2018/03/22/kubernetes-常用命令/index.html">
 <meta property="og:site_name" content="Fruit snack">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-22T08:39:47.781Z">
+<meta property="og:updated_time" content="2018-03-22T09:21:29.654Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="kubernetes 常用命令">
+<meta name="twitter:description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
   
     <link rel="alternate" href="/atom.xml" title="Fruit snack" type="application/atom+xml">
   
@@ -68,10 +69,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-kubernetes-常用命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/22/hello-world/" class="article-date">
-  <time datetime="2018-03-22T08:39:47.781Z" itemprop="datePublished">2018-03-22</time>
+    <a href="/2018/03/22/kubernetes-常用命令/" class="article-date">
+  <time datetime="2018-03-22T09:14:33.000Z" itemprop="datePublished">2018-03-22</time>
 </a>
     
   </div>
@@ -82,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      kubernetes 常用命令
     </h1>
   
 
@@ -90,37 +91,44 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <h2 id="kubectl-get-pods-o-wide"><a href="#kubectl-get-pods-o-wide" class="headerlink" title="kubectl get pods -o wide"></a>kubectl get pods -o wide</h2><h2 id="使用nslookup查看这些Pod的DNS"><a href="#使用nslookup查看这些Pod的DNS" class="headerlink" title="使用nslookup查看这些Pod的DNS"></a>使用nslookup查看这些Pod的DNS</h2><blockquote>
+<p><code>$ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh
+/ # nslookup web-0.nginx
+Server:    10.0.0.10
+Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
+</blockquote>
+<h2 id="用kubectl-run来创建一个CronJob："><a href="#用kubectl-run来创建一个CronJob：" class="headerlink" title="用kubectl run来创建一个CronJob："></a>用kubectl run来创建一个CronJob：</h2><blockquote>
+<p><code>kubectl run hello --schedule=&quot;*/1 * * * *&quot; --restart=OnFailure --image=busybox -- /bin/sh -c &quot;date; echo Hello from the Kubernetes cluster&quot;</code></p>
+</blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/hello-world/" data-id="cjf29vw9a0000dopoj6vajtd7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/kubernetes-常用命令/" data-id="cjf2avzny0000r8po75gyptd2" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2018/03/22/kubernetes-常用命令/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/22/ConfigMap/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          kubernetes 常用命令
+          ConfigMap
         
       </div>
     </a>
   
+  
+    <a href="/2018/03/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
 </nav>
 
