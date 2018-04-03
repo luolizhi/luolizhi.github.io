@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Kubernetes ZooKeeper K8SZK | Fruit snack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="By default, this user is zookeeper.The ZooKeeper package is installed into the /opt/zookeeper directory,all configuration is sym linked into the /usr/etc/zookeeper/,and all executables are sym linked">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes ZooKeeper K8SZK">
+<meta property="og:url" content="http://yoursite.com/2018/03/26/Kubernetes-ZooKeeper-K8SZK/index.html">
+<meta property="og:site_name" content="Fruit snack">
+<meta property="og:description" content="By default, this user is zookeeper.The ZooKeeper package is installed into the /opt/zookeeper directory,all configuration is sym linked into the /usr/etc/zookeeper/,and all executables are sym linked">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-03-26T01:33:10.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kubernetes ZooKeeper K8SZK">
+<meta name="twitter:description" content="By default, this user is zookeeper.The ZooKeeper package is installed into the /opt/zookeeper directory,all configuration is sym linked into the /usr/etc/zookeeper/,and all executables are sym linked">
+  
+    <link rel="alternate" href="/atom.xml" title="Fruit snack" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Fruit snack</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">beautiful &amp; delicious</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Kubernetes-ZooKeeper-K8SZK" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/26/Kubernetes-ZooKeeper-K8SZK/" class="article-date">
+  <time datetime="2018-03-26T01:05:24.000Z" itemprop="datePublished">2018-03-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Kubernetes ZooKeeper K8SZK
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>By default, this user is zookeeper.<br>The ZooKeeper package is installed into the /opt/zookeeper directory,<br>all configuration is sym linked into the /usr/etc/zookeeper/,<br>and all executables are sym linked into /usr/bin.<br>The ZooKeeper data directories are contained in /var/lib/zookeeper.<br>This is identical to the RPM distribution that users should be familiar with.</p>
+<h2 id="Headless-Service"><a href="#Headless-Service" class="headerlink" title="Headless Service"></a>Headless Service</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: zk-svc</span><br><span class="line">  labels:</span><br><span class="line">    app: zk-svc</span><br><span class="line">spec:</span><br><span class="line">  ports:</span><br><span class="line">  - port: 2888</span><br><span class="line">    name: server</span><br><span class="line">  - port: 3888</span><br><span class="line">    name: leader-election</span><br><span class="line">  clusterIP: None</span><br><span class="line">  selector:</span><br><span class="line">    app: zk-svc</span><br></pre></td></tr></table></figure>
+<h2 id="Stateful-Set"><a href="#Stateful-Set" class="headerlink" title="Stateful Set"></a>Stateful Set</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps/v1beta1</span><br><span class="line">kind: StatefulSet</span><br><span class="line">metadata:</span><br><span class="line">  name: zk</span><br><span class="line">spec:</span><br><span class="line">  serviceName: zk-svc</span><br><span class="line">  replicas: 3</span><br></pre></td></tr></table></figure>
+<h2 id="Container-Configuration"><a href="#Container-Configuration" class="headerlink" title="Container Configuration"></a>Container Configuration</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">containers:</span><br><span class="line">      - name: k8szk</span><br><span class="line">        imagePullPolicy: Always</span><br><span class="line">        image: gcr.io/google_samples/k8szk:v3</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 2181</span><br><span class="line">          name: client</span><br><span class="line">        - containerPort: 2888</span><br><span class="line">          name: server</span><br><span class="line">        - containerPort: 3888</span><br><span class="line">          name: leader-election</span><br><span class="line">        env:</span><br><span class="line">        - name : ZK_ENSEMBLE</span><br><span class="line">          value: &quot;zk-0;zk-1;zk-2&quot;</span><br><span class="line">        - name: ZK_CLIENT_PORT</span><br><span class="line">          value: &quot;2181&quot;</span><br><span class="line">        - name: ZK_SERVER_PORT</span><br><span class="line">          value: &quot;2888&quot;</span><br><span class="line">        - name: ZK_ELECTION_PORT</span><br><span class="line">          value: &quot;3888&quot;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/26/Kubernetes-ZooKeeper-K8SZK/" data-id="cjfj0ju3b00043wpobmlpiiu7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/03/23/fluentd/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">fluentd</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-fluentd-kafka-mongo/">k8s,fluentd,kafka,mongo</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/k8s/" style="font-size: 20px;">k8s</a> <a href="/tags/k8s-fluentd-kafka-mongo/" style="font-size: 10px;">k8s,fluentd,kafka,mongo</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/03/26/Kubernetes-ZooKeeper-K8SZK/">Kubernetes ZooKeeper K8SZK</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/23/fluentd/">fluentd</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/22/ConfigMap/">ConfigMap</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/22/kubernetes-常用命令/">kubernetes 常用命令</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/22/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 lukey<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

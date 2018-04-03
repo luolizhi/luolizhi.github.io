@@ -15,10 +15,12 @@
 <meta property="og:site_name" content="Fruit snack">
 <meta property="og:description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-22T09:21:29.654Z">
+<meta property="og:image" content="http://yoursite.com/2018/03/png/kubernetes-container-naming-rule.jpg">
+<meta property="og:updated_time" content="2018-03-23T02:10:52.819Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kubernetes 常用命令">
 <meta name="twitter:description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/png/kubernetes-container-naming-rule.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Fruit snack" type="application/atom+xml">
   
@@ -100,11 +102,21 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
 <h2 id="用kubectl-run来创建一个CronJob："><a href="#用kubectl-run来创建一个CronJob：" class="headerlink" title="用kubectl run来创建一个CronJob："></a>用kubectl run来创建一个CronJob：</h2><blockquote>
 <p><code>kubectl run hello --schedule=&quot;*/1 * * * *&quot; --restart=OnFailure --image=busybox -- /bin/sh -c &quot;date; echo Hello from the Kubernetes cluster&quot;</code></p>
 </blockquote>
+<h2 id="三种容器类型"><a href="#三种容器类型" class="headerlink" title="三种容器类型"></a>三种容器类型</h2><ul>
+<li><p>静态容器组：bare pod, IP和Hostname恒定；</p>
+</li>
+<li><p>有状态伸缩组： Deployment, IP和Hostname恒定，支持IP池；</p>
+</li>
+<li><p>无状态伸缩组： StatefulSets, 支持IP池，IP随机分配，灵活度更高。</p>
+</li>
+</ul>
+<p><em>斜体</em><br><strong>黑体</strong></p>
+<h2 id="k8s容器命名规则"><a href="#k8s容器命名规则" class="headerlink" title="k8s容器命名规则"></a>k8s容器命名规则</h2><p><img src="../../png/kubernetes-container-naming-rule.jpg" alt=""></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/kubernetes-常用命令/" data-id="cjf2avzny0000r8po75gyptd2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/kubernetes-常用命令/" data-id="cjfj0ju4300083wpoem8rnyt7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
@@ -146,7 +158,7 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-fluentd-kafka-mongo/">k8s,fluentd,kafka,mongo</a></li></ul>
     </div>
   </div>
 
@@ -156,7 +168,7 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/k8s/" style="font-size: 10px;">k8s</a>
+      <a href="/tags/k8s/" style="font-size: 20px;">k8s</a> <a href="/tags/k8s-fluentd-kafka-mongo/" style="font-size: 10px;">k8s,fluentd,kafka,mongo</a>
     </div>
   </div>
 
@@ -176,6 +188,14 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/03/26/Kubernetes-ZooKeeper-K8SZK/">Kubernetes ZooKeeper K8SZK</a>
+          </li>
+        
+          <li>
+            <a href="/2018/03/23/fluentd/">fluentd</a>
+          </li>
         
           <li>
             <a href="/2018/03/22/ConfigMap/">ConfigMap</a>
