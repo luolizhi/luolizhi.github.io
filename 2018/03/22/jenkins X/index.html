@@ -5,22 +5,20 @@
   
 
   
-  <title>kubernetes 常用命令 | Fruit snack</title>
+  <title>ConfigMap | Fruit snack</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
-<meta name="keywords" content="k8s">
+  <meta name="description" content="Jenkins X 是一个高度集成化的CI/CD平台，基于Jenkins和Kubernetes实现，旨在解决微服务体系架构下的云原生应用的持续交付的问题，简化整个云原生应用的开发、运行和部署过程。 Jenkins X 部分新特性1.自动化一切：自动化CI/CD流水线选择项目类型自动生成Jenkinsfile定义流水线 自动生成Dockerfile并打包容器镜像 自动创建Helm Chart并运行">
+<meta name="keywords" content="k8s,jenkins,">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kubernetes 常用命令">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/kubernetes-常用命令/index.html">
+<meta property="og:title" content="ConfigMap">
+<meta property="og:url" content="http://yoursite.com/2018/03/22/jenkins X/index.html">
 <meta property="og:site_name" content="Fruit snack">
-<meta property="og:description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
+<meta property="og:description" content="Jenkins X 是一个高度集成化的CI/CD平台，基于Jenkins和Kubernetes实现，旨在解决微服务体系架构下的云原生应用的持续交付的问题，简化整个云原生应用的开发、运行和部署过程。 Jenkins X 部分新特性1.自动化一切：自动化CI/CD流水线选择项目类型自动生成Jenkinsfile定义流水线 自动生成Dockerfile并打包容器镜像 自动创建Helm Chart并运行">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/03/png/kubernetes-container-naming-rule.jpg">
-<meta property="og:updated_time" content="2018-03-23T02:10:52.819Z">
+<meta property="og:updated_time" content="2018-04-19T08:21:39.247Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kubernetes 常用命令">
-<meta name="twitter:description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
-<meta name="twitter:image" content="http://yoursite.com/2018/03/png/kubernetes-container-naming-rule.jpg">
+<meta name="twitter:title" content="ConfigMap">
+<meta name="twitter:description" content="Jenkins X 是一个高度集成化的CI/CD平台，基于Jenkins和Kubernetes实现，旨在解决微服务体系架构下的云原生应用的持续交付的问题，简化整个云原生应用的开发、运行和部署过程。 Jenkins X 部分新特性1.自动化一切：自动化CI/CD流水线选择项目类型自动生成Jenkinsfile定义流水线 自动生成Dockerfile并打包容器镜像 自动创建Helm Chart并运行">
   
     <link rel="alternate" href="/atom.xml" title="Fruit snack" type="application/atom+xml">
   
@@ -71,10 +69,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-kubernetes-常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-jenkins X" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/22/kubernetes-常用命令/" class="article-date">
-  <time datetime="2018-03-22T09:14:33.000Z" itemprop="datePublished">2018-03-22</time>
+    <a href="/2018/03/22/jenkins X/" class="article-date">
+  <time datetime="2018-03-22T09:19:12.000Z" itemprop="datePublished">2018-03-22</time>
 </a>
     
   </div>
@@ -85,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      kubernetes 常用命令
+      ConfigMap
     </h1>
   
 
@@ -93,33 +91,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="kubectl-get-pods-o-wide"><a href="#kubectl-get-pods-o-wide" class="headerlink" title="kubectl get pods -o wide"></a>kubectl get pods -o wide</h2><h2 id="使用nslookup查看这些Pod的DNS"><a href="#使用nslookup查看这些Pod的DNS" class="headerlink" title="使用nslookup查看这些Pod的DNS"></a>使用nslookup查看这些Pod的DNS</h2><blockquote>
-<p><code>$ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh
-/ # nslookup web-0.nginx
-Server:    10.0.0.10
-Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
-</blockquote>
-<h2 id="用kubectl-run来创建一个CronJob："><a href="#用kubectl-run来创建一个CronJob：" class="headerlink" title="用kubectl run来创建一个CronJob："></a>用kubectl run来创建一个CronJob：</h2><blockquote>
-<p><code>kubectl run hello --schedule=&quot;*/1 * * * *&quot; --restart=OnFailure --image=busybox -- /bin/sh -c &quot;date; echo Hello from the Kubernetes cluster&quot;</code></p>
-</blockquote>
-<h2 id="三种容器类型"><a href="#三种容器类型" class="headerlink" title="三种容器类型"></a>三种容器类型</h2><ul>
-<li><p>静态容器组：bare pod, IP和Hostname恒定；</p>
+        <p> Jenkins X 是一个高度集成化的CI/CD平台，基于Jenkins和Kubernetes实现，旨在解决微服务体系架构下的云原生应用的持续交付的问题，简化整个云原生应用的开发、运行和部署过程。</p>
+<h1 id="Jenkins-X-部分新特性"><a href="#Jenkins-X-部分新特性" class="headerlink" title="Jenkins X 部分新特性"></a>Jenkins X 部分新特性</h1><h2 id="1-自动化一切：自动化CI-CD流水线"><a href="#1-自动化一切：自动化CI-CD流水线" class="headerlink" title="1.自动化一切：自动化CI/CD流水线"></a>1.自动化一切：自动化CI/CD流水线</h2><p>选择项目类型自动生成Jenkinsfile定义流水线</p>
+<p>自动生成Dockerfile并打包容器镜像</p>
+<p>自动创建Helm Chart并运行在Kubernetes集群</p>
+<p>自动关联代码库和流水线，作为代码变更自动触发（基于Webhook实现）</p>
+<p>自动版本号自动归档</p>
+<h2 id="2-Review代码一键部署应用：基于GitOps的环境部署"><a href="#2-Review代码一键部署应用：基于GitOps的环境部署" class="headerlink" title="2. Review代码一键部署应用：基于GitOps的环境部署"></a>2. Review代码一键部署应用：基于GitOps的环境部署</h2><p>所有的环境，应用列表，版本，配置信息统一放在代码库中进行版本控制</p>
+<p>通过Pull Request实现研发和运维的协同，完成应用部署升级（Promotion）</p>
+<p>可自动部署和手动部署，在必要的时候增加手工Review</p>
+<p>当然这些都封装在jx命令中实现</p>
+<h2 id="3-自动生成预览环境和信息同步反馈"><a href="#3-自动生成预览环境和信息同步反馈" class="headerlink" title="3. 自动生成预览环境和信息同步反馈"></a>3. 自动生成预览环境和信息同步反馈</h2><p>预览环境用于代码Review环节中临时创建</p>
+<p>同Pull Request工作流程集成并实现信息同步和有效通知</p>
+<p>验证完毕后自动清理</p>
+<p>提交和应用状态自动同步到Github注释</p>
+<p>自动生成release notes信息供验证</p>
+<h1 id="Jenkins-X安装—以linux为例"><a href="#Jenkins-X安装—以linux为例" class="headerlink" title="Jenkins X安装—以linux为例"></a>Jenkins X安装—以linux为例</h1><ul>
+<li><p>在本地安装jx命令行工具(都要安装)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$curl -L https://github.com/jenkins-x/jx/releases/download/v1.2.6/jx-linux-amd64.tar.gz | tar xzv </span><br><span class="line">$sudo mv jx /usr/local/bin</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>有状态伸缩组： Deployment, IP和Hostname恒定，支持IP池；</p>
+<li><p>使用jx创建一个k8s集群，并自动安装Jenkins X</p>
+<blockquote>
+<p><a href="http://jenkins-x.io/getting-started/create-cluster/" target="_blank" rel="noopener">http://jenkins-x.io/getting-started/create-cluster/</a></p>
+</blockquote>
 </li>
-<li><p>无状态伸缩组： StatefulSets, 支持IP池，IP随机分配，灵活度更高。</p>
+<li>在已经存在的k8s集群上安装Jenkns x<blockquote>
+<p><a href="http://jenkins-x.io/getting-started/install-on-cluster/" target="_blank" rel="noopener">http://jenkins-x.io/getting-started/install-on-cluster/</a><br>jx install</p>
+</blockquote>
 </li>
 </ul>
-<p><em>斜体</em><br><strong>黑体</strong></p>
-<h2 id="k8s容器命名规则"><a href="#k8s容器命名规则" class="headerlink" title="k8s容器命名规则"></a>k8s容器命名规则</h2><p><img src="../../png/kubernetes-container-naming-rule.jpg" alt=""></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/kubernetes-常用命令/" data-id="cjhre3575000f1opo80ffrith" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/jenkins X/" data-id="cjhre356k00071opoj9fx9nma" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s-jenkins/">k8s,jenkins,</a></li></ul>
 
     </footer>
   </div>
@@ -127,7 +135,7 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
     
 <nav id="article-nav">
   
-    <a href="/2018/03/22/jenkins X/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/03/22/ConfigMap/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -137,9 +145,9 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
     </a>
   
   
-    <a href="/2018/03/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/03/22/kubernetes-常用命令/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">kubernetes 常用命令</div>
     </a>
   
 </nav>

@@ -5,18 +5,20 @@
   
 
   
-  <title>Tag: k8s,fluentd,kafka,mongo | Fruit snack</title>
+  <title>kubernetes部署Prometheus，配置grafana | Fruit snack</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="myblog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Fruit snack">
-<meta property="og:url" content="http://yoursite.com/tags/k8s-fluentd-kafka-mongo/index.html">
+  <meta name="description" content="kubernetes部署Prometheus 注意事项安装参考https://blog.qikqiak.com/post/kubernetes-monitor-prometheus-grafana/ 需要在grafana中增加Prometheus为datasource配置报警监控先在alerting中配置channel，比如钉钉，email等（）grafana4.4.3集成了钉钉。然后在配置的da">
+<meta name="keywords" content="k8s, prometheus, grafana">
+<meta property="og:type" content="article">
+<meta property="og:title" content="kubernetes部署Prometheus，配置grafana">
+<meta property="og:url" content="http://yoursite.com/2018/04/16/kubernetes部署Prometheus，配置grafana/index.html">
 <meta property="og:site_name" content="Fruit snack">
-<meta property="og:description" content="myblog">
+<meta property="og:description" content="kubernetes部署Prometheus 注意事项安装参考https://blog.qikqiak.com/post/kubernetes-monitor-prometheus-grafana/ 需要在grafana中增加Prometheus为datasource配置报警监控先在alerting中配置channel，比如钉钉，email等（）grafana4.4.3集成了钉钉。然后在配置的da">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-23T09:21:23.286Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Fruit snack">
-<meta name="twitter:description" content="myblog">
+<meta name="twitter:title" content="kubernetes部署Prometheus，配置grafana">
+<meta name="twitter:description" content="kubernetes部署Prometheus 注意事项安装参考https://blog.qikqiak.com/post/kubernetes-monitor-prometheus-grafana/ 需要在grafana中增加Prometheus为datasource配置报警监控先在alerting中配置channel，比如钉钉，email等（）grafana4.4.3集成了钉钉。然后在配置的da">
   
     <link rel="alternate" href="/atom.xml" title="Fruit snack" type="application/atom+xml">
   
@@ -67,40 +69,63 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/23/fluentd/" class="archive-article-date">
-  <time datetime="2018-03-23T05:36:46.000Z" itemprop="datePublished">3月 23</time>
+        <section id="main"><article id="post-kubernetes部署Prometheus，配置grafana" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/16/kubernetes部署Prometheus，配置grafana/" class="article-date">
+  <time datetime="2018-04-16T07:52:28.000Z" itemprop="datePublished">2018-04-16</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/23/fluentd/">fluentd</a>
+    <h1 class="article-title" itemprop="name">
+      kubernetes部署Prometheus，配置grafana
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="kubernetes部署Prometheus-注意事项"><a href="#kubernetes部署Prometheus-注意事项" class="headerlink" title="kubernetes部署Prometheus 注意事项"></a>kubernetes部署Prometheus 注意事项</h1><p>安装参考<br><a href="https://blog.qikqiak.com/post/kubernetes-monitor-prometheus-grafana/" target="_blank" rel="noopener">https://blog.qikqiak.com/post/kubernetes-monitor-prometheus-grafana/</a></p>
+<h2 id="需要在grafana中增加Prometheus为datasource"><a href="#需要在grafana中增加Prometheus为datasource" class="headerlink" title="需要在grafana中增加Prometheus为datasource"></a>需要在grafana中增加Prometheus为datasource</h2><h2 id="配置报警监控先在alerting中配置channel，比如钉钉，email等（）grafana4-4-3集成了钉钉。然后在配置的dashboard的graph中增加规则，触发告警系统。"><a href="#配置报警监控先在alerting中配置channel，比如钉钉，email等（）grafana4-4-3集成了钉钉。然后在配置的dashboard的graph中增加规则，触发告警系统。" class="headerlink" title="配置报警监控先在alerting中配置channel，比如钉钉，email等（）grafana4.4.3集成了钉钉。然后在配置的dashboard的graph中增加规则，触发告警系统。"></a>配置报警监控先在alerting中配置channel，比如钉钉，email等（）grafana4.4.3集成了钉钉。然后在配置的dashboard的graph中增加规则，触发告警系统。</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/16/kubernetes部署Prometheus，配置grafana/" data-id="cjhre3570000c1opozgw0d7jh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s-prometheus-grafana/">k8s, prometheus, grafana</a></li></ul>
 
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/29/2017-04-21-kubernetes-glusterfs/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          kubernetes glusterfs
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/11/kubernetes源码结构/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">kubernetes源码结构</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         

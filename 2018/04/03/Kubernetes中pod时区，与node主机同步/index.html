@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>Kubernetes中pod时区，与node主机同步 | Fruit snack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="pod时间同步k8s集群中的pod时间与主机不同步，解决这个问题基本上可以有两种思路：  直接修改镜像的时间设置，好处是应用部署时无需做特殊设置，但是需要手动构建Docker镜像。 部署应用时，单独读取主机的“/etc/localtime”文件，即创建pod时同步时区，无需修改镜像，但是每个应用都要单独设置。  这里为了快速、简单的解决这个问题，先使用第二种方案，yaml文件中设置时区同步，只需要">
+<meta name="keywords" content="k8s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes中pod时区，与node主机同步">
+<meta property="og:url" content="http://yoursite.com/2018/04/03/Kubernetes中pod时区，与node主机同步/index.html">
+<meta property="og:site_name" content="Fruit snack">
+<meta property="og:description" content="pod时间同步k8s集群中的pod时间与主机不同步，解决这个问题基本上可以有两种思路：  直接修改镜像的时间设置，好处是应用部署时无需做特殊设置，但是需要手动构建Docker镜像。 部署应用时，单独读取主机的“/etc/localtime”文件，即创建pod时同步时区，无需修改镜像，但是每个应用都要单独设置。  这里为了快速、简单的解决这个问题，先使用第二种方案，yaml文件中设置时区同步，只需要">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-03T02:58:43.420Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kubernetes中pod时区，与node主机同步">
+<meta name="twitter:description" content="pod时间同步k8s集群中的pod时间与主机不同步，解决这个问题基本上可以有两种思路：  直接修改镜像的时间设置，好处是应用部署时无需做特殊设置，但是需要手动构建Docker镜像。 部署应用时，单独读取主机的“/etc/localtime”文件，即创建pod时同步时区，无需修改镜像，但是每个应用都要单独设置。  这里为了快速、简单的解决这个问题，先使用第二种方案，yaml文件中设置时区同步，只需要">
+  
+    <link rel="alternate" href="/atom.xml" title="Fruit snack" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Fruit snack</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">beautiful &amp; delicious</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Kubernetes中pod时区，与node主机同步" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/03/Kubernetes中pod时区，与node主机同步/" class="article-date">
+  <time datetime="2018-04-03T02:52:04.000Z" itemprop="datePublished">2018-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Kubernetes中pod时区，与node主机同步
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="pod时间同步"><a href="#pod时间同步" class="headerlink" title="pod时间同步"></a>pod时间同步</h1><p>k8s集群中的pod时间与主机不同步，解决这个问题基本上可以有两种思路：</p>
+<ul>
+<li>直接修改镜像的时间设置，好处是应用部署时无需做特殊设置，但是需要手动构建Docker镜像。</li>
+<li>部署应用时，单独读取主机的“/etc/localtime”文件，即创建pod时同步时区，无需修改镜像，但是每个应用都要单独设置。</li>
+</ul>
+<p>这里为了快速、简单的解决这个问题，先使用第二种方案，yaml文件中设置时区同步，只需要映射主机的“/etc/localtime”文件。</p>
+<p>这里给出一个demo<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># test-jar-service.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="comment"># if your cluster supports it, uncomment the following to automatically create</span></span><br><span class="line">  <span class="comment"># an external load-balanced IP for the frontend service.</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">NodePort</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - port:</span> <span class="number">8080</span></span><br><span class="line"><span class="comment">#    targetPort: 8080</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">        image:</span> <span class="string">lukey123/kubernetes:test-jar</span></span><br><span class="line"><span class="comment">#        resources:</span></span><br><span class="line"><span class="comment">#          requests:</span></span><br><span class="line"><span class="comment">#            cpu: 100m</span></span><br><span class="line"><span class="comment">#            memory: 100Mi</span></span><br><span class="line"><span class="comment">#        env:</span></span><br><span class="line"><span class="comment">#        - name: GET_HOSTS_FROM</span></span><br><span class="line"><span class="comment">#          value: dns</span></span><br><span class="line">          <span class="comment"># If your cluster config does not include a dns service, then to</span></span><br><span class="line">          <span class="comment"># instead access environment variables to find service host</span></span><br><span class="line">          <span class="comment"># info, comment out the 'value: dns' line above, and uncomment the</span></span><br><span class="line">          <span class="comment"># line below:</span></span><br><span class="line">          <span class="comment"># value: env</span></span><br><span class="line"><span class="attr">        ports:</span></span><br><span class="line"><span class="attr">        - containerPort:</span> <span class="number">8080</span></span><br></pre></td></tr></table></figure></p>
+<p>修改后的yaml文件为</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="comment"># if your cluster supports it, uncomment the following to automatically create</span></span><br><span class="line">  <span class="comment"># an external load-balanced IP for the frontend service.</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">NodePort</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - port:</span> <span class="number">8080</span></span><br><span class="line"><span class="comment">#    targetPort: 8080</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">        image:</span> <span class="string">lukey123/kubernetes:test-jar</span></span><br><span class="line"><span class="attr">        volumeMounts:</span> <span class="comment">#这里是增加的部分</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">host-time</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/etc/localtime</span></span><br><span class="line"><span class="comment">#        resources:</span></span><br><span class="line"><span class="comment">#          requests:</span></span><br><span class="line"><span class="comment">#            cpu: 100m</span></span><br><span class="line"><span class="comment">#            memory: 100Mi</span></span><br><span class="line"><span class="comment">#        env:</span></span><br><span class="line"><span class="comment">#        - name: GET_HOSTS_FROM</span></span><br><span class="line"><span class="comment">#          value: dns</span></span><br><span class="line">          <span class="comment"># If your cluster config does not include a dns service, then to</span></span><br><span class="line">          <span class="comment"># instead access environment variables to find service host</span></span><br><span class="line">          <span class="comment"># info, comment out the 'value: dns' line above, and uncomment the</span></span><br><span class="line">          <span class="comment"># line below:</span></span><br><span class="line">          <span class="comment"># value: env</span></span><br><span class="line"><span class="attr">        ports:</span></span><br><span class="line"><span class="attr">        - containerPort:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">      volumes:</span> <span class="comment">#这里是增加的部分</span></span><br><span class="line"><span class="attr">       - name:</span> <span class="string">host-time</span></span><br><span class="line"><span class="attr">         hostPath:</span></span><br><span class="line"><span class="attr">           path:</span> <span class="string">/etc/localtime</span></span><br></pre></td></tr></table></figure>
+<p>接着进入pod执行就可以看到时间已经同步了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl <span class="built_in">exec</span> -it <span class="built_in">test</span>-jar-57d5474cbc-dv7xr  /bin/sh</span><br><span class="line"><span class="comment"># date</span></span><br><span class="line">Tue Apr  3 10:40:15 CST 2018</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/03/Kubernetes中pod时区，与node主机同步/" data-id="cjhre356300051opodfbq3uyf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/04/配置goLand查看k8s源码/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/03/26/Kubernetes-ZooKeeper-K8SZK/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Kubernetes ZooKeeper K8SZK</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-prometheus-grafana/">k8s, prometheus, grafana</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-fluentd-kafka-mongo/">k8s,fluentd,kafka,mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-jenkins/">k8s,jenkins,</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-源码/">k8s,源码</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/k8s/" style="font-size: 20px;">k8s</a> <a href="/tags/k8s-prometheus-grafana/" style="font-size: 10px;">k8s, prometheus, grafana</a> <a href="/tags/k8s-fluentd-kafka-mongo/" style="font-size: 10px;">k8s,fluentd,kafka,mongo</a> <a href="/tags/k8s-jenkins/" style="font-size: 10px;">k8s,jenkins,</a> <a href="/tags/k8s-源码/" style="font-size: 10px;">k8s,源码</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/05/29/2017-04-21-kubernetes-glusterfs/">kubernetes glusterfs</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/16/kubernetes部署Prometheus，配置grafana/">kubernetes部署Prometheus，配置grafana</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/11/kubernetes源码结构/">kubernetes源码结构</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/04/配置goLand查看k8s源码/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/03/Kubernetes中pod时区，与node主机同步/">Kubernetes中pod时区，与node主机同步</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 lukey<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -5,22 +5,20 @@
   
 
   
-  <title>kubernetes 常用命令 | Fruit snack</title>
+  <title>kubernetes源码结构 | Fruit snack</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
-<meta name="keywords" content="k8s">
+  <meta name="description" content="kubernetes源码结构 kubernetes源码地址：https://github.com/kubernetes/kubernetes  整体结构kubernetes源码主要分为包括pkg、cmd、plugin、test四个目录。其中各个包的主要功能如下： 1.pkg是kubernetes的主体代码，里面实现了kubernetes的主体逻辑2.cmd是kubernetes的所有后台进程的代码">
+<meta name="keywords" content="k8s,源码">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kubernetes 常用命令">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/kubernetes-常用命令/index.html">
+<meta property="og:title" content="kubernetes源码结构">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/kubernetes源码结构/index.html">
 <meta property="og:site_name" content="Fruit snack">
-<meta property="og:description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
+<meta property="og:description" content="kubernetes源码结构 kubernetes源码地址：https://github.com/kubernetes/kubernetes  整体结构kubernetes源码主要分为包括pkg、cmd、plugin、test四个目录。其中各个包的主要功能如下： 1.pkg是kubernetes的主体代码，里面实现了kubernetes的主体逻辑2.cmd是kubernetes的所有后台进程的代码">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2018/03/png/kubernetes-container-naming-rule.jpg">
-<meta property="og:updated_time" content="2018-03-23T02:10:52.819Z">
+<meta property="og:updated_time" content="2018-04-11T06:42:39.882Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kubernetes 常用命令">
-<meta name="twitter:description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
-<meta name="twitter:image" content="http://yoursite.com/2018/03/png/kubernetes-container-naming-rule.jpg">
+<meta name="twitter:title" content="kubernetes源码结构">
+<meta name="twitter:description" content="kubernetes源码结构 kubernetes源码地址：https://github.com/kubernetes/kubernetes  整体结构kubernetes源码主要分为包括pkg、cmd、plugin、test四个目录。其中各个包的主要功能如下： 1.pkg是kubernetes的主体代码，里面实现了kubernetes的主体逻辑2.cmd是kubernetes的所有后台进程的代码">
   
     <link rel="alternate" href="/atom.xml" title="Fruit snack" type="application/atom+xml">
   
@@ -71,10 +69,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-kubernetes-常用命令" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-kubernetes源码结构" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/22/kubernetes-常用命令/" class="article-date">
-  <time datetime="2018-03-22T09:14:33.000Z" itemprop="datePublished">2018-03-22</time>
+    <a href="/2018/04/11/kubernetes源码结构/" class="article-date">
+  <time datetime="2018-04-11T06:24:00.000Z" itemprop="datePublished">2018-04-11</time>
 </a>
     
   </div>
@@ -85,7 +83,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      kubernetes 常用命令
+      kubernetes源码结构
     </h1>
   
 
@@ -93,33 +91,72 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="kubectl-get-pods-o-wide"><a href="#kubectl-get-pods-o-wide" class="headerlink" title="kubectl get pods -o wide"></a>kubectl get pods -o wide</h2><h2 id="使用nslookup查看这些Pod的DNS"><a href="#使用nslookup查看这些Pod的DNS" class="headerlink" title="使用nslookup查看这些Pod的DNS"></a>使用nslookup查看这些Pod的DNS</h2><blockquote>
-<p><code>$ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh
-/ # nslookup web-0.nginx
-Server:    10.0.0.10
-Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
+        <h1 id="kubernetes源码结构"><a href="#kubernetes源码结构" class="headerlink" title="kubernetes源码结构"></a>kubernetes源码结构</h1><blockquote>
+<p>kubernetes源码地址：<a href="https://github.com/kubernetes/kubernetes" target="_blank" rel="noopener">https://github.com/kubernetes/kubernetes</a></p>
 </blockquote>
-<h2 id="用kubectl-run来创建一个CronJob："><a href="#用kubectl-run来创建一个CronJob：" class="headerlink" title="用kubectl run来创建一个CronJob："></a>用kubectl run来创建一个CronJob：</h2><blockquote>
-<p><code>kubectl run hello --schedule=&quot;*/1 * * * *&quot; --restart=OnFailure --image=busybox -- /bin/sh -c &quot;date; echo Hello from the Kubernetes cluster&quot;</code></p>
-</blockquote>
-<h2 id="三种容器类型"><a href="#三种容器类型" class="headerlink" title="三种容器类型"></a>三种容器类型</h2><ul>
-<li><p>静态容器组：bare pod, IP和Hostname恒定；</p>
-</li>
-<li><p>有状态伸缩组： Deployment, IP和Hostname恒定，支持IP池；</p>
-</li>
-<li><p>无状态伸缩组： StatefulSets, 支持IP池，IP随机分配，灵活度更高。</p>
-</li>
-</ul>
-<p><em>斜体</em><br><strong>黑体</strong></p>
-<h2 id="k8s容器命名规则"><a href="#k8s容器命名规则" class="headerlink" title="k8s容器命名规则"></a>k8s容器命名规则</h2><p><img src="../../png/kubernetes-container-naming-rule.jpg" alt=""></p>
+<h2 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h2><p>kubernetes源码主要分为包括pkg、cmd、plugin、test四个目录。其中各个包的主要功能如下：</p>
+<p>1.pkg是kubernetes的主体代码，里面实现了kubernetes的主体逻辑<br>2.cmd是kubernetes的所有后台进程的代码，主要是各个子模块的启动代码，具体的实现逻辑在pkg下<br>3.plugin主要是kube-scheduler和一些插件</p>
+<h2 id="主要包功能介绍"><a href="#主要包功能介绍" class="headerlink" title="主要包功能介绍"></a>主要包功能介绍</h2><p>以下简要介绍一下各个子包的功能</p>
+<h3 id="pkg"><a href="#pkg" class="headerlink" title="pkg"></a>pkg</h3><table>
+<thead>
+<tr>
+<th>包名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api</td>
+<td>kubernetes api主要包括最新版本的Rest API接口的类，并提供数据格式验证转换工具类，对应版本号文件夹下的文件描述了特定的版本如何序列化存储和网络</td>
+</tr>
+<tr>
+<td>client</td>
+<td>Kubernetes 中公用的客户端部分，实现对对象的具体操作增删该查操作</td>
+</tr>
+<tr>
+<td>cloudprovider</td>
+<td>kubernetes 提供对aws、azure、gce、cloudstack、mesos等云供应商提供了接口支持，目前包括负载均衡、实例、zone信息、路由信息等</td>
+</tr>
+<tr>
+<td>controller</td>
+<td>kubernetes controller主要包括各个controller的实现逻辑，为各类资源如replication、endpoint、node等的增删改等逻辑提供派发和执行</td>
+</tr>
+<tr>
+<td>credentialprovider</td>
+<td>kubernetes credentialprovider 为docker 镜像仓库贡献者提供权限认证</td>
+</tr>
+<tr>
+<td>generated</td>
+<td>kubernetes generated包是所有生成的文件的目标文件，一般这里面的文件日常是不进行改动的</td>
+</tr>
+<tr>
+<td>kubectl</td>
+<td>kuernetes kubectl模块是kubernetes的命令行工具，提供apiserver的各个接口的命令行操作，包括各类资源的增删改查、扩容等一系列命令工具</td>
+</tr>
+<tr>
+<td>kubelet</td>
+<td>kuernetes kubelet模块是kubernetes的核心模块，该模块负责node层的pod管理，完成pod及容器的创建，执行pod的删除同步等操作等等</td>
+</tr>
+<tr>
+<td>master</td>
+<td>kubernetes master负责集群中master节点的运行管理、api安装、各个组件的运行端口分配、NodeRegistry、PodRegistry等的创建工作</td>
+</tr>
+<tr>
+<td>runtime</td>
+<td>kubernetes runtime实现不同版本api之间的适配，实现不同api版本之间数据结构的转换</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cmd"><a href="#cmd" class="headerlink" title="cmd"></a>cmd</h3><p>包括kubernetes所以后台进程的代码包括apiserver、controller manager、proxy、kubelet等进程</p>
+<h3 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h3><p>主要包括调度模块的代码实现，用于执行具体的Scheduler的调度工作，认证等。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/kubernetes-常用命令/" data-id="cjhre3575000f1opo80ffrith" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/11/kubernetes源码结构/" data-id="cjhre3578000g1opowo6zwvvc" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s-源码/">k8s,源码</a></li></ul>
 
     </footer>
   </div>
@@ -127,19 +164,19 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
     
 <nav id="article-nav">
   
-    <a href="/2018/03/22/jenkins X/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/04/16/kubernetes部署Prometheus，配置grafana/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          ConfigMap
+          kubernetes部署Prometheus，配置grafana
         
       </div>
     </a>
   
   
-    <a href="/2018/03/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/04/04/配置goLand查看k8s源码/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title"></div>
     </a>
   
 </nav>

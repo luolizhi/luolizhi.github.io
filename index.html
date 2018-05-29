@@ -69,6 +69,303 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2017-04-21-kubernetes-glusterfs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/29/2017-04-21-kubernetes-glusterfs/" class="article-date">
+  <time datetime="2018-05-29T07:56:25.220Z" itemprop="datePublished">2018-05-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/docker/">docker</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/29/2017-04-21-kubernetes-glusterfs/">kubernetes glusterfs</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="kubernetes-glusterfs"><a href="#kubernetes-glusterfs" class="headerlink" title="kubernetes glusterfs"></a>kubernetes glusterfs</h1><h2 id="安装-glusterfs"><a href="#安装-glusterfs" class="headerlink" title="安装 glusterfs"></a>安装 glusterfs</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 先安装 gluster 源</span><br><span class="line">yum install centos-release-gluster -y</span><br><span class="line"></span><br><span class="line"># 安装 glusterfs 组件</span><br><span class="line">yum install -y glusterfs glusterfs-server glusterfs-fuse glusterfs-rdma glusterfs-geo-replication glusterfs-devel</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## 创建 glusterfs 目录</span><br><span class="line"></span><br><span class="line">mkdir /opt/glusterd</span><br><span class="line"></span><br><span class="line">## 修改 glusterd 目录</span><br><span class="line">sed -i &apos;s/var\/lib/opt/g&apos; /etc/glusterfs/glusterd.vol</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 启动 glusterfs</span><br><span class="line">systemctl start glusterd.service</span><br><span class="line"></span><br><span class="line"># 设置开机启动</span><br><span class="line">systemctl enable glusterd.service</span><br><span class="line"></span><br><span class="line">#查看状态</span><br><span class="line">systemctl status glusterd.service</span><br></pre></td></tr></table></figure>
+<h2 id="配置-glusterfs"><a href="#配置-glusterfs" class="headerlink" title="配置 glusterfs"></a>配置 glusterfs</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 配置 hosts</span><br><span class="line"></span><br><span class="line">vi /etc/hosts</span><br><span class="line"></span><br><span class="line">gluster-1  10.6.0.52</span><br><span class="line">gluster-2  10.6.0.53</span><br><span class="line">gluster-3  10.6.0.55</span><br><span class="line">gluster-4  10.6.0.56</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 开放端口</span><br><span class="line"></span><br><span class="line">iptables -I INPUT -p tcp --dport 24007 -j ACCEPT</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 创建存储目录</span><br><span class="line"></span><br><span class="line">mkdir /opt/gfs_data</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 添加节点到 集群</span><br><span class="line"># 执行操作的本机不需要probe 本机</span><br><span class="line">[root@gluster-1 ~]#</span><br><span class="line">gluster peer probe gluster-2</span><br><span class="line">gluster peer probe gluster-3</span><br><span class="line">gluster peer probe gluster-4</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看集群状态</span><br><span class="line">gluster peer status</span><br></pre></td></tr></table></figure>
+<h2 id="配置-volume"><a href="#配置-volume" class="headerlink" title="配置 volume"></a>配置 volume</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 创建 分布卷</span><br><span class="line">gluster volume create dht-volume transport tcp gluster-1:/opt/gfs_data gluster-2:/opt/gfs_data</span><br><span class="line"></span><br><span class="line"># 查看volume状态</span><br><span class="line">gluster volume info</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">Type: Distribute</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"># 启动 分布卷</span><br><span class="line">gluster volume start dht-volume</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 创建 复制卷</span><br><span class="line"></span><br><span class="line">gluster volume create afr-volume replica 2 transport tcp gluster-1:/opt/afr_data gluster-2:/opt/afr_data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看volume状态</span><br><span class="line">gluster volume info</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">Type: Replicate</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"># 启动 复制卷</span><br><span class="line">gluster volume start afr-volume</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 创建 条带卷</span><br><span class="line">gluster volume create str-volume stripe 2 transport tcp gluster-1:/opt/str_data gluster-2:/opt/str_data</span><br><span class="line"></span><br><span class="line"># 查看volume状态</span><br><span class="line">gluster volume info</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">Type: Stripe</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"># 启动 条带卷</span><br><span class="line">gluster volume start str-volume</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"># 上面三种基本模式，可以互相组合</span><br><span class="line"></span><br><span class="line"># 这里我们使用 组合 分布式复制卷 需要最少4台服务器 replica 必须为倍数</span><br><span class="line"></span><br><span class="line">gluster volume create k8s-volume replica 2 transport tcp gluster-1:/opt/gfs_data gluster-2:/opt/gfs_data gluster-3:/opt/gfs_data gluster-4:/opt/gfs_data</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看 volume 状态</span><br><span class="line"></span><br><span class="line">gluster volume info</span><br><span class="line"></span><br><span class="line">Volume Name: k8s-volume</span><br><span class="line">Type: Distributed-Replicate</span><br><span class="line">Volume ID: 981c41fa-bbe1-4a36-a1e2-9f76de1dc8f1</span><br><span class="line">Status: Created</span><br><span class="line">Snapshot Count: 0</span><br><span class="line">Number of Bricks: 2 x 2 = 4</span><br><span class="line">Transport-type: tcp</span><br><span class="line">Bricks:</span><br><span class="line">Brick1: gluster-1:/opt/gfs_data</span><br><span class="line">Brick2: gluster-2:/opt/gfs_data</span><br><span class="line">Brick3: gluster-3:/opt/gfs_data</span><br><span class="line">Brick4: gluster-4:/opt/gfs_data</span><br><span class="line">Options Reconfigured:</span><br><span class="line">transport.address-family: inet</span><br><span class="line">nfs.disable: on</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 启动 k8s-volume</span><br><span class="line">gluster volume start k8s-volume</span><br></pre></td></tr></table></figure>
+<h2 id="gluster-调优"><a href="#gluster-调优" class="headerlink" title="gluster 调优"></a>gluster 调优</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># 开启 指定 volume 的配额</span><br><span class="line">gluster volume quota k8s-volume enable</span><br><span class="line"></span><br><span class="line"># 限制 指定 volume 的配额</span><br><span class="line">gluster volume quota k8s-volume limit-usage / 5TB</span><br><span class="line"></span><br><span class="line"># 设置 cache 大小, 默认32MB</span><br><span class="line">gluster volume set k8s-volume performance.cache-size 4GB</span><br><span class="line"></span><br><span class="line"># 设置 io 线程, 太大会导致进程崩溃</span><br><span class="line">gluster volume set k8s-volume performance.io-thread-count 16</span><br><span class="line"></span><br><span class="line"># 设置 网络检测时间, 默认42s</span><br><span class="line">gluster volume set k8s-volume network.ping-timeout 10</span><br><span class="line"></span><br><span class="line"># 设置 目录索引的自动愈合进程</span><br><span class="line">gluster volume set k8s-volume cluster.self-heal-daemon on</span><br><span class="line"></span><br><span class="line"># 设置 自动愈合的检测间隔, 默认600s</span><br><span class="line">gluster volume set k8s-volume cluster.heal-timeout 300</span><br><span class="line"></span><br><span class="line"># 设置 写缓冲区的大小, 默认1M</span><br><span class="line">gluster volume set k8s-volume performance.write-behind-window-size 1024MB</span><br></pre></td></tr></table></figure>
+<h1 id="kubernetes-配置-glusterfs"><a href="#kubernetes-配置-glusterfs" class="headerlink" title="kubernetes 配置 glusterfs"></a>kubernetes 配置 glusterfs</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">官方的文档 https://github.com/kubernetes/kubernetes/tree/master/examples/volumes/glusterfs</span><br></pre></td></tr></table></figure>
+<h2 id="kubernetes-安装客户端"><a href="#kubernetes-安装客户端" class="headerlink" title="kubernetes 安装客户端"></a>kubernetes 安装客户端</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 在所有 k8s node 中安装 glusterfs 客户端</span><br><span class="line"></span><br><span class="line">yum install -y glusterfs glusterfs-fuse</span><br><span class="line"></span><br><span class="line"># 配置 hosts</span><br><span class="line"></span><br><span class="line">vi /etc/hosts</span><br><span class="line"></span><br><span class="line">gluster-1  10.6.0.52</span><br><span class="line">gluster-2  10.6.0.53</span><br><span class="line">gluster-3  10.6.0.55</span><br><span class="line">gluster-4  10.6.0.56</span><br></pre></td></tr></table></figure>
+<h2 id="配置-endpoints"><a href="#配置-endpoints" class="headerlink" title="配置 endpoints"></a>配置 endpoints</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/kubernetes/kubernetes/master/examples/volumes/glusterfs/glusterfs-endpoints.json</span><br><span class="line"></span><br><span class="line"># 修改 endpoints.json ，配置 glusters 集群节点ip</span><br><span class="line"># 每一个 addresses 为一个 ip 组</span><br><span class="line"></span><br><span class="line">    &#123;</span><br><span class="line">      &quot;addresses&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;ip&quot;: &quot;10.6.0.52&quot;</span><br><span class="line">        &#125;</span><br><span class="line">      ],</span><br><span class="line">      &quot;ports&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">          &quot;port&quot;: 1</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 导入 glusterfs-endpoints.json</span><br><span class="line"></span><br><span class="line">kubectl apply -f glusterfs-endpoints.json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看 endpoints 信息</span><br><span class="line">kubectl get ep</span><br></pre></td></tr></table></figure>
+<h2 id="配置-service"><a href="#配置-service" class="headerlink" title="配置 service"></a>配置 service</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/kubernetes/kubernetes/master/examples/volumes/glusterfs/glusterfs-service.json</span><br><span class="line"></span><br><span class="line"># service.json 不需要配置，里面查找的是 enpointes 的名称与端口，端口默认配置为 1</span><br><span class="line"></span><br><span class="line"># 导入 glusterfs-service.json</span><br><span class="line">kubectl apply -f glusterfs-service.json</span><br><span class="line"></span><br><span class="line"># 查看 service 信息</span><br><span class="line">kubectl get svc</span><br></pre></td></tr></table></figure>
+<h2 id="创建-测试-pod"><a href="#创建-测试-pod" class="headerlink" title="创建 测试 pod"></a>创建 测试 pod</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/kubernetes/kubernetes/master/examples/volumes/glusterfs/glusterfs-pod.json</span><br><span class="line"></span><br><span class="line"># 编辑 glusterfs-pod.json</span><br><span class="line"># 修改 volumes  下的 path 为上面创建的 volume 名称</span><br><span class="line"></span><br><span class="line">&quot;path&quot;: &quot;k8s-volume&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 导入 glusterfs-pod.json</span><br><span class="line">kubectl apply -f glusterfs-pod.json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看 pods 状态</span><br><span class="line">kubectl get pods               </span><br><span class="line">NAME                             READY     STATUS    RESTARTS   AGE</span><br><span class="line">glusterfs                        1/1       Running   0          1m</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看 pods 所在 node</span><br><span class="line"></span><br><span class="line">kubectl describe pods/glusterfs</span><br><span class="line"></span><br><span class="line"># 登陆 node 物理机 使用 df 可查看 挂载目录</span><br></pre></td></tr></table></figure>
+<h2 id="配置-pv"><a href="#配置-pv" class="headerlink" title="配置 pv"></a>配置 pv</h2><blockquote>
+<p>PersistentVolume（pv）和 PersistentVolumeClaim（pvc）是k8s提供的两种API资源，用于抽象存储细节。管理员关注于如何通过pv提供存储功能而无需关注用户如何使用，同样的用户只需要挂载pvc到容器中而不需要关注存储卷采用何种技术实现。</p>
+</blockquote>
+<blockquote>
+<p>pvc和pv的关系与pod和node关系类似，前者消耗后者的资源。pvc可以向pv申请指定大小的存储资源并设置访问模式。</p>
+</blockquote>
+<blockquote>
+<p>pv 属性 </p>
+<ol>
+<li>storage 容量</li>
+<li>读写属性 分别为 - ReadWriteOnce：单个节点读写 , ReadOnlyMany：多节点只读 , ReadWriteMany：多节点读写 。</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">vi glusterfs-pv.yaml</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolume</span><br><span class="line">metadata:</span><br><span class="line">  name: gluster-dev-volume</span><br><span class="line">spec:</span><br><span class="line">  capacity:</span><br><span class="line">    storage: 8Gi</span><br><span class="line">  accessModes:</span><br><span class="line">    - ReadWriteMany</span><br><span class="line">  glusterfs:</span><br><span class="line">    endpoints: &quot;glusterfs-cluster&quot;</span><br><span class="line">    path: &quot;k8s-volume&quot;</span><br><span class="line">    readOnly: false</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 导入 pv</span><br><span class="line"></span><br><span class="line">kubectl apply -f glusterfs-pv.yaml</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看 pv</span><br><span class="line"></span><br><span class="line">kubectl get pv</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>pvc 属性</p>
+<ol>
+<li>访问属性 与 pv 相同</li>
+<li>容量，向pv申请的容量 &lt;= pv 总容量</li>
+</ol>
+</blockquote>
+<h2 id="配置-pvc"><a href="#配置-pvc" class="headerlink" title="配置 pvc"></a>配置 pvc</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">---</span><br><span class="line">kind: PersistentVolumeClaim</span><br><span class="line">apiVersion: v1</span><br><span class="line">metadata:</span><br><span class="line">  name: glusterfs-nginx</span><br><span class="line">spec:</span><br><span class="line">  accessModes:</span><br><span class="line">    - ReadWriteMany</span><br><span class="line">  resources:</span><br><span class="line">    requests:</span><br><span class="line">      storage: 8Gi</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 导入 pvc</span><br><span class="line">kubectl apply -f glusterfs-pvc.yaml</span><br><span class="line"></span><br><span class="line"># 查看 pvc</span><br><span class="line"></span><br><span class="line">kubectl get pv</span><br><span class="line"></span><br><span class="line"># STATUS 为 Bound ， VOLUME 为 pv name</span><br></pre></td></tr></table></figure>
+<h2 id="创建-nginx-deployment-挂载-volume"><a href="#创建-nginx-deployment-挂载-volume" class="headerlink" title="创建 nginx  deployment 挂载 volume"></a>创建 nginx  deployment 挂载 volume</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">vi nginx-deployment.yaml</span><br><span class="line"></span><br><span class="line">---</span><br><span class="line">apiVersion: extensions/v1beta1 </span><br><span class="line">kind: Deployment </span><br><span class="line">metadata: </span><br><span class="line">  name: nginx-dm</span><br><span class="line">spec: </span><br><span class="line">  replicas: 2</span><br><span class="line">  template: </span><br><span class="line">    metadata: </span><br><span class="line">      labels: </span><br><span class="line">        name: nginx </span><br><span class="line">    spec: </span><br><span class="line">      containers: </span><br><span class="line">        - name: nginx </span><br><span class="line">          image: nginx:alpine </span><br><span class="line">          imagePullPolicy: IfNotPresent</span><br><span class="line">          ports: </span><br><span class="line">            - containerPort: 80</span><br><span class="line">          volumeMounts:</span><br><span class="line">            - name: gluster-dev-volume</span><br><span class="line">              mountPath: &quot;/usr/share/nginx/html&quot;</span><br><span class="line">      volumes:</span><br><span class="line">      - name: gluster-dev-volume</span><br><span class="line">        persistentVolumeClaim:</span><br><span class="line">          claimName: glusterfs-nginx</span><br><span class="line">          </span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 导入 deployment</span><br><span class="line"></span><br><span class="line">kubectl apply -f nginx-deployment.yaml </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看 deployment</span><br><span class="line"></span><br><span class="line">kubectl get pods |grep nginx-dm</span><br><span class="line">nginx-dm-2784556780-cnjdw        1/1       Running   0          8m</span><br><span class="line">nginx-dm-2784556780-pt8vf        1/1       Running   0          8m</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 查看 挂载</span><br><span class="line">kubectl exec -it nginx-dm-2784556780-cnjdw -- df -h|grep k8s-volume</span><br><span class="line"></span><br><span class="line"># 创建文件 测试</span><br><span class="line"></span><br><span class="line">kubectl exec -it nginx-dm-2784556780-cnjdw -- touch /usr/share/nginx/html/index.html</span><br><span class="line"></span><br><span class="line">kubectl exec -it nginx-dm-2784556780-pt8vf -- ls -lt /usr/share/nginx/html/index.html</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 验证 glusterfs</span><br><span class="line"># 因为我们使用 分布式复制卷，所以可以看到2个节点中有文件</span><br><span class="line"></span><br><span class="line">[root@gluster-1 ~] ls /opt/gfs_data/</span><br><span class="line">[root@gluster-2 ~] ls /opt/gfs_data/</span><br><span class="line">[root@gluster-3 ~] ls /opt/gfs_data/</span><br><span class="line">[root@gluster-4 ~] ls /opt/gfs_data/</span><br></pre></td></tr></table></figure>
+<h2 id="FAQ-问题"><a href="#FAQ-问题" class="headerlink" title="FAQ 问题"></a>FAQ 问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"># 在使用 pv 与 pvc 的过程中遇到问题</span><br><span class="line"></span><br><span class="line"># 第一次创建 pv 与 pvc 的时候 状态都是OK的</span><br><span class="line"></span><br><span class="line"># 当删除 pvc 以后，再创建 pvc 状态一直 pending 无论如何都不正常</span><br><span class="line"></span><br><span class="line"># 查看日志 报 no persistent volumes available for this claim and no storage class is set</span><br><span class="line"></span><br><span class="line"># 这里我们可以跳过 pv 与 pvc 只需要创建一个 ep 就可以</span><br><span class="line"></span><br><span class="line"># 挂载的时候我们直接在 yaml 目录下 写 ep 就行</span><br><span class="line"></span><br><span class="line"># 如下为 deployment 的 yaml 文件</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">apiVersion: extensions/v1beta1 </span><br><span class="line">kind: Deployment </span><br><span class="line">metadata: </span><br><span class="line">  name: nginx-dm</span><br><span class="line">spec: </span><br><span class="line">  replicas: 2</span><br><span class="line">  template: </span><br><span class="line">    metadata: </span><br><span class="line">      labels: </span><br><span class="line">        name: nginx </span><br><span class="line">    spec: </span><br><span class="line">      containers: </span><br><span class="line">        - name: nginx </span><br><span class="line">          image: nginx:alpine </span><br><span class="line">          imagePullPolicy: IfNotPresent</span><br><span class="line">          ports: </span><br><span class="line">            - containerPort: 80</span><br><span class="line">          volumeMounts:</span><br><span class="line">            - name: gluster-efk-volume</span><br><span class="line">              mountPath: &quot;/usr/share/nginx/html&quot;</span><br><span class="line">      volumes:</span><br><span class="line">      - name: gluster-efk-volume</span><br><span class="line">        glusterfs:</span><br><span class="line">          endpoints: glusterfs-cluster</span><br><span class="line">          path: efk-volume</span><br><span class="line">          readOnly: False</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/29/2017-04-21-kubernetes-glusterfs/" data-id="cjhre352s00001opo9f6mts9l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-kubernetes部署Prometheus，配置grafana" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/16/kubernetes部署Prometheus，配置grafana/" class="article-date">
+  <time datetime="2018-04-16T07:52:28.000Z" itemprop="datePublished">2018-04-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/16/kubernetes部署Prometheus，配置grafana/">kubernetes部署Prometheus，配置grafana</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="kubernetes部署Prometheus-注意事项"><a href="#kubernetes部署Prometheus-注意事项" class="headerlink" title="kubernetes部署Prometheus 注意事项"></a>kubernetes部署Prometheus 注意事项</h1><p>安装参考<br><a href="https://blog.qikqiak.com/post/kubernetes-monitor-prometheus-grafana/" target="_blank" rel="noopener">https://blog.qikqiak.com/post/kubernetes-monitor-prometheus-grafana/</a></p>
+<h2 id="需要在grafana中增加Prometheus为datasource"><a href="#需要在grafana中增加Prometheus为datasource" class="headerlink" title="需要在grafana中增加Prometheus为datasource"></a>需要在grafana中增加Prometheus为datasource</h2><h2 id="配置报警监控先在alerting中配置channel，比如钉钉，email等（）grafana4-4-3集成了钉钉。然后在配置的dashboard的graph中增加规则，触发告警系统。"><a href="#配置报警监控先在alerting中配置channel，比如钉钉，email等（）grafana4-4-3集成了钉钉。然后在配置的dashboard的graph中增加规则，触发告警系统。" class="headerlink" title="配置报警监控先在alerting中配置channel，比如钉钉，email等（）grafana4.4.3集成了钉钉。然后在配置的dashboard的graph中增加规则，触发告警系统。"></a>配置报警监控先在alerting中配置channel，比如钉钉，email等（）grafana4.4.3集成了钉钉。然后在配置的dashboard的graph中增加规则，触发告警系统。</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/16/kubernetes部署Prometheus，配置grafana/" data-id="cjhre3570000c1opozgw0d7jh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s-prometheus-grafana/">k8s, prometheus, grafana</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-kubernetes源码结构" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/11/kubernetes源码结构/" class="article-date">
+  <time datetime="2018-04-11T06:24:00.000Z" itemprop="datePublished">2018-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/11/kubernetes源码结构/">kubernetes源码结构</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="kubernetes源码结构"><a href="#kubernetes源码结构" class="headerlink" title="kubernetes源码结构"></a>kubernetes源码结构</h1><blockquote>
+<p>kubernetes源码地址：<a href="https://github.com/kubernetes/kubernetes" target="_blank" rel="noopener">https://github.com/kubernetes/kubernetes</a></p>
+</blockquote>
+<h2 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h2><p>kubernetes源码主要分为包括pkg、cmd、plugin、test四个目录。其中各个包的主要功能如下：</p>
+<p>1.pkg是kubernetes的主体代码，里面实现了kubernetes的主体逻辑<br>2.cmd是kubernetes的所有后台进程的代码，主要是各个子模块的启动代码，具体的实现逻辑在pkg下<br>3.plugin主要是kube-scheduler和一些插件</p>
+<h2 id="主要包功能介绍"><a href="#主要包功能介绍" class="headerlink" title="主要包功能介绍"></a>主要包功能介绍</h2><p>以下简要介绍一下各个子包的功能</p>
+<h3 id="pkg"><a href="#pkg" class="headerlink" title="pkg"></a>pkg</h3><table>
+<thead>
+<tr>
+<th>包名</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api</td>
+<td>kubernetes api主要包括最新版本的Rest API接口的类，并提供数据格式验证转换工具类，对应版本号文件夹下的文件描述了特定的版本如何序列化存储和网络</td>
+</tr>
+<tr>
+<td>client</td>
+<td>Kubernetes 中公用的客户端部分，实现对对象的具体操作增删该查操作</td>
+</tr>
+<tr>
+<td>cloudprovider</td>
+<td>kubernetes 提供对aws、azure、gce、cloudstack、mesos等云供应商提供了接口支持，目前包括负载均衡、实例、zone信息、路由信息等</td>
+</tr>
+<tr>
+<td>controller</td>
+<td>kubernetes controller主要包括各个controller的实现逻辑，为各类资源如replication、endpoint、node等的增删改等逻辑提供派发和执行</td>
+</tr>
+<tr>
+<td>credentialprovider</td>
+<td>kubernetes credentialprovider 为docker 镜像仓库贡献者提供权限认证</td>
+</tr>
+<tr>
+<td>generated</td>
+<td>kubernetes generated包是所有生成的文件的目标文件，一般这里面的文件日常是不进行改动的</td>
+</tr>
+<tr>
+<td>kubectl</td>
+<td>kuernetes kubectl模块是kubernetes的命令行工具，提供apiserver的各个接口的命令行操作，包括各类资源的增删改查、扩容等一系列命令工具</td>
+</tr>
+<tr>
+<td>kubelet</td>
+<td>kuernetes kubelet模块是kubernetes的核心模块，该模块负责node层的pod管理，完成pod及容器的创建，执行pod的删除同步等操作等等</td>
+</tr>
+<tr>
+<td>master</td>
+<td>kubernetes master负责集群中master节点的运行管理、api安装、各个组件的运行端口分配、NodeRegistry、PodRegistry等的创建工作</td>
+</tr>
+<tr>
+<td>runtime</td>
+<td>kubernetes runtime实现不同版本api之间的适配，实现不同api版本之间数据结构的转换</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cmd"><a href="#cmd" class="headerlink" title="cmd"></a>cmd</h3><p>包括kubernetes所以后台进程的代码包括apiserver、controller manager、proxy、kubelet等进程</p>
+<h3 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h3><p>主要包括调度模块的代码实现，用于执行具体的Scheduler的调度工作，认证等。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/11/kubernetes源码结构/" data-id="cjhre3578000g1opowo6zwvvc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s-源码/">k8s,源码</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-配置goLand查看k8s源码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/04/配置goLand查看k8s源码/" class="article-date">
+  <time datetime="2018-04-04T01:52:38.639Z" itemprop="datePublished">2018-04-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="pycharm或者gogland配置读取kubernetes代码"><a href="#pycharm或者gogland配置读取kubernetes代码" class="headerlink" title="pycharm或者gogland配置读取kubernetes代码"></a>pycharm或者gogland配置读取kubernetes代码</h1><ol>
+<li>先下载kubernetes代码</li>
+<li>下载代码并解压出来并按照src\k8s.io\kubernetes新建目录，最后一级为下载的源码目录。</li>
+<li>接下来利用goland打开代码，到src一级。</li>
+<li>设置projectpath；添加下面三行<br>C:\Users\lukey\Documents\code\go\k8s\src\k8s.io\kubernetes\vendor<br>C:\Users\lukey\Documents\code\go\k8s\<br>C:\Users\lukey\Documents\code\go\k8s\src\k8s.io\kubernetes\staging\src</li>
+<li>过一会，代码中的import就由红色变成绿色，就可以直接ctrl+点击到声明了。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/04/配置goLand查看k8s源码/" data-id="cjhre358b000p1opo1pek9wvq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Kubernetes中pod时区，与node主机同步" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/03/Kubernetes中pod时区，与node主机同步/" class="article-date">
+  <time datetime="2018-04-03T02:52:04.000Z" itemprop="datePublished">2018-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/03/Kubernetes中pod时区，与node主机同步/">Kubernetes中pod时区，与node主机同步</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="pod时间同步"><a href="#pod时间同步" class="headerlink" title="pod时间同步"></a>pod时间同步</h1><p>k8s集群中的pod时间与主机不同步，解决这个问题基本上可以有两种思路：</p>
+<ul>
+<li>直接修改镜像的时间设置，好处是应用部署时无需做特殊设置，但是需要手动构建Docker镜像。</li>
+<li>部署应用时，单独读取主机的“/etc/localtime”文件，即创建pod时同步时区，无需修改镜像，但是每个应用都要单独设置。</li>
+</ul>
+<p>这里为了快速、简单的解决这个问题，先使用第二种方案，yaml文件中设置时区同步，只需要映射主机的“/etc/localtime”文件。</p>
+<p>这里给出一个demo<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># test-jar-service.yaml</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="comment"># if your cluster supports it, uncomment the following to automatically create</span></span><br><span class="line">  <span class="comment"># an external load-balanced IP for the frontend service.</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">NodePort</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - port:</span> <span class="number">8080</span></span><br><span class="line"><span class="comment">#    targetPort: 8080</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">        image:</span> <span class="string">lukey123/kubernetes:test-jar</span></span><br><span class="line"><span class="comment">#        resources:</span></span><br><span class="line"><span class="comment">#          requests:</span></span><br><span class="line"><span class="comment">#            cpu: 100m</span></span><br><span class="line"><span class="comment">#            memory: 100Mi</span></span><br><span class="line"><span class="comment">#        env:</span></span><br><span class="line"><span class="comment">#        - name: GET_HOSTS_FROM</span></span><br><span class="line"><span class="comment">#          value: dns</span></span><br><span class="line">          <span class="comment"># If your cluster config does not include a dns service, then to</span></span><br><span class="line">          <span class="comment"># instead access environment variables to find service host</span></span><br><span class="line">          <span class="comment"># info, comment out the 'value: dns' line above, and uncomment the</span></span><br><span class="line">          <span class="comment"># line below:</span></span><br><span class="line">          <span class="comment"># value: env</span></span><br><span class="line"><span class="attr">        ports:</span></span><br><span class="line"><span class="attr">        - containerPort:</span> <span class="number">8080</span></span><br></pre></td></tr></table></figure></p>
+<p>修改后的yaml文件为</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Service</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">  labels:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="comment"># if your cluster supports it, uncomment the following to automatically create</span></span><br><span class="line">  <span class="comment"># an external load-balanced IP for the frontend service.</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">NodePort</span></span><br><span class="line"><span class="attr">  ports:</span></span><br><span class="line"><span class="attr">  - port:</span> <span class="number">8080</span></span><br><span class="line"><span class="comment">#    targetPort: 8080</span></span><br><span class="line"><span class="attr">  selector:</span></span><br><span class="line"><span class="attr">    app:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">extensions/v1beta1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Deployment</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line"><span class="attr">  name:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line"><span class="attr">  replicas:</span> <span class="number">3</span></span><br><span class="line"><span class="attr">  template:</span></span><br><span class="line"><span class="attr">    metadata:</span></span><br><span class="line"><span class="attr">      labels:</span></span><br><span class="line"><span class="attr">        app:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">    spec:</span></span><br><span class="line"><span class="attr">      containers:</span></span><br><span class="line"><span class="attr">      - name:</span> <span class="string">test-jar</span></span><br><span class="line"><span class="attr">        image:</span> <span class="string">lukey123/kubernetes:test-jar</span></span><br><span class="line"><span class="attr">        volumeMounts:</span> <span class="comment">#这里是增加的部分</span></span><br><span class="line"><span class="attr">        - name:</span> <span class="string">host-time</span></span><br><span class="line"><span class="attr">          mountPath:</span> <span class="string">/etc/localtime</span></span><br><span class="line"><span class="comment">#        resources:</span></span><br><span class="line"><span class="comment">#          requests:</span></span><br><span class="line"><span class="comment">#            cpu: 100m</span></span><br><span class="line"><span class="comment">#            memory: 100Mi</span></span><br><span class="line"><span class="comment">#        env:</span></span><br><span class="line"><span class="comment">#        - name: GET_HOSTS_FROM</span></span><br><span class="line"><span class="comment">#          value: dns</span></span><br><span class="line">          <span class="comment"># If your cluster config does not include a dns service, then to</span></span><br><span class="line">          <span class="comment"># instead access environment variables to find service host</span></span><br><span class="line">          <span class="comment"># info, comment out the 'value: dns' line above, and uncomment the</span></span><br><span class="line">          <span class="comment"># line below:</span></span><br><span class="line">          <span class="comment"># value: env</span></span><br><span class="line"><span class="attr">        ports:</span></span><br><span class="line"><span class="attr">        - containerPort:</span> <span class="number">8080</span></span><br><span class="line"><span class="attr">      volumes:</span> <span class="comment">#这里是增加的部分</span></span><br><span class="line"><span class="attr">       - name:</span> <span class="string">host-time</span></span><br><span class="line"><span class="attr">         hostPath:</span></span><br><span class="line"><span class="attr">           path:</span> <span class="string">/etc/localtime</span></span><br></pre></td></tr></table></figure>
+<p>接着进入pod执行就可以看到时间已经同步了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl <span class="built_in">exec</span> -it <span class="built_in">test</span>-jar-57d5474cbc-dv7xr  /bin/sh</span><br><span class="line"><span class="comment"># date</span></span><br><span class="line">Tue Apr  3 10:40:15 CST 2018</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/03/Kubernetes中pod时区，与node主机同步/" data-id="cjhre356300051opodfbq3uyf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Kubernetes-ZooKeeper-K8SZK" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/26/Kubernetes-ZooKeeper-K8SZK/" class="article-date">
@@ -98,7 +395,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/26/Kubernetes-ZooKeeper-K8SZK/" data-id="cjfj0ju3b00043wpobmlpiiu7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/26/Kubernetes-ZooKeeper-K8SZK/" data-id="cjhre355n00031opokotj9yf4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -149,7 +446,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/23/fluentd/" data-id="cjfj0ju2600003wpoy8rs0a0g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/23/fluentd/" data-id="cjhre356c00061oporluohrp5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s-fluentd-kafka-mongo/">k8s,fluentd,kafka,mongo</a></li></ul>
@@ -244,10 +541,77 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/ConfigMap/" data-id="cjfj0ju2j00013wpomzg9jrrm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/ConfigMap/" data-id="cjhre354a00011opojkfmvrro" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-jenkins X" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/22/jenkins X/" class="article-date">
+  <time datetime="2018-03-22T09:19:12.000Z" itemprop="datePublished">2018-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/22/jenkins X/">ConfigMap</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> Jenkins X 是一个高度集成化的CI/CD平台，基于Jenkins和Kubernetes实现，旨在解决微服务体系架构下的云原生应用的持续交付的问题，简化整个云原生应用的开发、运行和部署过程。</p>
+<h1 id="Jenkins-X-部分新特性"><a href="#Jenkins-X-部分新特性" class="headerlink" title="Jenkins X 部分新特性"></a>Jenkins X 部分新特性</h1><h2 id="1-自动化一切：自动化CI-CD流水线"><a href="#1-自动化一切：自动化CI-CD流水线" class="headerlink" title="1.自动化一切：自动化CI/CD流水线"></a>1.自动化一切：自动化CI/CD流水线</h2><p>选择项目类型自动生成Jenkinsfile定义流水线</p>
+<p>自动生成Dockerfile并打包容器镜像</p>
+<p>自动创建Helm Chart并运行在Kubernetes集群</p>
+<p>自动关联代码库和流水线，作为代码变更自动触发（基于Webhook实现）</p>
+<p>自动版本号自动归档</p>
+<h2 id="2-Review代码一键部署应用：基于GitOps的环境部署"><a href="#2-Review代码一键部署应用：基于GitOps的环境部署" class="headerlink" title="2. Review代码一键部署应用：基于GitOps的环境部署"></a>2. Review代码一键部署应用：基于GitOps的环境部署</h2><p>所有的环境，应用列表，版本，配置信息统一放在代码库中进行版本控制</p>
+<p>通过Pull Request实现研发和运维的协同，完成应用部署升级（Promotion）</p>
+<p>可自动部署和手动部署，在必要的时候增加手工Review</p>
+<p>当然这些都封装在jx命令中实现</p>
+<h2 id="3-自动生成预览环境和信息同步反馈"><a href="#3-自动生成预览环境和信息同步反馈" class="headerlink" title="3. 自动生成预览环境和信息同步反馈"></a>3. 自动生成预览环境和信息同步反馈</h2><p>预览环境用于代码Review环节中临时创建</p>
+<p>同Pull Request工作流程集成并实现信息同步和有效通知</p>
+<p>验证完毕后自动清理</p>
+<p>提交和应用状态自动同步到Github注释</p>
+<p>自动生成release notes信息供验证</p>
+<h1 id="Jenkins-X安装—以linux为例"><a href="#Jenkins-X安装—以linux为例" class="headerlink" title="Jenkins X安装—以linux为例"></a>Jenkins X安装—以linux为例</h1><ul>
+<li><p>在本地安装jx命令行工具(都要安装)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$curl -L https://github.com/jenkins-x/jx/releases/download/v1.2.6/jx-linux-amd64.tar.gz | tar xzv </span><br><span class="line">$sudo mv jx /usr/local/bin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用jx创建一个k8s集群，并自动安装Jenkins X</p>
+<blockquote>
+<p><a href="http://jenkins-x.io/getting-started/create-cluster/" target="_blank" rel="noopener">http://jenkins-x.io/getting-started/create-cluster/</a></p>
+</blockquote>
+</li>
+<li>在已经存在的k8s集群上安装Jenkns x<blockquote>
+<p><a href="http://jenkins-x.io/getting-started/install-on-cluster/" target="_blank" rel="noopener">http://jenkins-x.io/getting-started/install-on-cluster/</a><br>jx install</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/22/jenkins X/" data-id="cjhre356k00071opoj9fx9nma" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s-jenkins/">k8s,jenkins,</a></li></ul>
 
     </footer>
   </div>
@@ -301,7 +665,7 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/kubernetes-常用命令/" data-id="cjfj0ju4300083wpoem8rnyt7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/03/22/kubernetes-常用命令/" data-id="cjhre3575000f1opo80ffrith" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
@@ -313,65 +677,32 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/22/hello-world/" class="article-date">
-  <time datetime="2018-03-22T08:39:47.781Z" itemprop="datePublished">2018-03-22</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/hello-world/" data-id="cjfj0ju3200033wpoytnlb1bz" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+  </nav>
 
 </section>
         
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/docker/">docker</a></li></ul>
+    </div>
+  </div>
+
 
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-fluentd-kafka-mongo/">k8s,fluentd,kafka,mongo</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-prometheus-grafana/">k8s, prometheus, grafana</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-fluentd-kafka-mongo/">k8s,fluentd,kafka,mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-jenkins/">k8s,jenkins,</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-源码/">k8s,源码</a></li></ul>
     </div>
   </div>
 
@@ -381,7 +712,7 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/k8s/" style="font-size: 20px;">k8s</a> <a href="/tags/k8s-fluentd-kafka-mongo/" style="font-size: 10px;">k8s,fluentd,kafka,mongo</a>
+      <a href="/tags/k8s/" style="font-size: 20px;">k8s</a> <a href="/tags/k8s-prometheus-grafana/" style="font-size: 10px;">k8s, prometheus, grafana</a> <a href="/tags/k8s-fluentd-kafka-mongo/" style="font-size: 10px;">k8s,fluentd,kafka,mongo</a> <a href="/tags/k8s-jenkins/" style="font-size: 10px;">k8s,jenkins,</a> <a href="/tags/k8s-源码/" style="font-size: 10px;">k8s,源码</a>
     </div>
   </div>
 
@@ -390,7 +721,7 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
     </div>
   </div>
 
@@ -403,23 +734,23 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
       <ul>
         
           <li>
-            <a href="/2018/03/26/Kubernetes-ZooKeeper-K8SZK/">Kubernetes ZooKeeper K8SZK</a>
+            <a href="/2018/05/29/2017-04-21-kubernetes-glusterfs/">kubernetes glusterfs</a>
           </li>
         
           <li>
-            <a href="/2018/03/23/fluentd/">fluentd</a>
+            <a href="/2018/04/16/kubernetes部署Prometheus，配置grafana/">kubernetes部署Prometheus，配置grafana</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/ConfigMap/">ConfigMap</a>
+            <a href="/2018/04/11/kubernetes源码结构/">kubernetes源码结构</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/kubernetes-常用命令/">kubernetes 常用命令</a>
+            <a href="/2018/04/04/配置goLand查看k8s源码/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2018/03/22/hello-world/">Hello World</a>
+            <a href="/2018/04/03/Kubernetes中pod时区，与node主机同步/">Kubernetes中pod时区，与node主机同步</a>
           </li>
         
       </ul>
