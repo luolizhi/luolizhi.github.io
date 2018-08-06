@@ -7,19 +7,19 @@
   
   <title>kubernetes 常用命令 | Fruit snack</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
+  <meta name="description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNSkubectl run -i --tty --image busybox dns-test --restart123/ # nslookup web-0.nginxServer:    10.0.0.10Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster">
 <meta name="keywords" content="k8s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kubernetes 常用命令">
 <meta property="og:url" content="http://yoursite.com/2018/03/22/kubernetes-常用命令/index.html">
 <meta property="og:site_name" content="Fruit snack">
-<meta property="og:description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
+<meta property="og:description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNSkubectl run -i --tty --image busybox dns-test --restart123/ # nslookup web-0.nginxServer:    10.0.0.10Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2018/03/png/kubernetes-container-naming-rule.jpg">
-<meta property="og:updated_time" content="2018-03-23T02:10:52.819Z">
+<meta property="og:updated_time" content="2018-08-06T06:35:06.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kubernetes 常用命令">
-<meta name="twitter:description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNS $ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh / # nslookup web-0.nginx Server:    10.0.0.10 Address 1: 10.0.0.10 kube-dns.k">
+<meta name="twitter:description" content="kubectl get pods -o wide使用nslookup查看这些Pod的DNSkubectl run -i --tty --image busybox dns-test --restart123/ # nslookup web-0.nginxServer:    10.0.0.10Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster">
 <meta name="twitter:image" content="http://yoursite.com/2018/03/png/kubernetes-container-naming-rule.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Fruit snack" type="application/atom+xml">
@@ -93,15 +93,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="kubectl-get-pods-o-wide"><a href="#kubectl-get-pods-o-wide" class="headerlink" title="kubectl get pods -o wide"></a>kubectl get pods -o wide</h2><h2 id="使用nslookup查看这些Pod的DNS"><a href="#使用nslookup查看这些Pod的DNS" class="headerlink" title="使用nslookup查看这些Pod的DNS"></a>使用nslookup查看这些Pod的DNS</h2><blockquote>
-<p><code>$ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh
-/ # nslookup web-0.nginx
-Server:    10.0.0.10
-Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
-</blockquote>
-<h2 id="用kubectl-run来创建一个CronJob："><a href="#用kubectl-run来创建一个CronJob：" class="headerlink" title="用kubectl run来创建一个CronJob："></a>用kubectl run来创建一个CronJob：</h2><blockquote>
-<p><code>kubectl run hello --schedule=&quot;*/1 * * * *&quot; --restart=OnFailure --image=busybox -- /bin/sh -c &quot;date; echo Hello from the Kubernetes cluster&quot;</code></p>
-</blockquote>
+        <h2 id="kubectl-get-pods-o-wide"><a href="#kubectl-get-pods-o-wide" class="headerlink" title="kubectl get pods -o wide"></a>kubectl get pods -o wide</h2><h2 id="使用nslookup查看这些Pod的DNS"><a href="#使用nslookup查看这些Pod的DNS" class="headerlink" title="使用nslookup查看这些Pod的DNS"></a>使用nslookup查看这些Pod的DNS</h2><figure class="highlight plain"><figcaption><span>kubectl run -i --tty --image busybox dns-test --restart</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/ # nslookup web-0.nginx</span><br><span class="line">Server:    10.0.0.10</span><br><span class="line">Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</span><br></pre></td></tr></table></figure>
+<h2 id="用kubectl-run来创建一个CronJob："><a href="#用kubectl-run来创建一个CronJob：" class="headerlink" title="用kubectl run来创建一个CronJob："></a>用kubectl run来创建一个CronJob：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl run hello --schedule=<span class="string">"*/1 * * * *"</span> --restart=OnFailure --image=busybox -- /bin/sh -c <span class="string">"date; echo Hello from the Kubernetes cluster"</span></span><br></pre></td></tr></table></figure>
 <h2 id="三种容器类型"><a href="#三种容器类型" class="headerlink" title="三种容器类型"></a>三种容器类型</h2><ul>
 <li><p>静态容器组：bare pod, IP和Hostname恒定；</p>
 </li>
@@ -165,7 +158,7 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-prometheus-grafana/">k8s, prometheus, grafana</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-fluentd-kafka-mongo/">k8s,fluentd,kafka,mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-jenkins/">k8s,jenkins,</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-源码/">k8s,源码</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-prometheus-grafana/">k8s, prometheus, grafana</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-fluentd-kafka-mongo/">k8s,fluentd,kafka,mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-jenkins/">k8s,jenkins,</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-源码/">k8s,源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-nginx/">linux,nginx</a></li></ul>
     </div>
   </div>
 
@@ -175,7 +168,7 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/k8s/" style="font-size: 20px;">k8s</a> <a href="/tags/k8s-prometheus-grafana/" style="font-size: 10px;">k8s, prometheus, grafana</a> <a href="/tags/k8s-fluentd-kafka-mongo/" style="font-size: 10px;">k8s,fluentd,kafka,mongo</a> <a href="/tags/k8s-jenkins/" style="font-size: 10px;">k8s,jenkins,</a> <a href="/tags/k8s-源码/" style="font-size: 10px;">k8s,源码</a>
+      <a href="/tags/k8s/" style="font-size: 20px;">k8s</a> <a href="/tags/k8s-prometheus-grafana/" style="font-size: 10px;">k8s, prometheus, grafana</a> <a href="/tags/k8s-fluentd-kafka-mongo/" style="font-size: 10px;">k8s,fluentd,kafka,mongo</a> <a href="/tags/k8s-jenkins/" style="font-size: 10px;">k8s,jenkins,</a> <a href="/tags/k8s-源码/" style="font-size: 10px;">k8s,源码</a> <a href="/tags/linux-nginx/" style="font-size: 10px;">linux,nginx</a>
     </div>
   </div>
 
@@ -197,7 +190,7 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
       <ul>
         
           <li>
-            <a href="/2018/08/06/nginx/">(no title)</a>
+            <a href="/2018/08/06/nginx/">nginx</a>
           </li>
         
           <li>
