@@ -15,7 +15,7 @@
 <meta property="og:description" content="nginx配置nginx 安装1. yum安装123456789101112# 1.将nginx放到yum repro库中[root@localhost ~]# rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm# 2.查看nginx信息[root@l">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2018/08/06/images/nginx配置文件结构图.png">
-<meta property="og:updated_time" content="2018-08-06T06:22:35.462Z">
+<meta property="og:updated_time" content="2018-08-06T06:26:30.944Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fruit snack">
 <meta name="twitter:description" content="nginx配置nginx 安装1. yum安装123456789101112# 1.将nginx放到yum repro库中[root@localhost ~]# rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm# 2.查看nginx信息[root@l">
@@ -86,8 +86,9 @@
 <h3 id="2-源码安装"><a href="#2-源码安装" class="headerlink" title="2. 源码安装"></a>2. 源码安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.下载nginx包。</span></span><br><span class="line">[root@localhost ~]<span class="comment"># wget http://nginx.org/download/nginx-1.14.0.tar.gz</span></span><br><span class="line"><span class="comment">#2.复制包到你的安装目录</span></span><br><span class="line">[root@localhost ~]<span class="comment"># cp nginx-1.14.0.tar.gz /usr/local/</span></span><br><span class="line"><span class="comment"># 3.解压</span></span><br><span class="line">[root@localhost ~]<span class="comment"># tar -zxvf nginx-1.14.0.tar.gz</span></span><br><span class="line">[root@localhost ~]<span class="comment"># cd nginx-1.14.0</span></span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"><span class="comment"># 4.启动nginx</span></span><br><span class="line">[root@localhost ~]<span class="comment"># /usr/local/nginx/sbin/nginx</span></span><br><span class="line"><span class="comment"># 5.查看版本s</span></span><br><span class="line">[root@localhost ~]<span class="comment"># nginx -v</span></span><br><span class="line"><span class="comment">#6.url访问nginx localhost或127.0.0.1</span></span><br></pre></td></tr></table></figure>
 <h3 id="安装其他模块"><a href="#安装其他模块" class="headerlink" title="安装其他模块"></a>安装其他模块</h3><p>在上述第3步</p>
 <blockquote>
-<p>./configure –add-module=/path/to/module </p>
+<p>./configure –add-module=/path/to/module  </p>
 </blockquote>
+<p><code>./configure --add-module=/path/to/module</code></p>
 <p>后续继续执行即可</p>
 <h3 id="设置开机启动"><a href="#设置开机启动" class="headerlink" title="设置开机启动"></a>设置开机启动</h3><p>在/etc/rc.d/rc.local文件最后一行增加启动的命令</p>
 <blockquote>
