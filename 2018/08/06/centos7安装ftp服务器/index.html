@@ -5,18 +5,20 @@
   
 
   
-  <title>归档 | Fruit snack</title>
+  <title>Fruit snack</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="myblog">
-<meta property="og:type" content="website">
+  <meta name="description" content="centos搭建ftp服务器系统环境Centos7.2 安装步骤通过yum来安装vsftpdsudo yum -y install vsftpd 设置为开机启动sudo chkconfig vsftpd on 修改配置vim /etc/vsftpd/vsftpd.conf 修改如下123456local_enable=YESwrite_enable=YESlocal_umask=022chroot">
+<meta name="keywords" content="ftp">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Fruit snack">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/08/06/centos7安装ftp服务器/index.html">
 <meta property="og:site_name" content="Fruit snack">
-<meta property="og:description" content="myblog">
+<meta property="og:description" content="centos搭建ftp服务器系统环境Centos7.2 安装步骤通过yum来安装vsftpdsudo yum -y install vsftpd 设置为开机启动sudo chkconfig vsftpd on 修改配置vim /etc/vsftpd/vsftpd.conf 修改如下123456local_enable=YESwrite_enable=YESlocal_umask=022chroot">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-06T07:59:08.165Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fruit snack">
-<meta name="twitter:description" content="myblog">
+<meta name="twitter:description" content="centos搭建ftp服务器系统环境Centos7.2 安装步骤通过yum来安装vsftpdsudo yum -y install vsftpd 设置为开机启动sudo chkconfig vsftpd on 修改配置vim /etc/vsftpd/vsftpd.conf 修改如下123456local_enable=YESwrite_enable=YESlocal_umask=022chroot">
   
     <link rel="alternate" href="/atom.xml" title="Fruit snack" type="application/atom+xml">
   
@@ -67,140 +69,69 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/03/Kubernetes中pod时区，与node主机同步/" class="archive-article-date">
-  <time datetime="2018-04-03T02:52:04.000Z" itemprop="datePublished">4月 3</time>
+        <section id="main"><article id="post-centos7安装ftp服务器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/06/centos7安装ftp服务器/" class="article-date">
+  <time datetime="2018-08-06T07:55:32.734Z" itemprop="datePublished">2018-08-06</time>
 </a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/03/Kubernetes中pod时区，与node主机同步/">Kubernetes中pod时区，与node主机同步</a>
-    </h1>
-  
-
-    </header>
+    
   </div>
-</article>
-  
+  <div class="article-inner">
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/26/Kubernetes-ZooKeeper-K8SZK/" class="archive-article-date">
-  <time datetime="2018-03-26T01:05:24.000Z" itemprop="datePublished">3月 26</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/26/Kubernetes-ZooKeeper-K8SZK/">Kubernetes ZooKeeper K8SZK</a>
-    </h1>
-  
+        <h1 id="centos搭建ftp服务器"><a href="#centos搭建ftp服务器" class="headerlink" title="centos搭建ftp服务器"></a>centos搭建ftp服务器</h1><p>系统环境<br><code>Centos7.2</code></p>
+<p>安装步骤<br>通过yum来安装vsftpd<br><code>sudo yum -y install vsftpd</code></p>
+<p>设置为开机启动<br><code>sudo chkconfig vsftpd on</code></p>
+<p>修改配置<br><code>vim /etc/vsftpd/vsftpd.conf</code></p>
+<p>修改如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">local_enable=YES</span><br><span class="line">write_enable=YES</span><br><span class="line">local_umask=022</span><br><span class="line">chroot_local_user=YES      #这行可能需自己写</span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line">userlist_enable=YES</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注：chroot_local_user #是否将所有用户限制在主目录,YES为启用 NO禁用.(该项默认值是NO,即在安装vsftpd后不做配置的话，ftp用户是可以向上切换到要目录之外的)</p>
+</blockquote>
+<p>配置保存后，重启vsftpd服务<br><code>sudo service vsftpd restart</code></p>
+<p>添加用户<br>添加vsftpd账号,并制定ftp<br><code>sudo useradd d /home/ftpdir -s /sbin/nologin vsftpd</code></p>
+<p>为账号设置密码，按提示操作<br>sudo passwd vsftpd<br>为用户的目录修改权限，实现上传和下载文件<br><code>sudo chmod o+w /home/ftpdir</code></p>
+<p>配置Centos防火墙<br>添加ip_conntrack_ftp模块<br><code>sudo vi /etc/sysconfig/iptables-config</code></p>
+<p>添加下面一行<br><code>IPTABLES_MODULES=&quot;ip_conntrack_ftp&quot;</code></p>
+<p>打开ftp端口21<br><code>sudo vi /etc/sysconfig/iptables</code><br>添加下面一行</p>
+<p><code>-A INPUT -m state --state NEW -m tcp -p tcp --dport 21 -j ACCEPT</code></p>
+<p>重启iptables使新的规则生效<br><code>sudo service iptables restart</code></p>
+<p>测试<br>可用WinSCP进行测试</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/23/fluentd/" class="archive-article-date">
-  <time datetime="2018-03-23T05:36:46.000Z" itemprop="datePublished">3月 23</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/23/fluentd/">fluentd</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/22/jenkins X/" class="archive-article-date">
-  <time datetime="2018-03-22T09:19:12.000Z" itemprop="datePublished">3月 22</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/06/centos7安装ftp服务器/" data-id="cjkhzldk5000f68poiknwxuaq" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/22/jenkins X/">ConfigMap</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/22/ConfigMap/" class="archive-article-date">
-  <time datetime="2018-03-22T09:19:12.000Z" itemprop="datePublished">3月 22</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/22/ConfigMap/">ConfigMap</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ftp/">ftp</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/08/06/2017-04-21-kubernetes-glusterfs/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          kubernetes glusterfs
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/06/centos7安装apache文件下载服务器/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/22/kubernetes-常用命令/" class="archive-article-date">
-  <time datetime="2018-03-22T09:14:33.000Z" itemprop="datePublished">3月 22</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/22/kubernetes-常用命令/">kubernetes 常用命令</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/archives/">&laquo; 上一页</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-  </nav>
 
 </section>
         

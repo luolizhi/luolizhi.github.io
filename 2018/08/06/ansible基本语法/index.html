@@ -5,19 +5,19 @@
   
 
   
-  <title>ansible 语法 | Fruit snack</title>
+  <title>Fruit snack</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="ansible 基本语法Ansible中文权威指南Ansible教程Ansible基础学习    command模块：是Ansible默认执行模块，在远程主机执行 shell 指令用法下面两种方法等价，默认执行commandansible all -a &amp;quot;pwd&amp;quot;ansible all -m command -a &amp;quot;pwd&amp;quot;  12345678# 关闭系统-">
 <meta name="keywords" content="linux,ansible">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ansible 语法">
+<meta property="og:title" content="Fruit snack">
 <meta property="og:url" content="http://yoursite.com/2018/08/06/ansible基本语法/index.html">
 <meta property="og:site_name" content="Fruit snack">
 <meta property="og:description" content="ansible 基本语法Ansible中文权威指南Ansible教程Ansible基础学习    command模块：是Ansible默认执行模块，在远程主机执行 shell 指令用法下面两种方法等价，默认执行commandansible all -a &amp;quot;pwd&amp;quot;ansible all -m command -a &amp;quot;pwd&amp;quot;  12345678# 关闭系统-">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-06T07:15:11.831Z">
+<meta property="og:updated_time" content="2018-08-06T08:02:43.557Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ansible 语法">
+<meta name="twitter:title" content="Fruit snack">
 <meta name="twitter:description" content="ansible 基本语法Ansible中文权威指南Ansible教程Ansible基础学习    command模块：是Ansible默认执行模块，在远程主机执行 shell 指令用法下面两种方法等价，默认执行commandansible all -a &amp;quot;pwd&amp;quot;ansible all -m command -a &amp;quot;pwd&amp;quot;  12345678# 关闭系统-">
   
     <link rel="alternate" href="/atom.xml" title="Fruit snack" type="application/atom+xml">
@@ -72,22 +72,12 @@
         <section id="main"><article id="post-ansible基本语法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/08/06/ansible基本语法/" class="article-date">
-  <time datetime="2018-08-06T07:36:46.000Z" itemprop="datePublished">2018-08-06</time>
+  <time datetime="2018-08-06T08:01:26.042Z" itemprop="datePublished">2018-08-06</time>
 </a>
     
   </div>
   <div class="article-inner">
     
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      ansible 语法
-    </h1>
-  
-
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
@@ -96,7 +86,7 @@
 <li><h2 id="command模块：是Ansible默认执行模块，在远程主机执行-shell-指令"><a href="#command模块：是Ansible默认执行模块，在远程主机执行-shell-指令" class="headerlink" title="command模块：是Ansible默认执行模块，在远程主机执行 shell 指令"></a>command模块：是Ansible默认执行模块，在远程主机执行 shell 指令</h2><strong>用法</strong><br>下面两种方法等价，默认执行command<br><code>ansible all -a &quot;pwd&quot;</code><br><code>ansible all -m command -a &quot;pwd&quot;</code></li>
 </ul>
 <figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关闭系统</span></span><br><span class="line"><span class="attr">-command:</span> <span class="string">/sbin/shutdown</span> <span class="bullet">-t</span> <span class="string">now</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当指定的文件存在时，跳过不执行该命令</span></span><br><span class="line"><span class="attr">-command:</span> <span class="string">/usr/bin/make_database.sh</span> <span class="string">arg1</span> <span class="string">arg2</span> <span class="string">creates=/path/to/database</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当指定不文件存在时，则该命令将会执行</span></span><br><span class="line"><span class="attr">-command:</span> <span class="string">/usr/bin/make_database.sh</span> <span class="string">arg1</span> <span class="string">arg2</span> <span class="string">creates=/path/to/database</span></span><br></pre></td></tr></table></figure>
-<p>`注：这个模块不支持管道和重定向，要支持管道可以用-m shell 或者-m raw，shell 和 raw 语法一样，它们支持管道和重定向，如：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">- shell:</span> <span class="string">ifconfig|grep</span> <span class="string">inet|grep</span> <span class="bullet">-Ev</span> <span class="string">'127.'</span><span class="string">|cut</span> <span class="bullet">-d':'</span> <span class="bullet">-f2|cut</span> <span class="bullet">-d'</span> <span class="string">' -f1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- raw: ifconfig|grep inet|grep -Ev '</span><span class="number">127.</span><span class="string">'|cut -d'</span><span class="string">:'</span> <span class="bullet">-f2|cut</span> <span class="bullet">-d'</span> <span class="string">' -f1 &gt; /tmp/ip.log</span></span><br></pre></td></tr></table></figure></p>
+<p>注：这个模块不支持管道和重定向，要支持管道可以用-m shell 或者-m raw，shell 和 raw 语法一样，它们支持管道和重定向，如：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">- shell:</span> <span class="string">ifconfig|grep</span> <span class="string">inet|grep</span> <span class="bullet">-Ev</span> <span class="string">'127.'</span><span class="string">|cut</span> <span class="bullet">-d':'</span> <span class="bullet">-f2|cut</span> <span class="bullet">-d'</span> <span class="string">' -f1</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- raw: ifconfig|grep inet|grep -Ev '</span><span class="number">127.</span><span class="string">'|cut -d'</span><span class="string">:'</span> <span class="bullet">-f2|cut</span> <span class="bullet">-d'</span> <span class="string">' -f1 &gt; /tmp/ip.log</span></span><br></pre></td></tr></table></figure></p>
 <ul>
 <li><h2 id="file模块：设置文件的属性"><a href="#file模块：设置文件的属性" class="headerlink" title="file模块：设置文件的属性"></a>file模块：设置文件的属性</h2></li>
 </ul>
@@ -217,7 +207,7 @@ playbook的基础组件：
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/06/ansible基本语法/" data-id="cjkhxyscg0000pgpoxszifkqt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/06/ansible基本语法/" data-id="cjkhzlnan001k68porvyyeasm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ansible/">ansible</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -229,9 +219,9 @@ playbook的基础组件：
 <nav id="article-nav">
   
   
-    <a href="/2018/08/06/nginx/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/08/06/配置goLand查看k8s源码/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">nginx</div>
+      <div class="article-nav-title"></div>
     </a>
   
 </nav>
@@ -257,7 +247,7 @@ playbook的基础组件：
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configmap/">configmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fluentd/">fluentd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grafana/">grafana</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jenkins/">jenkins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/">pod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prometheus/">prometheus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ansible/">ansible</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/configmap/">configmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fluentd/">fluentd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ftp/">ftp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grafana/">grafana</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jenkins/">jenkins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nfs/">nfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/">pod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prometheus/">prometheus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li></ul>
     </div>
   </div>
 
@@ -267,7 +257,7 @@ playbook的基础组件：
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/configmap/" style="font-size: 10px;">configmap</a> <a href="/tags/fluentd/" style="font-size: 10px;">fluentd</a> <a href="/tags/grafana/" style="font-size: 10px;">grafana</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 20px;">k8s</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/kubernetes/" style="font-size: 20px;">kubernetes</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/prometheus/" style="font-size: 10px;">prometheus</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a>
+      <a href="/tags/ansible/" style="font-size: 10px;">ansible</a> <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/configmap/" style="font-size: 10px;">configmap</a> <a href="/tags/fastdfs/" style="font-size: 10px;">fastdfs</a> <a href="/tags/fluentd/" style="font-size: 10px;">fluentd</a> <a href="/tags/ftp/" style="font-size: 10px;">ftp</a> <a href="/tags/grafana/" style="font-size: 10px;">grafana</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 20px;">k8s</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/kubernetes/" style="font-size: 20px;">kubernetes</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/nfs/" style="font-size: 10px;">nfs</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/prometheus/" style="font-size: 10px;">prometheus</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a>
     </div>
   </div>
 
@@ -276,7 +266,7 @@ playbook的基础组件：
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
     </div>
   </div>
 
@@ -289,23 +279,23 @@ playbook的基础组件：
       <ul>
         
           <li>
-            <a href="/2018/08/06/ansible基本语法/">ansible 语法</a>
+            <a href="/2018/08/06/ansible基本语法/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2018/08/06/nginx/">nginx</a>
+            <a href="/2018/08/06/配置goLand查看k8s源码/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2018/05/29/2017-04-21-kubernetes-glusterfs/">kubernetes glusterfs</a>
+            <a href="/2018/08/06/kubernetes部署Prometheus，配置grafana/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2018/04/16/kubernetes部署Prometheus，配置grafana/">kubernetes部署Prometheus，配置grafana</a>
+            <a href="/2018/08/06/2017-04-21-kubernetes-glusterfs/">kubernetes glusterfs</a>
           </li>
         
           <li>
-            <a href="/2018/04/11/kubernetes源码结构/">kubernetes源码结构</a>
+            <a href="/2018/08/06/centos7安装ftp服务器/">(no title)</a>
           </li>
         
       </ul>

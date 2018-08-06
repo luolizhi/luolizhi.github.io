@@ -5,20 +5,20 @@
   
 
   
-  <title>ConfigMap | Fruit snack</title>
+  <title>Fruit snack</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Jenkins X 是一个高度集成化的CI/CD平台，基于Jenkins和Kubernetes实现，旨在解决微服务体系架构下的云原生应用的持续交付的问题，简化整个云原生应用的开发、运行和部署过程。 Jenkins X 部分新特性1.自动化一切：自动化CI/CD流水线选择项目类型自动生成Jenkinsfile定义流水线 自动生成Dockerfile并打包容器镜像 自动创建Helm Chart并运行">
-<meta name="keywords" content="k8s,jenkins">
+  <meta name="description" content="ubuntu16.04 搭建nfs服务器一、服务器端：1.1安装NFS服务：#执行以下命令安装NFS服务器， #apt会自动安装nfs-common、rpcbind等13个软件包 sudo apt install nfs-kernel-server 1.2编写配置文件：#编辑/etc/exports 文件： sudo vi /etc/exports #/etc/exports文件的内容如下：123">
+<meta name="keywords" content="nfs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ConfigMap">
-<meta property="og:url" content="http://yoursite.com/2018/03/22/jenkins X/index.html">
+<meta property="og:title" content="Fruit snack">
+<meta property="og:url" content="http://yoursite.com/2018/08/06/ubuntu16.04搭建nfs服务器/index.html">
 <meta property="og:site_name" content="Fruit snack">
-<meta property="og:description" content="Jenkins X 是一个高度集成化的CI/CD平台，基于Jenkins和Kubernetes实现，旨在解决微服务体系架构下的云原生应用的持续交付的问题，简化整个云原生应用的开发、运行和部署过程。 Jenkins X 部分新特性1.自动化一切：自动化CI/CD流水线选择项目类型自动生成Jenkinsfile定义流水线 自动生成Dockerfile并打包容器镜像 自动创建Helm Chart并运行">
+<meta property="og:description" content="ubuntu16.04 搭建nfs服务器一、服务器端：1.1安装NFS服务：#执行以下命令安装NFS服务器， #apt会自动安装nfs-common、rpcbind等13个软件包 sudo apt install nfs-kernel-server 1.2编写配置文件：#编辑/etc/exports 文件： sudo vi /etc/exports #/etc/exports文件的内容如下：123">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-06T07:03:19.475Z">
+<meta property="og:updated_time" content="2018-08-06T07:59:25.156Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ConfigMap">
-<meta name="twitter:description" content="Jenkins X 是一个高度集成化的CI/CD平台，基于Jenkins和Kubernetes实现，旨在解决微服务体系架构下的云原生应用的持续交付的问题，简化整个云原生应用的开发、运行和部署过程。 Jenkins X 部分新特性1.自动化一切：自动化CI/CD流水线选择项目类型自动生成Jenkinsfile定义流水线 自动生成Dockerfile并打包容器镜像 自动创建Helm Chart并运行">
+<meta name="twitter:title" content="Fruit snack">
+<meta name="twitter:description" content="ubuntu16.04 搭建nfs服务器一、服务器端：1.1安装NFS服务：#执行以下命令安装NFS服务器， #apt会自动安装nfs-common、rpcbind等13个软件包 sudo apt install nfs-kernel-server 1.2编写配置文件：#编辑/etc/exports 文件： sudo vi /etc/exports #/etc/exports文件的内容如下：123">
   
     <link rel="alternate" href="/atom.xml" title="Fruit snack" type="application/atom+xml">
   
@@ -69,65 +69,62 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-jenkins X" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-ubuntu16.04搭建nfs服务器" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/22/jenkins X/" class="article-date">
-  <time datetime="2018-03-22T09:19:12.000Z" itemprop="datePublished">2018-03-22</time>
+    <a href="/2018/08/06/ubuntu16.04搭建nfs服务器/" class="article-date">
+  <time datetime="2018-08-06T07:55:32.717Z" itemprop="datePublished">2018-08-06</time>
 </a>
     
   </div>
   <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      ConfigMap
-    </h1>
-  
-
-      </header>
-    
     <div class="article-entry" itemprop="articleBody">
       
-        <p> Jenkins X 是一个高度集成化的CI/CD平台，基于Jenkins和Kubernetes实现，旨在解决微服务体系架构下的云原生应用的持续交付的问题，简化整个云原生应用的开发、运行和部署过程。</p>
-<h1 id="Jenkins-X-部分新特性"><a href="#Jenkins-X-部分新特性" class="headerlink" title="Jenkins X 部分新特性"></a>Jenkins X 部分新特性</h1><h2 id="1-自动化一切：自动化CI-CD流水线"><a href="#1-自动化一切：自动化CI-CD流水线" class="headerlink" title="1.自动化一切：自动化CI/CD流水线"></a>1.自动化一切：自动化CI/CD流水线</h2><p>选择项目类型自动生成Jenkinsfile定义流水线</p>
-<p>自动生成Dockerfile并打包容器镜像</p>
-<p>自动创建Helm Chart并运行在Kubernetes集群</p>
-<p>自动关联代码库和流水线，作为代码变更自动触发（基于Webhook实现）</p>
-<p>自动版本号自动归档</p>
-<h2 id="2-Review代码一键部署应用：基于GitOps的环境部署"><a href="#2-Review代码一键部署应用：基于GitOps的环境部署" class="headerlink" title="2. Review代码一键部署应用：基于GitOps的环境部署"></a>2. Review代码一键部署应用：基于GitOps的环境部署</h2><p>所有的环境，应用列表，版本，配置信息统一放在代码库中进行版本控制</p>
-<p>通过Pull Request实现研发和运维的协同，完成应用部署升级（Promotion）</p>
-<p>可自动部署和手动部署，在必要的时候增加手工Review</p>
-<p>当然这些都封装在jx命令中实现</p>
-<h2 id="3-自动生成预览环境和信息同步反馈"><a href="#3-自动生成预览环境和信息同步反馈" class="headerlink" title="3. 自动生成预览环境和信息同步反馈"></a>3. 自动生成预览环境和信息同步反馈</h2><p>预览环境用于代码Review环节中临时创建</p>
-<p>同Pull Request工作流程集成并实现信息同步和有效通知</p>
-<p>验证完毕后自动清理</p>
-<p>提交和应用状态自动同步到Github注释</p>
-<p>自动生成release notes信息供验证</p>
-<h1 id="Jenkins-X安装—以linux为例"><a href="#Jenkins-X安装—以linux为例" class="headerlink" title="Jenkins X安装—以linux为例"></a>Jenkins X安装—以linux为例</h1><ul>
-<li><p>在本地安装jx命令行工具(都要安装)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$curl -L https://github.com/jenkins-x/jx/releases/download/v1.2.6/jx-linux-amd64.tar.gz | tar xzv </span><br><span class="line">$sudo mv jx /usr/local/bin</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用jx创建一个k8s集群，并自动安装Jenkins X</p>
-<blockquote>
-<p><a href="http://jenkins-x.io/getting-started/create-cluster/" target="_blank" rel="noopener">http://jenkins-x.io/getting-started/create-cluster/</a></p>
-</blockquote>
-</li>
-<li>在已经存在的k8s集群上安装Jenkns x<blockquote>
-<p><a href="http://jenkins-x.io/getting-started/install-on-cluster/" target="_blank" rel="noopener">http://jenkins-x.io/getting-started/install-on-cluster/</a><br>jx install</p>
-</blockquote>
-</li>
-</ul>
+        <h1 id="ubuntu16-04-搭建nfs服务器"><a href="#ubuntu16-04-搭建nfs服务器" class="headerlink" title="ubuntu16.04 搭建nfs服务器"></a>ubuntu16.04 搭建nfs服务器</h1><h2 id="一、服务器端："><a href="#一、服务器端：" class="headerlink" title="一、服务器端："></a>一、服务器端：</h2><h3 id="1-1安装NFS服务："><a href="#1-1安装NFS服务：" class="headerlink" title="1.1安装NFS服务："></a>1.1安装NFS服务：</h3><p>#执行以下命令安装NFS服务器，</p>
+<p>#apt会自动安装nfs-common、rpcbind等13个软件包</p>
+<p><code>sudo apt install nfs-kernel-server</code></p>
+<h3 id="1-2编写配置文件："><a href="#1-2编写配置文件：" class="headerlink" title="1.2编写配置文件："></a>1.2编写配置文件：</h3><p>#编辑/etc/exports 文件：</p>
+<p>sudo vi /etc/exports</p>
+<p>#/etc/exports文件的内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/tmp *(rw,sync,no_subtree_check,no_root_squash)</span><br><span class="line">/data *(rw,sync,no_subtree_check,no_root_squash)</span><br><span class="line">/logs *(rw,sync,no_subtree_check,no_root_squash)</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-3创建共享目录"><a href="#1-3创建共享目录" class="headerlink" title="1.3创建共享目录"></a>1.3创建共享目录</h3><p>#在服务器端创建/tmp /data和/logs共享目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /tmp</span><br><span class="line">sudo mkdir -p /data</span><br><span class="line">sudo mkdir -p /logs</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-4重启nfs服务："><a href="#1-4重启nfs服务：" class="headerlink" title="1.4重启nfs服务："></a>1.4重启nfs服务：</h3><p><code>sudo service nfs-kernel-server restart</code></p>
+<h3 id="1-5常用命令工具："><a href="#1-5常用命令工具：" class="headerlink" title="1.5常用命令工具："></a>1.5常用命令工具：</h3><p>#在安装NFS服务器时，已包含常用的命令行工具，无需额外安装。</p>
+<p>#显示已经mount到本机nfs目录的客户端机器。</p>
+<p><code>sudo showmount -e localhost</code></p>
+<p>#将配置文件中的目录全部重新export一次！无需重启服务。</p>
+<p><code>sudo exportfs -rv</code></p>
+<p>#查看NFS的运行状态</p>
+<p><code>sudo nfsstat</code></p>
+<p>#查看rpc执行信息，可以用于检测rpc运行情况</p>
+<p><code>sudo rpcinfo`</code></p>
+<p>#查看网络端口，NFS默认是使用111端口。</p>
+<p><code>sudo netstat -tu -4</code></p>
+<h2 id="二、客户端："><a href="#二、客户端：" class="headerlink" title="二、客户端："></a>二、客户端：</h2><h3 id="2-1安装客户端工具："><a href="#2-1安装客户端工具：" class="headerlink" title="2.1安装客户端工具："></a>2.1安装客户端工具：</h3><p>#在需要连接到NFS服务器的客户端机器上，</p>
+<p>#需要执行以下命令，安装nfs-common软件包。</p>
+<p>#apt会自动安装nfs-common、rpcbind等12个软件包</p>
+<p><code>sudo apt install nfs-common</code></p>
+<h3 id="2-2查看NFS服务器上的共享目录"><a href="#2-2查看NFS服务器上的共享目录" class="headerlink" title="2.2查看NFS服务器上的共享目录"></a>2.2查看NFS服务器上的共享目录</h3><p>#显示指定的（192.168.3.167）NFS服务器上export出来的目录</p>
+<p><code>sudo showmount -e 192.168.3.167</code></p>
+<h3 id="2-3创建本地挂载目录"><a href="#2-3创建本地挂载目录" class="headerlink" title="2.3创建本地挂载目录"></a>2.3创建本地挂载目录</h3><p><code>sudo mkdir -p /mnt/data</code></p>
+<p><code>sudo mkdir -p /mnt/logs</code></p>
+<h3 id="2-4挂载共享目录"><a href="#2-4挂载共享目录" class="headerlink" title="2.4挂载共享目录"></a>2.4挂载共享目录</h3><p>#将NFS服务器192.168.3.167上的目录，挂载到本地的/mnt/目录下</p>
+<p><code>sudo mount -t nfs 192.168.3.167:/data /mnt/data</code></p>
+<p><code>sudo mount -t nfs 192.168.3.167:/logs /mnt/logs</code></p>
+<p>#注：在没有安装nfs-common或者nfs-kernel-server软件包的机器上，</p>
+<p>#直接执行showmount、exportfs、nfsstat、rpcinfo等命令时，</p>
+<p>#系统会给出友好的提示，</p>
+<p>#比如直接showmount会提示需要执行sudo apt install nfs-common命令，</p>
+<p>#比如直接rpcinfo会提示需要执行sudo apt install rpcbind命令。</p>
+<h3 id="2-5卸载文件系统命令"><a href="#2-5卸载文件系统命令" class="headerlink" title="2.5卸载文件系统命令"></a>2.5卸载文件系统命令</h3><p><code>umount /mnt/data</code><br><code>umount /mnt/logs</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/jenkins X/" data-id="cjkhzliiw000u68ponlhyx8ww" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/06/ubuntu16.04搭建nfs服务器/" data-id="cjkhzldkl000j68po1v4af5qy" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jenkins/">jenkins</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nfs/">nfs</a></li></ul>
 
     </footer>
   </div>
@@ -135,19 +132,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/03/23/fluentd/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/08/06/centos7安装apache文件下载服务器/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          fluentd
+          (no title)
         
       </div>
     </a>
   
   
-    <a href="/2018/03/22/ConfigMap/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/08/06/fastdfs安装/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">ConfigMap</div>
+      <div class="article-nav-title"></div>
     </a>
   
 </nav>

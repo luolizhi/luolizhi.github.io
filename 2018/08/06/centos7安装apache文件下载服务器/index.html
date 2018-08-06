@@ -5,18 +5,20 @@
   
 
   
-  <title>归档 | Fruit snack</title>
+  <title>Fruit snack</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="myblog">
-<meta property="og:type" content="website">
+  <meta name="description" content="centos7安装apache文件下载服务器part.1安装httpdyum install -y httpd part.2 设置开机启动项systemctl enable httpd` part.3 修改配置文件配置文件地址为：/etc/httpd/conf/httpd.conf修改配置文件Listen 80vim /etc/httpd/conf/httpd.conf例：Listen 8051">
+<meta name="keywords" content="apache">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Fruit snack">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/08/06/centos7安装apache文件下载服务器/index.html">
 <meta property="og:site_name" content="Fruit snack">
-<meta property="og:description" content="myblog">
+<meta property="og:description" content="centos7安装apache文件下载服务器part.1安装httpdyum install -y httpd part.2 设置开机启动项systemctl enable httpd` part.3 修改配置文件配置文件地址为：/etc/httpd/conf/httpd.conf修改配置文件Listen 80vim /etc/httpd/conf/httpd.conf例：Listen 8051">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-06T07:59:02.577Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Fruit snack">
-<meta name="twitter:description" content="myblog">
+<meta name="twitter:description" content="centos7安装apache文件下载服务器part.1安装httpdyum install -y httpd part.2 设置开机启动项systemctl enable httpd` part.3 修改配置文件配置文件地址为：/etc/httpd/conf/httpd.conf修改配置文件Listen 80vim /etc/httpd/conf/httpd.conf例：Listen 8051">
   
     <link rel="alternate" href="/atom.xml" title="Fruit snack" type="application/atom+xml">
   
@@ -67,140 +69,61 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/04/03/Kubernetes中pod时区，与node主机同步/" class="archive-article-date">
-  <time datetime="2018-04-03T02:52:04.000Z" itemprop="datePublished">4月 3</time>
+        <section id="main"><article id="post-centos7安装apache文件下载服务器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/06/centos7安装apache文件下载服务器/" class="article-date">
+  <time datetime="2018-08-06T07:55:32.730Z" itemprop="datePublished">2018-08-06</time>
 </a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/04/03/Kubernetes中pod时区，与node主机同步/">Kubernetes中pod时区，与node主机同步</a>
-    </h1>
-  
-
-    </header>
+    
   </div>
-</article>
-  
+  <div class="article-inner">
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/26/Kubernetes-ZooKeeper-K8SZK/" class="archive-article-date">
-  <time datetime="2018-03-26T01:05:24.000Z" itemprop="datePublished">3月 26</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/26/Kubernetes-ZooKeeper-K8SZK/">Kubernetes ZooKeeper K8SZK</a>
-    </h1>
-  
+        <h1 id="centos7安装apache文件下载服务器"><a href="#centos7安装apache文件下载服务器" class="headerlink" title="centos7安装apache文件下载服务器"></a>centos7安装apache文件下载服务器</h1><h2 id="part-1安装httpd"><a href="#part-1安装httpd" class="headerlink" title="part.1安装httpd"></a>part.1安装httpd</h2><p><code>yum install -y httpd</code></p>
+<h2 id="part-2-设置开机启动项"><a href="#part-2-设置开机启动项" class="headerlink" title="part.2 设置开机启动项"></a>part.2 设置开机启动项</h2><p><code>systemctl enable httpd`</code></p>
+<h2 id="part-3-修改配置文件"><a href="#part-3-修改配置文件" class="headerlink" title="part.3 修改配置文件"></a>part.3 修改配置文件</h2><p>配置文件地址为：<br>/etc/httpd/conf/httpd.conf<br>修改配置文件Listen 80<br><code>vim /etc/httpd/conf/httpd.conf</code><br>例：Listen 8051 //80为默认访问端口,若该为其它端口，首先要保证端口没有被占用，访问时也需要加端口号</p>
+<h2 id="part-4指定提供下载的目录地址"><a href="#part-4指定提供下载的目录地址" class="headerlink" title="part.4指定提供下载的目录地址"></a>part.4指定提供下载的目录地址</h2><p>因apache服务显示的地址默认为 /var/www/html<br>我们进入此地址</p>
+<p>cd /var/www/html<br>建立文件目录软链接<br>输入ln -s 文件目录地址 下载地址<br>例：</p>
+<p> ln -s /home/downloads downloads<br>即在/var/www/html目录建立新的文件夹downloads,并且链接到/home/downloads目录</p>
+<h2 id="part-5-启动服务查看效果"><a href="#part-5-启动服务查看效果" class="headerlink" title="part.5 启动服务查看效果"></a>part.5 启动服务查看效果</h2><p><code>systemctl httpd start</code><br>访问此文件目录进行下载即在浏览器输入<br>http://[ip]/downloads<br>即可看到/home/downloads目录下的所有文件和文件夹</p>
+<p>如果显示访问超时，需要把防火墙关闭。</p>
+<p><code>systemctl stop firewalld.service</code><br>再次访问即可。</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/23/fluentd/" class="archive-article-date">
-  <time datetime="2018-03-23T05:36:46.000Z" itemprop="datePublished">3月 23</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/23/fluentd/">fluentd</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/22/jenkins X/" class="archive-article-date">
-  <time datetime="2018-03-22T09:19:12.000Z" itemprop="datePublished">3月 22</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/06/centos7安装apache文件下载服务器/" data-id="cjkhzldks000k68po25fzvfk8" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/22/jenkins X/">ConfigMap</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/22/ConfigMap/" class="archive-article-date">
-  <time datetime="2018-03-22T09:19:12.000Z" itemprop="datePublished">3月 22</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/22/ConfigMap/">ConfigMap</a>
-    </h1>
-  
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/08/06/centos7安装ftp服务器/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/06/ubuntu16.04搭建nfs服务器/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/03/22/kubernetes-常用命令/" class="archive-article-date">
-  <time datetime="2018-03-22T09:14:33.000Z" itemprop="datePublished">3月 22</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/03/22/kubernetes-常用命令/">kubernetes 常用命令</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/archives/">&laquo; 上一页</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-  </nav>
 
 </section>
         
