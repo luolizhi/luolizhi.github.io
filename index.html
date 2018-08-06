@@ -69,6 +69,75 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-nginx" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/06/nginx/" class="article-date">
+  <time datetime="2018-08-06T06:23:42.354Z" itemprop="datePublished">2018-08-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a>nginx配置</h1><h2 id="nginx-安装"><a href="#nginx-安装" class="headerlink" title="nginx 安装"></a>nginx 安装</h2><h3 id="1-yum安装"><a href="#1-yum安装" class="headerlink" title="1. yum安装"></a>1. yum安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.将nginx放到yum repro库中</span></span><br><span class="line">[root@localhost ~]<span class="comment"># rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span></span><br><span class="line"><span class="comment"># 2.查看nginx信息</span></span><br><span class="line">[root@localhost ~]<span class="comment"># yum info nginx</span></span><br><span class="line"><span class="comment"># 3.使用yum安装ngnix</span></span><br><span class="line">[root@localhost ~]<span class="comment"># yum install nginx</span></span><br><span class="line"><span class="comment"># 4.启动nginx</span></span><br><span class="line">[root@localhost ~]<span class="comment"># service nginx start</span></span><br><span class="line"><span class="comment"># 5.查看nginx版本</span></span><br><span class="line">[root@localhost ~]<span class="comment"># nginx -v</span></span><br><span class="line"><span class="comment"># 6.访问nginx，现在你可以通过公网ip (本地可以通过 localhost /或 127.0.0.1 ) 查看nginx 服务返回的信息。</span></span><br><span class="line">[root@localhost ~]<span class="comment"># curl -i localhost</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-源码安装"><a href="#2-源码安装" class="headerlink" title="2. 源码安装"></a>2. 源码安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.下载nginx包。</span></span><br><span class="line">[root@localhost ~]<span class="comment"># wget http://nginx.org/download/nginx-1.14.0.tar.gz</span></span><br><span class="line"><span class="comment">#2.复制包到你的安装目录</span></span><br><span class="line">[root@localhost ~]<span class="comment"># cp nginx-1.14.0.tar.gz /usr/local/</span></span><br><span class="line"><span class="comment"># 3.解压</span></span><br><span class="line">[root@localhost ~]<span class="comment"># tar -zxvf nginx-1.14.0.tar.gz</span></span><br><span class="line">[root@localhost ~]<span class="comment"># cd nginx-1.14.0</span></span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"><span class="comment"># 4.启动nginx</span></span><br><span class="line">[root@localhost ~]<span class="comment"># /usr/local/nginx/sbin/nginx</span></span><br><span class="line"><span class="comment"># 5.查看版本s</span></span><br><span class="line">[root@localhost ~]<span class="comment"># nginx -v</span></span><br><span class="line"><span class="comment">#6.url访问nginx localhost或127.0.0.1</span></span><br></pre></td></tr></table></figure>
+<h3 id="安装其他模块"><a href="#安装其他模块" class="headerlink" title="安装其他模块"></a>安装其他模块</h3><p>在上述第3步</p>
+<blockquote>
+<p>./configure –add-module=/path/to/module </p>
+</blockquote>
+<p>后续继续执行即可</p>
+<h3 id="设置开机启动"><a href="#设置开机启动" class="headerlink" title="设置开机启动"></a>设置开机启动</h3><p>在/etc/rc.d/rc.local文件最后一行增加启动的命令</p>
+<blockquote>
+<p>/usr/local/nginx/sbin/nginx<br>chmod +x /etc/rc.d/rc.local</p>
+</blockquote>
+<h2 id="nginx-配置"><a href="#nginx-配置" class="headerlink" title="nginx 配置"></a>nginx 配置</h2><p><img src="../images/nginx配置文件结构图.png" alt="配置文件示意图"><br>yum安装的配置文件路径为</p>
+<blockquote>
+<p>/etc/nginx/nginx.conf</p>
+</blockquote>
+<p>源码安装的配置文件路径为</p>
+<blockquote>
+<p>/usr/local/nginx/conf/nginx.conf</p>
+</blockquote>
+<p>默认配置文件如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># cat /usr/local/nginx/conf/nginx.conf</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#user  nobody;</span></span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line"><span class="comment">#error_log  logs/error.log;</span></span><br><span class="line"><span class="comment">#error_log  logs/error.log  notice;</span></span><br><span class="line"><span class="comment">#error_log  logs/error.log  info;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#pid        logs/nginx.pid;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '</span></span><br><span class="line">    <span class="comment">#                  '$status $body_bytes_sent "$http_referer" '</span></span><br><span class="line">    <span class="comment">#                  '"$http_user_agent" "$http_x_forwarded_for"';</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#access_log  logs/access.log  main;</span></span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    <span class="comment">#tcp_nopush     on;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#keepalive_timeout  0;</span></span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#gzip  on;</span></span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       80;</span><br><span class="line">        server_name  localhost;</span><br><span class="line"></span><br><span class="line">        <span class="comment">#charset koi8-r;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#access_log  logs/host.access.log  main;</span></span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root   html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">#error_page  404              /404.html;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># redirect server error pages to the static page /50x.html</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">            root   html;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># proxy the PHP scripts to Apache listening on 127.0.0.1:80</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment">#location ~ \.php$ &#123;</span></span><br><span class="line">        <span class="comment">#    proxy_pass   http://127.0.0.1;</span></span><br><span class="line">        <span class="comment">#&#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment">#location ~ \.php$ &#123;</span></span><br><span class="line">        <span class="comment">#    root           html;</span></span><br><span class="line">        <span class="comment">#    fastcgi_pass   127.0.0.1:9000;</span></span><br><span class="line">        <span class="comment">#    fastcgi_index  index.php;</span></span><br><span class="line">        <span class="comment">#    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</span></span><br><span class="line">        <span class="comment">#    include        fastcgi_params;</span></span><br><span class="line">        <span class="comment">#&#125;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># deny access to .htaccess files, if Apache's document root</span></span><br><span class="line">        <span class="comment"># concurs with nginx's one</span></span><br><span class="line">        <span class="comment">#</span></span><br><span class="line">        <span class="comment">#location ~ /\.ht &#123;</span></span><br><span class="line">        <span class="comment">#    deny  all;</span></span><br><span class="line">        <span class="comment">#&#125;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">//这里可以配置其他server</span><br><span class="line"></span><br><span class="line">    <span class="comment"># another virtual host using mix of IP-, name-, and port-based configuration</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#server &#123;</span></span><br><span class="line">    <span class="comment">#    listen       8000;</span></span><br><span class="line">    <span class="comment">#    listen       somename:8080;</span></span><br><span class="line">    <span class="comment">#    server_name  somename  alias  another.alias;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#    location / &#123;</span></span><br><span class="line">    <span class="comment">#        root   html;</span></span><br><span class="line">    <span class="comment">#        index  index.html index.htm;</span></span><br><span class="line">    <span class="comment">#    &#125;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># HTTPS server</span></span><br><span class="line">    <span class="comment">#</span></span><br><span class="line">    <span class="comment">#server &#123;</span></span><br><span class="line">    <span class="comment">#    listen       443 ssl;</span></span><br><span class="line">    <span class="comment">#    server_name  localhost;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#    ssl_certificate      cert.pem;</span></span><br><span class="line">    <span class="comment">#    ssl_certificate_key  cert.key;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#    ssl_session_cache    shared:SSL:1m;</span></span><br><span class="line">    <span class="comment">#    ssl_session_timeout  5m;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#    ssl_ciphers  HIGH:!aNULL:!MD5;</span></span><br><span class="line">    <span class="comment">#    ssl_prefer_server_ciphers  on;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#    location / &#123;</span></span><br><span class="line">    <span class="comment">#        root   html;</span></span><br><span class="line">    <span class="comment">#        index  index.html index.htm;</span></span><br><span class="line">    <span class="comment">#    &#125;</span></span><br><span class="line">    <span class="comment">#&#125;</span></span><br><span class="line"> // 这里可以增加include</span><br><span class="line"> // include /usr/<span class="built_in">local</span>/nginx/conf.d/*.conf</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>修改配置可以直接在server中增加location，或者在http中增加server（参考上图和默认配置）</p>
+</blockquote>
+<h2 id="nginx-常用操作"><a href="#nginx-常用操作" class="headerlink" title="nginx 常用操作"></a>nginx 常用操作</h2><p>启动 (以源码安装为例)</p>
+<blockquote>
+<p>service nginx start<br>/usr/local/nginx/sbin/nginx </p>
+</blockquote>
+<p>重启</p>
+<blockquote>
+<p>/usr/local/nginx/sbin/nginx -s reload</p>
+</blockquote>
+<p>停止</p>
+<blockquote>
+<p> /usr/local/nginx/sbin/nginx -s stop</p>
+</blockquote>
+<h2 id="location-规则"><a href="#location-规则" class="headerlink" title="location 规则"></a>location 规则</h2><p>语法规则： location  [ 空格 | = | ~ | ~<em> | ^~| !~ | !~</em> ]     /uri/<br>            { … }<br>= 开头表示精确匹配<br>^~ 开头表示uri以某个常规字符串开头，理解为匹配 url路径即可。nginx不对url做编码，因此请求为/static/20%/aa，可以被规则^~ /static/ /aa匹配到（注意是空格）。<br>~ 开头表示区分大小写的正则匹配<br>~<em>  开头表示不区分大小写的正则匹配<br>!~和!~</em>分别为区分大小写不匹配及不区分大小写不匹配 的正则<br>/ 通用匹配，任何请求都会匹配到。<br>多个location配置的情况下匹配顺序为：</p>
+<blockquote>
+<p><code>(location =) &gt; (location 完整路径) &gt; (location ^~ 路径) &gt; (location ~,~* 正则顺序) &gt; (location 部分起始路径) &gt; (/)</code>  </p>
+</blockquote>
+<p>1.首先匹配=<br>2.其次匹配^~<br>3.再其次按照配置文件的顺序进行正则匹配、<br>4.最后是交给/进行通用匹配<br>注意：<br>当有匹配成功时，立刻停止匹配，按照当前匹配规则处理请求</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">location</span> <span class="string">=</span> <span class="string">/</span> <span class="string">&#123;</span></span><br><span class="line">   <span class="comment">#规则A</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">location</span> <span class="string">=</span> <span class="string">/login</span> <span class="string">&#123;</span></span><br><span class="line">   <span class="comment">#规则B</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">location</span> <span class="string">^~</span> <span class="string">/static/</span> <span class="string">&#123;</span></span><br><span class="line">   <span class="comment">#规则C</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">location</span> <span class="string">~</span> <span class="string">\.(gif|jpg|png|js|css)$</span> <span class="string">&#123;</span></span><br><span class="line">   <span class="comment">#规则D</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">location</span> <span class="string">~*</span> <span class="string">\.png$</span> <span class="string">&#123;</span></span><br><span class="line">   <span class="comment">#规则E</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">location</span> <span class="string">!~</span> <span class="string">\.xhtml$</span> <span class="string">&#123;</span></span><br><span class="line">   <span class="comment">#规则F</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">location</span> <span class="string">!~*</span> <span class="string">\.xhtml$</span> <span class="string">&#123;</span></span><br><span class="line">   <span class="comment">#规则G</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">location</span> <span class="string">/</span> <span class="string">&#123;</span></span><br><span class="line">   <span class="comment">#规则H</span></span><br></pre></td></tr></table></figure>
+<p>那么产生的效果如下：<br>访问根目录/， 比如<a href="http://localhost/" target="_blank" rel="noopener">http://localhost/</a> 将匹配规则A<br>访问 <a href="http://localhost/login" target="_blank" rel="noopener">http://localhost/login</a> 将匹配规则B，<a href="http://localhost/register" target="_blank" rel="noopener">http://localhost/register</a> 则匹配规则H<br>访问 <a href="http://localhost/static/a.html" target="_blank" rel="noopener">http://localhost/static/a.html</a> 将匹配规则C<br>访问 <a href="http://localhost/a.gif" target="_blank" rel="noopener">http://localhost/a.gif</a>, <a href="http://localhost/b.jpg" target="_blank" rel="noopener">http://localhost/b.jpg</a> 将匹配规则D和规则E，但是规则D顺序优先，规则E不起作用，而 <a href="http://localhost/static/c.png" target="_blank" rel="noopener">http://localhost/static/c.png</a> 则优先匹配到 规则C<br>访问 <a href="http://localhost/a.PNG" target="_blank" rel="noopener">http://localhost/a.PNG</a> 则匹配规则E， 而不会匹配规则D，因为规则E不区分大小写。<br>访问 <a href="http://localhost/a.xhtml" target="_blank" rel="noopener">http://localhost/a.xhtml</a> 不会匹配规则F和规则G，<a href="http://localhost/a.XHTML" target="_blank" rel="noopener">http://localhost/a.XHTML</a> 不会匹配规则G，因为不区分大小写。规则F，规则G属于排除法，<strong>符合匹配规则但是不会匹配到</strong>，所以想想看实际应用中哪里会用到。<br>访问 <a href="http://localhost/category/id/1111" target="_blank" rel="noopener">http://localhost/category/id/1111</a> 则最终匹配到规则H，因为以上规则都不匹配，这个时候应该是nginx转发请求给后端应用服务器，比如FastCGI（php），tomcat（jsp），nginx作为方向代理服务器存在。<br>所以实际使用中，通常至少有三个匹配规则定义，如下：<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#直接匹配网站根，通过域名访问网站首页比较频繁，使用这个会加速处理，官网如是说。</span></span><br><span class="line"><span class="comment">#这里是直接转发给后端应用服务器了，也可以是一个静态首页</span></span><br><span class="line"><span class="comment"># 第一个必选规则</span></span><br><span class="line"><span class="string">location</span> <span class="string">=</span> <span class="string">/</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">proxy_pass</span> <span class="attr">http://tomcat:8080/index</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment"># 第二个必选规则是处理静态文件请求，这是nginx作为http服务器的强项</span></span><br><span class="line"><span class="comment"># 有两种配置模式，目录匹配或后缀匹配,任选其一或搭配使用</span></span><br><span class="line"><span class="string">location</span> <span class="string">^~</span> <span class="string">/static/</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">root</span> <span class="string">/webroot/static/;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">location</span> <span class="string">~*</span> <span class="string">\.(gif|jpg|jpeg|png|css|js|ico)$</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">root</span> <span class="string">/webroot/res/;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">#第三个规则就是通用规则，用来转发动态请求到后端应用服务器</span></span><br><span class="line"><span class="comment">#非静态文件请求就默认是动态请求，自己根据实际把握</span></span><br><span class="line"><span class="comment">#毕竟目前的一些框架的流行，带.php,.jsp后缀的情况很少了</span></span><br><span class="line"><span class="string">location</span> <span class="string">/</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">proxy_pass</span> <span class="attr">http://tomcat:8080/</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="显示真实ip地址"><a href="#显示真实ip地址" class="headerlink" title="显示真实ip地址"></a>显示真实ip地址</h2><p>在配置文件中，location，proxy_pass之前增加下面三行<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">location</span> <span class="string">/</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="string">proxy_set_header</span> <span class="string">Host</span> <span class="string">$host;</span></span><br><span class="line">    <span class="string">proxy_set_header</span> <span class="string">X-Real-IP</span> <span class="string">$remote_addr;</span></span><br><span class="line">    <span class="string">proxy_set_header</span> <span class="string">X-Forwarded-For</span> <span class="string">$proxy_add_x_forwarded_for;</span></span><br><span class="line">    </span><br><span class="line">    <span class="string">proxy_pass</span> <span class="attr">http://tomcat:8080/</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/06/nginx/" data-id="cjkhw4rqu00002gpo1afelj9w" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2017-04-21-kubernetes-glusterfs" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/05/29/2017-04-21-kubernetes-glusterfs/" class="article-date">
@@ -215,7 +284,9 @@
 <p>kubernetes源码地址：<a href="https://github.com/kubernetes/kubernetes" target="_blank" rel="noopener">https://github.com/kubernetes/kubernetes</a></p>
 </blockquote>
 <h2 id="整体结构"><a href="#整体结构" class="headerlink" title="整体结构"></a>整体结构</h2><p>kubernetes源码主要分为包括pkg、cmd、plugin、test四个目录。其中各个包的主要功能如下：</p>
-<p>1.pkg是kubernetes的主体代码，里面实现了kubernetes的主体逻辑<br>2.cmd是kubernetes的所有后台进程的代码，主要是各个子模块的启动代码，具体的实现逻辑在pkg下<br>3.plugin主要是kube-scheduler和一些插件</p>
+<p>1.pkg是kubernetes的主体代码，里面实现了kubernetes的主体逻辑。</p>
+<p>2.cmd是kubernetes的所有后台进程的代码，主要是各个子模块的启动代码，具体的实现逻辑在pkg下。</p>
+<p>3.plugin主要是kube-scheduler和一些插件</p>
 <h2 id="主要包功能介绍"><a href="#主要包功能介绍" class="headerlink" title="主要包功能介绍"></a>主要包功能介绍</h2><p>以下简要介绍一下各个子包的功能</p>
 <h3 id="pkg"><a href="#pkg" class="headerlink" title="pkg"></a>pkg</h3><table>
 <thead>
@@ -458,6 +529,73 @@
 
 
   
+    <article id="post-jenkins X" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/22/jenkins X/" class="article-date">
+  <time datetime="2018-03-22T09:19:12.000Z" itemprop="datePublished">2018-03-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/22/jenkins X/">ConfigMap</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> Jenkins X 是一个高度集成化的CI/CD平台，基于Jenkins和Kubernetes实现，旨在解决微服务体系架构下的云原生应用的持续交付的问题，简化整个云原生应用的开发、运行和部署过程。</p>
+<h1 id="Jenkins-X-部分新特性"><a href="#Jenkins-X-部分新特性" class="headerlink" title="Jenkins X 部分新特性"></a>Jenkins X 部分新特性</h1><h2 id="1-自动化一切：自动化CI-CD流水线"><a href="#1-自动化一切：自动化CI-CD流水线" class="headerlink" title="1.自动化一切：自动化CI/CD流水线"></a>1.自动化一切：自动化CI/CD流水线</h2><p>选择项目类型自动生成Jenkinsfile定义流水线</p>
+<p>自动生成Dockerfile并打包容器镜像</p>
+<p>自动创建Helm Chart并运行在Kubernetes集群</p>
+<p>自动关联代码库和流水线，作为代码变更自动触发（基于Webhook实现）</p>
+<p>自动版本号自动归档</p>
+<h2 id="2-Review代码一键部署应用：基于GitOps的环境部署"><a href="#2-Review代码一键部署应用：基于GitOps的环境部署" class="headerlink" title="2. Review代码一键部署应用：基于GitOps的环境部署"></a>2. Review代码一键部署应用：基于GitOps的环境部署</h2><p>所有的环境，应用列表，版本，配置信息统一放在代码库中进行版本控制</p>
+<p>通过Pull Request实现研发和运维的协同，完成应用部署升级（Promotion）</p>
+<p>可自动部署和手动部署，在必要的时候增加手工Review</p>
+<p>当然这些都封装在jx命令中实现</p>
+<h2 id="3-自动生成预览环境和信息同步反馈"><a href="#3-自动生成预览环境和信息同步反馈" class="headerlink" title="3. 自动生成预览环境和信息同步反馈"></a>3. 自动生成预览环境和信息同步反馈</h2><p>预览环境用于代码Review环节中临时创建</p>
+<p>同Pull Request工作流程集成并实现信息同步和有效通知</p>
+<p>验证完毕后自动清理</p>
+<p>提交和应用状态自动同步到Github注释</p>
+<p>自动生成release notes信息供验证</p>
+<h1 id="Jenkins-X安装—以linux为例"><a href="#Jenkins-X安装—以linux为例" class="headerlink" title="Jenkins X安装—以linux为例"></a>Jenkins X安装—以linux为例</h1><ul>
+<li><p>在本地安装jx命令行工具(都要安装)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$curl -L https://github.com/jenkins-x/jx/releases/download/v1.2.6/jx-linux-amd64.tar.gz | tar xzv </span><br><span class="line">$sudo mv jx /usr/local/bin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用jx创建一个k8s集群，并自动安装Jenkins X</p>
+<blockquote>
+<p><a href="http://jenkins-x.io/getting-started/create-cluster/" target="_blank" rel="noopener">http://jenkins-x.io/getting-started/create-cluster/</a></p>
+</blockquote>
+</li>
+<li>在已经存在的k8s集群上安装Jenkns x<blockquote>
+<p><a href="http://jenkins-x.io/getting-started/install-on-cluster/" target="_blank" rel="noopener">http://jenkins-x.io/getting-started/install-on-cluster/</a><br>jx install</p>
+</blockquote>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/03/22/jenkins X/" data-id="cjhre356k00071opoj9fx9nma" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s-jenkins/">k8s,jenkins,</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ConfigMap" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/03/22/ConfigMap/" class="article-date">
@@ -553,130 +691,6 @@
 
 
   
-    <article id="post-jenkins X" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/22/jenkins X/" class="article-date">
-  <time datetime="2018-03-22T09:19:12.000Z" itemprop="datePublished">2018-03-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/jenkins X/">ConfigMap</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> Jenkins X 是一个高度集成化的CI/CD平台，基于Jenkins和Kubernetes实现，旨在解决微服务体系架构下的云原生应用的持续交付的问题，简化整个云原生应用的开发、运行和部署过程。</p>
-<h1 id="Jenkins-X-部分新特性"><a href="#Jenkins-X-部分新特性" class="headerlink" title="Jenkins X 部分新特性"></a>Jenkins X 部分新特性</h1><h2 id="1-自动化一切：自动化CI-CD流水线"><a href="#1-自动化一切：自动化CI-CD流水线" class="headerlink" title="1.自动化一切：自动化CI/CD流水线"></a>1.自动化一切：自动化CI/CD流水线</h2><p>选择项目类型自动生成Jenkinsfile定义流水线</p>
-<p>自动生成Dockerfile并打包容器镜像</p>
-<p>自动创建Helm Chart并运行在Kubernetes集群</p>
-<p>自动关联代码库和流水线，作为代码变更自动触发（基于Webhook实现）</p>
-<p>自动版本号自动归档</p>
-<h2 id="2-Review代码一键部署应用：基于GitOps的环境部署"><a href="#2-Review代码一键部署应用：基于GitOps的环境部署" class="headerlink" title="2. Review代码一键部署应用：基于GitOps的环境部署"></a>2. Review代码一键部署应用：基于GitOps的环境部署</h2><p>所有的环境，应用列表，版本，配置信息统一放在代码库中进行版本控制</p>
-<p>通过Pull Request实现研发和运维的协同，完成应用部署升级（Promotion）</p>
-<p>可自动部署和手动部署，在必要的时候增加手工Review</p>
-<p>当然这些都封装在jx命令中实现</p>
-<h2 id="3-自动生成预览环境和信息同步反馈"><a href="#3-自动生成预览环境和信息同步反馈" class="headerlink" title="3. 自动生成预览环境和信息同步反馈"></a>3. 自动生成预览环境和信息同步反馈</h2><p>预览环境用于代码Review环节中临时创建</p>
-<p>同Pull Request工作流程集成并实现信息同步和有效通知</p>
-<p>验证完毕后自动清理</p>
-<p>提交和应用状态自动同步到Github注释</p>
-<p>自动生成release notes信息供验证</p>
-<h1 id="Jenkins-X安装—以linux为例"><a href="#Jenkins-X安装—以linux为例" class="headerlink" title="Jenkins X安装—以linux为例"></a>Jenkins X安装—以linux为例</h1><ul>
-<li><p>在本地安装jx命令行工具(都要安装)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$curl -L https://github.com/jenkins-x/jx/releases/download/v1.2.6/jx-linux-amd64.tar.gz | tar xzv </span><br><span class="line">$sudo mv jx /usr/local/bin</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用jx创建一个k8s集群，并自动安装Jenkins X</p>
-<blockquote>
-<p><a href="http://jenkins-x.io/getting-started/create-cluster/" target="_blank" rel="noopener">http://jenkins-x.io/getting-started/create-cluster/</a></p>
-</blockquote>
-</li>
-<li>在已经存在的k8s集群上安装Jenkns x<blockquote>
-<p><a href="http://jenkins-x.io/getting-started/install-on-cluster/" target="_blank" rel="noopener">http://jenkins-x.io/getting-started/install-on-cluster/</a><br>jx install</p>
-</blockquote>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/jenkins X/" data-id="cjhre356k00071opoj9fx9nma" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s-jenkins/">k8s,jenkins,</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-kubernetes-常用命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/22/kubernetes-常用命令/" class="article-date">
-  <time datetime="2018-03-22T09:14:33.000Z" itemprop="datePublished">2018-03-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/22/kubernetes-常用命令/">kubernetes 常用命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="kubectl-get-pods-o-wide"><a href="#kubectl-get-pods-o-wide" class="headerlink" title="kubectl get pods -o wide"></a>kubectl get pods -o wide</h2><h2 id="使用nslookup查看这些Pod的DNS"><a href="#使用nslookup查看这些Pod的DNS" class="headerlink" title="使用nslookup查看这些Pod的DNS"></a>使用nslookup查看这些Pod的DNS</h2><blockquote>
-<p><code>$ kubectl run -i --tty --image busybox dns-test --restart=Never --rm /bin/sh
-/ # nslookup web-0.nginx
-Server:    10.0.0.10
-Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
-</blockquote>
-<h2 id="用kubectl-run来创建一个CronJob："><a href="#用kubectl-run来创建一个CronJob：" class="headerlink" title="用kubectl run来创建一个CronJob："></a>用kubectl run来创建一个CronJob：</h2><blockquote>
-<p><code>kubectl run hello --schedule=&quot;*/1 * * * *&quot; --restart=OnFailure --image=busybox -- /bin/sh -c &quot;date; echo Hello from the Kubernetes cluster&quot;</code></p>
-</blockquote>
-<h2 id="三种容器类型"><a href="#三种容器类型" class="headerlink" title="三种容器类型"></a>三种容器类型</h2><ul>
-<li><p>静态容器组：bare pod, IP和Hostname恒定；</p>
-</li>
-<li><p>有状态伸缩组： Deployment, IP和Hostname恒定，支持IP池；</p>
-</li>
-<li><p>无状态伸缩组： StatefulSets, 支持IP池，IP随机分配，灵活度更高。</p>
-</li>
-</ul>
-<p><em>斜体</em><br><strong>黑体</strong></p>
-<h2 id="k8s容器命名规则"><a href="#k8s容器命名规则" class="headerlink" title="k8s容器命名规则"></a>k8s容器命名规则</h2><p><img src="../../png/kubernetes-container-naming-rule.jpg" alt=""></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/03/22/kubernetes-常用命令/" data-id="cjhre3575000f1opo80ffrith" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -721,7 +735,7 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li></ul>
     </div>
   </div>
 
@@ -732,6 +746,10 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/08/06/nginx/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2018/05/29/2017-04-21-kubernetes-glusterfs/">kubernetes glusterfs</a>
@@ -747,10 +765,6 @@ Address 1: 10.0.0.10 kube-dns.kube-system.svc.cluster.local</code></p>
         
           <li>
             <a href="/2018/04/04/配置goLand查看k8s源码/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2018/04/03/Kubernetes中pod时区，与node主机同步/">Kubernetes中pod时区，与node主机同步</a>
           </li>
         
       </ul>
