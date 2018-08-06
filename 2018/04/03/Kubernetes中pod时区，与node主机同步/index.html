@@ -8,14 +8,14 @@
   <title>Kubernetes中pod时区，与node主机同步 | Fruit snack</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="pod时间同步k8s集群中的pod时间与主机不同步，解决这个问题基本上可以有两种思路：  直接修改镜像的时间设置，好处是应用部署时无需做特殊设置，但是需要手动构建Docker镜像。 部署应用时，单独读取主机的“/etc/localtime”文件，即创建pod时同步时区，无需修改镜像，但是每个应用都要单独设置。  这里为了快速、简单的解决这个问题，先使用第二种方案，yaml文件中设置时区同步，只需要">
-<meta name="keywords" content="k8s">
+<meta name="keywords" content="kubernetes,pod">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kubernetes中pod时区，与node主机同步">
 <meta property="og:url" content="http://yoursite.com/2018/04/03/Kubernetes中pod时区，与node主机同步/index.html">
 <meta property="og:site_name" content="Fruit snack">
 <meta property="og:description" content="pod时间同步k8s集群中的pod时间与主机不同步，解决这个问题基本上可以有两种思路：  直接修改镜像的时间设置，好处是应用部署时无需做特殊设置，但是需要手动构建Docker镜像。 部署应用时，单独读取主机的“/etc/localtime”文件，即创建pod时同步时区，无需修改镜像，但是每个应用都要单独设置。  这里为了快速、简单的解决这个问题，先使用第二种方案，yaml文件中设置时区同步，只需要">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-03T02:58:43.420Z">
+<meta property="og:updated_time" content="2018-08-06T07:04:46.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kubernetes中pod时区，与node主机同步">
 <meta name="twitter:description" content="pod时间同步k8s集群中的pod时间与主机不同步，解决这个问题基本上可以有两种思路：  直接修改镜像的时间设置，好处是应用部署时无需做特殊设置，但是需要手动构建Docker镜像。 部署应用时，单独读取主机的“/etc/localtime”文件，即创建pod时同步时区，无需修改镜像，但是每个应用都要单独设置。  这里为了快速、简单的解决这个问题，先使用第二种方案，yaml文件中设置时区同步，只需要">
@@ -108,7 +108,7 @@
       <a data-url="http://yoursite.com/2018/04/03/Kubernetes中pod时区，与node主机同步/" data-id="cjhre356300051opodfbq3uyf" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/k8s/">k8s</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kubernetes/">kubernetes</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pod/">pod</a></li></ul>
 
     </footer>
   </div>
@@ -154,7 +154,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-prometheus-grafana/">k8s, prometheus, grafana</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-fluentd-kafka-mongo/">k8s,fluentd,kafka,mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-jenkins/">k8s,jenkins,</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s-源码/">k8s,源码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-nginx/">linux,nginx</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/configmap/">configmap</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fluentd/">fluentd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grafana/">grafana</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jenkins/">jenkins</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/k8s/">k8s</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kubernetes/">kubernetes</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pod/">pod</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/prometheus/">prometheus</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/zookeeper/">zookeeper</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/源码/">源码</a></li></ul>
     </div>
   </div>
 
@@ -164,7 +164,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/k8s/" style="font-size: 20px;">k8s</a> <a href="/tags/k8s-prometheus-grafana/" style="font-size: 10px;">k8s, prometheus, grafana</a> <a href="/tags/k8s-fluentd-kafka-mongo/" style="font-size: 10px;">k8s,fluentd,kafka,mongo</a> <a href="/tags/k8s-jenkins/" style="font-size: 10px;">k8s,jenkins,</a> <a href="/tags/k8s-源码/" style="font-size: 10px;">k8s,源码</a> <a href="/tags/linux-nginx/" style="font-size: 10px;">linux,nginx</a>
+      <a href="/tags/configmap/" style="font-size: 10px;">configmap</a> <a href="/tags/fluentd/" style="font-size: 10px;">fluentd</a> <a href="/tags/grafana/" style="font-size: 10px;">grafana</a> <a href="/tags/jenkins/" style="font-size: 10px;">jenkins</a> <a href="/tags/k8s/" style="font-size: 20px;">k8s</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/kubernetes/" style="font-size: 20px;">kubernetes</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/pod/" style="font-size: 10px;">pod</a> <a href="/tags/prometheus/" style="font-size: 10px;">prometheus</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/源码/" style="font-size: 10px;">源码</a>
     </div>
   </div>
 
