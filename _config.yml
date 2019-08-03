@@ -6,10 +6,12 @@
 title: Fruit snack
 subtitle: beautiful & delicious
 description: myblog
-keywords:
+keywords: docker kubernetes k8s jenkins golang
 author: lukey
 language: zh-CN
-timezone:
+#timezone:
+#author: lukey
+email: luolizhi1221@gmail.com
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -74,7 +76,7 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 # theme: beautifulhugo
-theme: landscape
+theme: indigo
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
