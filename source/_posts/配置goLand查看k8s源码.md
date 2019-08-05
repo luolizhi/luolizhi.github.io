@@ -1,4 +1,10 @@
-# pycharm或者gogland配置读取kubernetes代码
+---
+title: 查看kubernetes源码
+date: 2019-08-05 09:15:02
+tags: [k8s, kuberenetes]
+---
+
+# gogland配置读取kubernetes代码
 
 1. 先下载kubernetes代码
 2. 下载代码并解压出来并按照src\k8s.io\kubernetes新建目录，最后一级为下载的源码目录。

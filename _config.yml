@@ -3,19 +3,18 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Fruit snack
+title: 水果点心
 subtitle: beautiful & delicious
-description: myblog
-keywords: docker kubernetes k8s jenkins golang
+description: 不是一个关于吃的网站
+keywords: docker,kubernetes,k8s,jenkins,golang
 author: lukey
 language: zh-CN
 #timezone:
-#author: lukey
 email: luolizhi1221@gmail.com
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://luolizhi.github.io/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -81,6 +80,6 @@ theme: indigo
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
+  type: github
   repo: git@github.com:luolizhi/luolizhi.github.io.git
   branch: master

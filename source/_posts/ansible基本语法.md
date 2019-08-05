@@ -1,4 +1,5 @@
 ---
+title: ansible 基本语法
 tags: [linux, ansible]
 ---
 

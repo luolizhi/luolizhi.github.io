@@ -1,4 +1,5 @@
 ---
+title: ubuntu16.04 搭建nfs服务器
 tags: [nfs]
 ---
 # ubuntu16.04 搭建nfs服务器

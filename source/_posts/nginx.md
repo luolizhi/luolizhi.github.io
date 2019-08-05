@@ -1,4 +1,5 @@
 ---
+title: nginx 配置
 tags: [linux, nginx]
 ---
 
