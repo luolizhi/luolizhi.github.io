@@ -71,6 +71,7 @@ yum安装的配置文件路径为
 `/usr/local/nginx/conf/nginx.conf`
 
 默认配置文件如下：
+
 ```bash
 [root@localhost ~]# cat /usr/local/nginx/conf/nginx.conf
 
@@ -193,9 +194,8 @@ http {
  // include /usr/local/nginx/conf.d/*.conf
 }
 ```
+
 `修改配置可以直接在server中增加location，或者在http中增加server（参考上图和默认配置）`
-
-
 
 
 ## nginx 常用操作
@@ -229,7 +229,6 @@ http {
 4.最后是交给/进行通用匹配
 注意：
 当有匹配成功时，立刻停止匹配，按照当前匹配规则处理请求
-
 
 ```yaml
 location = / {
@@ -304,3 +303,27 @@ location / {
 }
 ```
 
+## nginx try_files 用法
+
+要使非HTML请求实际资源不存在时响应404，方法是：若请求的资源不是HTML，则放弃尝试后备文件。
+要使得try_files不影响index和/与autoindex，方法是：若请求的路径是目录，则放弃尝试后备文件。
+
+```yaml
+    location / {
+        root /var/www/mysite;
+        index index.html;
+
+        autoindex on;
+
+        set $fallback_file /index.html;
+        if ($http_accept !~ text/html) {
+            set $fallback_file /null;
+        }
+        if ($uri ~ /$) {
+            set $fallback_file $uri;
+        }
+        try_files $uri $fallback_file;
+    }
+```
+
+首页在/login不跳转时增加上述配置解决问题.(微信端登录bug)
