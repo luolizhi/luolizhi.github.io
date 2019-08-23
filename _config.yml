@@ -80,6 +80,6 @@ theme: indigo
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: github
-  repo: https://github.com/luolizhi/luolizhi.github.io.git
+  type: git
+  repo: git@github.com:luolizhi/luolizhi.github.io.git
   branch: master
