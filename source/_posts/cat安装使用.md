@@ -6,7 +6,10 @@ tags: [cat,微服务]
 
 ## cat 安装步骤
 
-```bash
-#!/bin/bash
+### 服务端部署
 
-```
+官方地址：https://github.com/dianping/cat/wiki/readme_server
+
+### 客户端集成
+
+官方地址：https://github.com/dianping/cat/wiki/readme_client
