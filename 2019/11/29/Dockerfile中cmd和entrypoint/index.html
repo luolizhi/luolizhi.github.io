@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    
+    <title>dockerfile中cmd和entrypoint用法 | 水果点心 | beautiful &amp; delicious</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="kubernetes,dockerfile">
+    <meta name="description" content="entrypoint cmd在docker run image cmd arg1时，总是相当于CMD的[“cmd”, “arg1”]形式。 此外，docker-compose.yml的情况与docker run类似。 Dockerfile中cmd命令的三种形式The CMD instruction has three forms:  CMD [“executable”,”param1”,”para">
+<meta name="keywords" content="kubernetes,dockerfile">
+<meta property="og:type" content="article">
+<meta property="og:title" content="dockerfile中cmd和entrypoint用法">
+<meta property="og:url" content="https://luolizhi.github.io/2019/11/29/Dockerfile中cmd和entrypoint/index.html">
+<meta property="og:site_name" content="水果点心">
+<meta property="og:description" content="entrypoint cmd在docker run image cmd arg1时，总是相当于CMD的[“cmd”, “arg1”]形式。 此外，docker-compose.yml的情况与docker run类似。 Dockerfile中cmd命令的三种形式The CMD instruction has three forms:  CMD [“executable”,”param1”,”para">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-29T11:45:41.523Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="dockerfile中cmd和entrypoint用法">
+<meta name="twitter:description" content="entrypoint cmd在docker run image cmd arg1时，总是相当于CMD的[“cmd”, “arg1”]形式。 此外，docker-compose.yml的情况与docker run类似。 Dockerfile中cmd命令的三种形式The CMD instruction has three forms:  CMD [“executable”,”param1”,”para">
+    
+        <link rel="alternate" type="application/atom+xml" title="水果点心" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="//unpkg.com/hexo-theme-material-indigo@latest/css/style.css">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/leaves7.jpg">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">lukey</h5>
+          <a href="mailto:luolizhi1221@gmail.com" title="luolizhi1221@gmail.com" class="mail">luolizhi1221@gmail.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                Archives
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                Tags
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                Categories
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="https://github.com/luolizhi" target="_blank" >
+                <i class="icon icon-lg icon-github"></i>
+                Github
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="http://www.weibo.com/haiyangbingan" target="_blank" >
+                <i class="icon icon-lg icon-weibo"></i>
+                Weibo
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/custom"  >
+                <i class="icon icon-lg icon-link"></i>
+                Custom
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-info"></i>
+                About
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">dockerfile中cmd和entrypoint用法</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">dockerfile中cmd和entrypoint用法</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-11-29T11:45:41.523Z" itemprop="datePublished" class="page-time">
+  2019-11-29
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#entrypoint-cmd"><span class="post-toc-number">1.</span> <span class="post-toc-text">entrypoint cmd</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Dockerfile中cmd命令的三种形式"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Dockerfile中cmd命令的三种形式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ENTRYPOINT-has-two-forms"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">ENTRYPOINT has two forms:</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#docker-compose-Dockerfile-Kubernetes中CMD和entrypoint区别"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">docker-compose Dockerfile Kubernetes中CMD和entrypoint区别</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Dockerfile中cmd和entrypoint"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">dockerfile中cmd和entrypoint用法</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-11-29 19:45:41" datetime="2019-11-29T11:45:41.523Z"  itemprop="datePublished">2019-11-29</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h2 id="entrypoint-cmd"><a href="#entrypoint-cmd" class="headerlink" title="entrypoint cmd"></a>entrypoint cmd</h2><p>在docker run image cmd arg1时，总是相当于CMD的[“cmd”, “arg1”]形式。 此外，docker-compose.yml的情况与docker run类似。</p>
+<h3 id="Dockerfile中cmd命令的三种形式"><a href="#Dockerfile中cmd命令的三种形式" class="headerlink" title="Dockerfile中cmd命令的三种形式"></a>Dockerfile中cmd命令的三种形式</h3><p>The CMD instruction has three forms:</p>
+<ul>
+<li>CMD [“executable”,”param1”,”param2”] (exec form, this is the preferred form)</li>
+<li>CMD [“param1”,”param2”] (as default parameters to ENTRYPOINT)</li>
+<li>CMD command param1 param2 (shell form)</li>
+</ul>
+<p>第一种(推荐)<br>采用中括号形式，那么第一个参数必须是命令的全路径才行。而且，一个dockerfile至多只能有一个cmd，如果有多个，只有最后一个生效。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu</span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"/bin/bash"</span>, <span class="string">"-c"</span>, <span class="string">"echo 'hello cmd!'"</span>]</span></span><br></pre></td></tr></table></figure>
+<p>第二种是作为参数传递给entrypoint<br>第三种shell form，即没有中括号的形式。那么命令command默认是在”/bin/sh -c”下执行的。(等价于第一种的写法)</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> ubuntu</span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"hello cmd!"</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="ENTRYPOINT-has-two-forms"><a href="#ENTRYPOINT-has-two-forms" class="headerlink" title="ENTRYPOINT has two forms:"></a>ENTRYPOINT has two forms:</h3><ul>
+<li>ENTRYPOINT [“executable”, “param1”, “param2”] (exec form, preferred)</li>
+<li>ENTRYPOINT command param1 param2 (shell form)</li>
+</ul>
+<p>分为命令行和shell两种。<br>先看命令行模式，也就是带中括号的。和cmd的中括号形式是一致的，但是这里貌似是在shell的环境下执行的，与cmd有区别。如果run命令后面有东西，那么后面的全部都会作为entrypoint的参数。如果docker run后面没有额外的东西，但是cmd有，那么cmd的全部内容会作为entrypoint的参数，这同时是cmd的第二种用法。这也是网上说的entrypoint不会被覆盖。当然如果要在run里面覆盖，也是有办法的，使用–entrypoint即可。</p>
+<h3 id="docker-compose-Dockerfile-Kubernetes中CMD和entrypoint区别"><a href="#docker-compose-Dockerfile-Kubernetes中CMD和entrypoint区别" class="headerlink" title="docker-compose Dockerfile Kubernetes中CMD和entrypoint区别"></a>docker-compose Dockerfile Kubernetes中CMD和entrypoint区别</h3><table>
+<thead>
+<tr>
+<th>Description</th>
+<th>Docker field name</th>
+<th>Docker-compose</th>
+<th>Kubernetes field name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The command run by the container</td>
+<td>Entrypoint</td>
+<td>Entrypoint</td>
+<td>command</td>
+</tr>
+<tr>
+<td>The arguments passed to the command</td>
+<td>Cmd</td>
+<td>command</td>
+<td>args</td>
+</tr>
+</tbody>
+</table>
+<p>如果要覆盖默认的Entrypoint 与 Cmd，需要遵循如下规则：(Docker 与 Kubernetes, k8s中的设置会覆盖容器默认的命令)</p>
+<ul>
+<li><p>如果在容器配置中没有设置command 或者 args，那么将使用Docker镜像自带的命令及其入参。</p>
+</li>
+<li><p>如果在容器配置中只设置了command但是没有设置args,那么容器启动时只会执行该命令，Docker镜像中自带的命令及其入参会被忽略。</p>
+</li>
+<li><p>如果在容器配置中只设置了args,那么Docker镜像中自带的命令会使用该新入参作为其执行时的入参。</p>
+</li>
+<li><p>如果在容器配置中同时设置了command 与 args，那么Docker镜像中自带的命令及其入参会被忽略。容器启动时只会执行配置中设置的命令，并使用配置中设置的入参作为命令的入参。</p>
+</li>
+</ul>
+<p>下表涵盖了各类设置场景：</p>
+<table>
+<thead>
+<tr>
+<th>Image Entrypoint</th>
+<th>Image Cmd</th>
+<th>Container command</th>
+<th>Container args</th>
+<th>Command run</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[/ep-1]</td>
+<td>[foo bar]</td>
+<td><not set></not></td>
+<td><not set></not></td>
+<td>[ep-1 foo bar]</td>
+</tr>
+<tr>
+<td>[/ep-1]</td>
+<td>[foo bar]</td>
+<td>[/ep-2]</td>
+<td><not set></not></td>
+<td>[ep-2]</td>
+</tr>
+<tr>
+<td>[/ep-1]</td>
+<td>[foo bar]</td>
+<td><not set></not></td>
+<td>[zoo boo]</td>
+<td>[ep-1 zoo boo]</td>
+</tr>
+<tr>
+<td>[/ep-1]</td>
+<td>[foo bar]</td>
+<td>[/ep-2]</td>
+<td>[zoo boo]</td>
+<td>[ep-2 zoo boo]</td>
+</tr>
+</tbody>
+</table>
+<p><em>空白表示没设置该参数</em></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">env:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">MESSAGE</span></span><br><span class="line">  <span class="attr">value:</span> <span class="string">"hello world"</span></span><br><span class="line"><span class="attr">command:</span> <span class="string">["/bin/echo"]</span></span><br><span class="line"><span class="attr">args:</span> <span class="string">["$(MESSAGE)"]</span></span><br></pre></td></tr></table></figure>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-11-29T11:45:41.523Z" itemprop="dateUpdated">2019-11-29 19:45:41</time>
+</span><br>
+
+
+        
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/11/29/Dockerfile中cmd和entrypoint/" target="_blank" rel="external">https://luolizhi.github.io/2019/11/29/Dockerfile中cmd和entrypoint/</a>
+        
+    </div>
+    
+    <footer>
+        <a href="https://luolizhi.github.io">
+            <img src="/img/leaves7.jpg" alt="lukey">
+            lukey
+        </a>
+    </footer>
+</blockquote>
+
+        
+<div class="page-reward">
+    <a id="rewardBtn" href="javascript:;" class="page-reward-btn waves-effect waves-circle waves-light">赏</a>
+</div>
+
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dockerfile/">dockerfile</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kubernetes/">kubernetes</a></li></ul>
+
+
+            
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2019/11/29/ansible基本语法/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">ansible 基本语法</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/11/29/2017-04-21-kubernetes-glusterfs/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">kubernetes glusterfs</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+<div id="reward" class="page-modal reward-lay">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <div class="reward-content">
+        
+        <div class="reward-code">
+            <img id="rewardCode" src="/img/wechat.png" alt="打赏二维码">
+        </div>
+        
+    </div>
+</div>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+
+        <p>
+            
+                <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            
+            <span>博客内容遵循 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh">知识共享 署名 - 非商业性 - 相同方式共享 4.0 国际协议</a></span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>lukey &copy; 2015 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: false, REWARD: true };
+
+
+</script>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/main.min.js"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="//unpkg.com/hexo-theme-material-indigo@latest/js/search.min.js" async></script>
+
+
+
+
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = '走丢了！';
+            clearTimeout(titleTime);
+        } else {
+            document.title = '(つェ⊂)咦!又好了!';
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
