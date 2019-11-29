@@ -12,4 +12,4 @@ npm install
 npm install hexo-deployer-git --save
 ```
 
-之后开始写博客，写好部署好之后，别忘记 git add , ….git push origin hexo…推上去，或者hexo -d推上去。
+之后开始写博客，写好部署好之后，别忘记 `git add .`,`git commit -m "update"`, `git push origin hexo` 推到 `hexo` 分支上去，然后使用 `hexo g -d` 部署上去。
