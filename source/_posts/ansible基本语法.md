@@ -1,5 +1,6 @@
 ---
 title: ansible 基本语法
+date: 2018-12-1 10:50:27
 tags: [linux, ansible]
 ---
 
@@ -352,7 +353,7 @@ VirtualHost 127.0.0.1:8080
     Templates：模板，即使用了模板语法的文本文件；
     Handlers：由特定条件触发的Tasks；
     Roles：角色；
-
+    
     playbook的基础组件：
         Hosts：运行指定任务的目标主机；
         remote_user：在远程主机以哪个用户身份执行；
@@ -377,8 +378,9 @@ VirtualHost 127.0.0.1:8080
             -t TAGS, --tags=TAGS
             --skip-tags=SKIP_TAGS
             --start-at-task=START_AT
+
   
-  
+
 ```
 ansible-playbook -C group.yml 
 ```

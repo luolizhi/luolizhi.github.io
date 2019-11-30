@@ -1,4 +1,6 @@
 ---
+title: centos搭建ftp服务器
+date: 2018-12-1 10:50:27
 tags: [ftp]
 ---
 # centos搭建ftp服务器

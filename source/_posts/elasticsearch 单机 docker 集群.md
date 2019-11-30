@@ -1,5 +1,5 @@
 ---
-title: elasticsearch 单机 docker 安装
+title: elasticsearch 单机 docker 集群
 date: 2019-08-15 09:19:04
 tags: [docker, elasticsearch]
 ---

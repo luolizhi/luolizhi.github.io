@@ -1,5 +1,6 @@
 ---
 title: centos7 安装ansible
+date: 2018-12-1 10:50:27
 tags: [ansible]
 ---
 # centos7 安装ansible

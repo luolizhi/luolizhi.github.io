@@ -1,4 +1,6 @@
 ---
+title: fastdfs 集群
+date: 2018-12-1 10:50:27
 tags: [fastdfs]
 ---
 # fastdfs 安装
@@ -57,7 +59,7 @@ ln -s /usr/bin/restart.sh /usr/local/bin/
 ```
 - 启动服务
 `service fdfs_trackerd start` 或者
-`/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart	`
+	/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart	`
 - 查看监听
 `netstat -nltp|grep fdfs`
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: kubernetes glusterfs
+date: 2018-12-1 10:50:27
 categories: docker
 description: kubernetes glusterfs
 keywords: docker

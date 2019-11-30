@@ -1,6 +1,6 @@
 ---
-title: dockerfile中cmd和entrypoint用法
-date: 2019-08-123 09:19:04
+title: dockerfile 中 cmd 和 entrypoint 用法
+date: 2019-08-11 09:19:04
 tags: [dockerfile, kubernetes]
 ---
 ## entrypoint cmd

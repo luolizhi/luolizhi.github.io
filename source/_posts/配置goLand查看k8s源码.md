@@ -1,7 +1,7 @@
 ---
-title: 查看kubernetes源码
+title: gogland查看kubernetes源码
 date: 2019-08-05 09:15:02
-tags: [k8s, kuberenetes]
+tags: [kuberenetes]
 ---
 
 # gogland配置读取kubernetes代码

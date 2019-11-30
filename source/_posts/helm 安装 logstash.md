@@ -1,7 +1,7 @@
 ---
 title: helm 安装 logstash 同步mysql数据到elasticsearch
-date: 2019-08-28 13:25:34
-tags: [logstash]
+date: 2019-08-25 13:25:34
+tags: [logstash, kubernetes]
 ---
 
 ## 安装

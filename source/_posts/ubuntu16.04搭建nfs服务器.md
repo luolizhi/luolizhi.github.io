@@ -1,5 +1,6 @@
 ---
 title: ubuntu16.04 搭建nfs服务器
+date: 2018-12-1 10:50:27
 tags: [nfs]
 ---
 # ubuntu16.04 搭建nfs服务器
@@ -26,7 +27,7 @@ sudo vi /etc/exports
 /data *(rw,sync,no_subtree_check,no_root_squash)
 /logs *(rw,sync,no_subtree_check,no_root_squash)
 ```
- 
+
 
 ### 1.3创建共享目录
 
@@ -36,7 +37,7 @@ sudo mkdir -p /tmp
 sudo mkdir -p /data
 sudo mkdir -p /logs
 ```
- 
+
 
 ### 1.4重启nfs服务：
 

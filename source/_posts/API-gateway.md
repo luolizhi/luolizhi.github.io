@@ -1,16 +1,19 @@
 ---
 title: API-gateway
 date: 2019-08-27 09:25:34
-tags: [api-gateway, 微服务]
+tags: [gateway, 微服务]
 ---
 
 ## 开源API网关比较
 
-nginx
-zuul 是一种提供动态路由、监视、弹性、安全性等功能的边缘服务。Zuul 是 Netflix 出品的一个基于 JVM 路由和服务端的负载均衡器。
-kong
-spring cloud gateway
-Traefik 是一个现代 HTTP 反向代理和负载均衡器，可以轻松部署微服务，Traeffik 可以与您现有的组件（Docker、Swarm，Kubernetes，Marathon，Consul，Etcd，…）集成，并自动动态配置。
+| 开源网关             | 简介                                                         |
+| -------------------- | ------------------------------------------------------------ |
+| zuul                 | Netflix 开源，基于 JVM 路由和服务端的负载均衡器。（已经停止维护） |
+| kong                 | 基于 OpenResty（Nginx + Lua 模块）编写的高可用、易扩展的，由 Mashape 公司开源的 API Gateway 项目 。 |
+| spring cloud gateway | Spring Cloud 团队的一个全新项目，基于 Spring 5.0、SpringBoot2.0、Project Reactor 等技术开发的网关， 目标是替代 Netflix Zuul 。 |
+| Traefik              | 一个现代 HTTP 反向代理和负载均衡器，可以轻松部署微服务，Traeffik 可以与您现有的组件（Docker、Swarm，Kubernetes，Marathon，Consul，Etcd，…）集成，并自动动态配置。 |
+
+
 
 从开源社区活跃度来看，无疑是Kong和Traefik较好；
 从成熟度来看，较好的是Kong、Traefik；

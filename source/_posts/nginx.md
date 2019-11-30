@@ -1,9 +1,10 @@
 ---
-title: nginx 配置
+title: nginx
+date: 2018-12-1 10:50:27
 tags: [linux, nginx]
 ---
 
-# nginx配置
+# nginx 
 
 ## nginx 安装
 
@@ -63,7 +64,7 @@ make && make install
 ## nginx 配置
 
 ![配置文件示意图](../images/nginx配置文件结构图.png)  
- 
+
 yum安装的配置文件路径为
 `/etc/nginx/nginx.conf`
 
