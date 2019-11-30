@@ -14,7 +14,7 @@
     
     
     
-    <title>No title | 水果点心 | beautiful &amp; delicious</title>
+    <title>fastdfs 集群 | 水果点心 | beautiful &amp; delicious</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
@@ -24,19 +24,19 @@
     <meta name="description" content="fastdfs 安装安装环境   组件 版本     操作系统 Centos7.2 Final   FastDFS版本 fastdfs-5.11.tar.gz   libfastcommon https://github.com/happyfish100/libfastcommon   nginx nginx-1.14.0.tar.gz   fastdfs-nginx-module fastdfs">
 <meta name="keywords" content="fastdfs">
 <meta property="og:type" content="article">
-<meta property="og:title" content="No title">
-<meta property="og:url" content="https://luolizhi.github.io/2019/11/29/fastdfs安装/index.html">
+<meta property="og:title" content="fastdfs 集群">
+<meta property="og:url" content="https://luolizhi.github.io/2018/12/01/fastdfs集群/index.html">
 <meta property="og:site_name" content="水果点心">
 <meta property="og:description" content="fastdfs 安装安装环境   组件 版本     操作系统 Centos7.2 Final   FastDFS版本 fastdfs-5.11.tar.gz   libfastcommon https://github.com/happyfish100/libfastcommon   nginx nginx-1.14.0.tar.gz   fastdfs-nginx-module fastdfs">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://luolizhi.github.io/2019/11/29/images/fdfs架构图.jpg">
-<meta property="og:image" content="https://luolizhi.github.io/2019/11/29/images/fdfs结合nginx配置图.jpg">
-<meta property="og:image" content="https://luolizhi.github.io/2019/11/29/images/fdfs完整配置图.jpg">
-<meta property="og:updated_time" content="2019-11-29T11:45:41.526Z">
+<meta property="og:image" content="https://luolizhi.github.io/2018/12/01/images/fdfs架构图.jpg">
+<meta property="og:image" content="https://luolizhi.github.io/2018/12/01/images/fdfs结合nginx配置图.jpg">
+<meta property="og:image" content="https://luolizhi.github.io/2018/12/01/images/fdfs完整配置图.jpg">
+<meta property="og:updated_time" content="2019-11-30T03:50:31.872Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="No title">
+<meta name="twitter:title" content="fastdfs 集群">
 <meta name="twitter:description" content="fastdfs 安装安装环境   组件 版本     操作系统 Centos7.2 Final   FastDFS版本 fastdfs-5.11.tar.gz   libfastcommon https://github.com/happyfish100/libfastcommon   nginx nginx-1.14.0.tar.gz   fastdfs-nginx-module fastdfs">
-<meta name="twitter:image" content="https://luolizhi.github.io/2019/11/29/images/fdfs架构图.jpg">
+<meta name="twitter:image" content="https://luolizhi.github.io/2018/12/01/images/fdfs架构图.jpg">
     
         <link rel="alternate" type="application/atom+xml" title="水果点心" href="/atom.xml">
     
@@ -138,7 +138,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">No title</div>
+        <div class="flex-col header-title ellipsis">fastdfs 集群</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -156,11 +156,11 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">No title</h1>
+        <h1 class="title">fastdfs 集群</h1>
         <h5 class="subtitle">
             
-                <time datetime="2019-11-29T11:45:41.526Z" itemprop="datePublished" class="page-time">
-  2019-11-29
+                <time datetime="2018-12-01T02:50:27.000Z" itemprop="datePublished" class="page-time">
+  2018-12-01
 </time>
 
 
@@ -179,18 +179,18 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#fastdfs-安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">fastdfs 安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装环境"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">安装环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#架构"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">架构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装fastcommon，fastdfs-（所有节点）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">安装fastcommon，fastdfs （所有节点）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#tracker配置-（192-168-77-76）"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">tracker配置 （192.168.77.76）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#storage配置（192-168-77-77，192-168-77-78）"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">storage配置（192.168.77.77，192.168.77.78）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置开机启动"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">设置开机启动</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#上传下载"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">上传下载</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#完整的文件服务器架构图："><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">完整的文件服务器架构图：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nginx安装"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">nginx安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#tracker上只安装nginx"><span class="post-toc-number">1.8.1.</span> <span class="post-toc-text">tracker上只安装nginx</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#nginx配置"><span class="post-toc-number">1.8.1.1.</span> <span class="post-toc-text">nginx配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#storage上安装nginx和fastdfs-nginx-module-（192-168-77-77，192-168-77-78）"><span class="post-toc-number">1.8.2.</span> <span class="post-toc-text">storage上安装nginx和fastdfs-nginx-module （192.168.77.77，192.168.77.78）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在tracker上操作集群，上传下载"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">在tracker上操作集群，上传下载</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件上传"><span class="post-toc-number">1.9.1.</span> <span class="post-toc-text">文件上传</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件下载"><span class="post-toc-number">1.9.2.</span> <span class="post-toc-text">文件下载</span></a></li></ol></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#fastdfs-安装"><span class="post-toc-number">1.</span> <span class="post-toc-text">fastdfs 安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装环境"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">安装环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#架构"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">架构</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安装libfastcommon，fastdfs-（所有节点）"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">安装libfastcommon，fastdfs （所有节点）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#tracker配置-（192-168-77-76）"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">tracker配置 （192.168.77.76）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#storage配置（192-168-77-77，192-168-77-78）"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">storage配置（192.168.77.77，192.168.77.78）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置开机启动"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">设置开机启动</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#上传下载"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">上传下载</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#完整的文件服务器架构图："><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">完整的文件服务器架构图：</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nginx安装"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">nginx安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#tracker上只安装nginx"><span class="post-toc-number">1.8.1.</span> <span class="post-toc-text">tracker上只安装nginx</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#nginx配置"><span class="post-toc-number">1.8.1.1.</span> <span class="post-toc-text">nginx配置</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#storage上安装nginx和fastdfs-nginx-module-（192-168-77-77，192-168-77-78）"><span class="post-toc-number">1.8.2.</span> <span class="post-toc-text">storage上安装nginx和fastdfs-nginx-module （192.168.77.77，192.168.77.78）</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#在tracker上操作集群，上传下载"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">在tracker上操作集群，上传下载</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件上传"><span class="post-toc-number">1.9.1.</span> <span class="post-toc-text">文件上传</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文件下载"><span class="post-toc-number">1.9.2.</span> <span class="post-toc-text">文件下载</span></a></li></ol></li></ol></li></ol>
         </nav>
     </aside>
 
 
-<article id="post-fastdfs安装"
+<article id="post-fastdfs集群"
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">No title</h1>
+        <h1 class="post-card-title">fastdfs 集群</h1>
         <div class="post-meta">
-            <time class="post-time" title="2019-11-29 19:45:41" datetime="2019-11-29T11:45:41.526Z"  itemprop="datePublished">2019-11-29</time>
+            <time class="post-time" title="2018-12-01 10:50:27" datetime="2018-12-01T02:50:27.000Z"  itemprop="datePublished">2018-12-01</time>
 
             
 
@@ -242,13 +242,13 @@
                 </div>
                 <div class="image-caption">fdfs架构图</div>
             </figure>
-<h2 id="安装fastcommon，fastdfs-（所有节点）"><a href="#安装fastcommon，fastdfs-（所有节点）" class="headerlink" title="安装fastcommon，fastdfs （所有节点）"></a>安装fastcommon，fastdfs （所有节点）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># fastcommon</span><br><span class="line">wget https://github.com/happyfish100/libfastcommon.git </span><br><span class="line">#安装libfastcommon-master(与libfastcommon不同，里面多了很多头文件)</span><br><span class="line">tar zxvf libfastcommon-master.tar.gz</span><br><span class="line">cd libfastcommon-master/</span><br><span class="line">./make.sh</span><br><span class="line">./make.sh install</span><br><span class="line"></span><br><span class="line"># fastdfs安装</span><br><span class="line">wget https://github.com/happyfish100/fastdfs/archive/V5.11.tar.gz</span><br><span class="line">cd fastdfs-5.11/</span><br><span class="line">./make.sh</span><br><span class="line">./make.sh install</span><br></pre></td></tr></table></figure>
+<h2 id="安装libfastcommon，fastdfs-（所有节点）"><a href="#安装libfastcommon，fastdfs-（所有节点）" class="headerlink" title="安装libfastcommon，fastdfs （所有节点）"></a>安装libfastcommon，fastdfs （所有节点）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># fastcommon</span><br><span class="line">wget https://github.com/happyfish100/libfastcommon.git </span><br><span class="line">#安装libfastcommon-master(与libfastcommon不同，里面多了很多头文件)</span><br><span class="line">tar zxvf libfastcommon-master.tar.gz</span><br><span class="line">cd libfastcommon-master/</span><br><span class="line">./make.sh</span><br><span class="line">./make.sh install</span><br><span class="line"></span><br><span class="line"># fastdfs安装</span><br><span class="line">wget https://github.com/happyfish100/fastdfs/archive/V5.11.tar.gz</span><br><span class="line">cd fastdfs-5.11/</span><br><span class="line">./make.sh</span><br><span class="line">./make.sh install</span><br></pre></td></tr></table></figure>
 <h2 id="tracker配置-（192-168-77-76）"><a href="#tracker配置-（192-168-77-76）" class="headerlink" title="tracker配置 （192.168.77.76）"></a>tracker配置 （192.168.77.76）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/fastdfs/</span><br><span class="line">cd /etc/fdfs/</span><br><span class="line">cp tracker.conf.sample tracker.conf</span><br><span class="line">vim tracker.conf</span><br><span class="line">#修改参数</span><br><span class="line">base_path=/data/fastdfs</span><br></pre></td></tr></table></figure>
 <ul>
 <li><p>创建软链接</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ln -s /usr/bin/fdfs_trackerd /usr/local/bin/</span><br><span class="line">ln -s /usr/bin/stop.sh /usr/local/bin/</span><br><span class="line">ln -s /usr/bin/restart.sh /usr/local/bin/</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>启动服务<br><code>service fdfs_trackerd start</code> 或者<br><code>/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart</code></p>
+<li><p>启动服务<br><code>service fdfs_trackerd start</code> 或者<br>  /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart    `</p>
 </li>
 <li>查看监听<br><code>netstat -nltp|grep fdfs</code></li>
 </ul>
@@ -306,12 +306,12 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-11-29T11:45:41.526Z" itemprop="dateUpdated">2019-11-29 19:45:41</time>
+    最后更新时间：<time datetime="2019-11-30T03:50:31.872Z" itemprop="dateUpdated">2019-11-30 11:50:31</time>
 </span><br>
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/11/29/fastdfs安装/" target="_blank" rel="external">https://luolizhi.github.io/2019/11/29/fastdfs安装/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/12/01/fastdfs集群/" target="_blank" rel="external">https://luolizhi.github.io/2018/12/01/fastdfs集群/</a>
         
     </div>
     
@@ -345,18 +345,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2019/11/29/fastdfs集群/" id="post-prev" class="post-nav-link">
+      <a href="/2018/12/01/nginx/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">No title</h4>
+        <h4 class="title">nginx</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2019/11/29/centos7安装ansible/" id="post-next" class="post-nav-link">
+      <a href="/2018/12/01/centos7安装ftp服务器/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">centos7 安装ansible</h4>
+        <h4 class="title">centos搭建ftp服务器</h4>
       </a>
     </div>
   

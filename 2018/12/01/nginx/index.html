@@ -14,27 +14,27 @@
     
     
     
-    <title>nginx 配置 | 水果点心 | beautiful &amp; delicious</title>
+    <title>nginx | 水果点心 | beautiful &amp; delicious</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     
     <meta name="theme-color" content="#3F51B5">
     
     
     <meta name="keywords" content="linux,nginx">
-    <meta name="description" content="nginx配置nginx 安装1. yum安装123456789101112# 1.将nginx放到yum repro库中[root@localhost ~]# rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm# 2.查看nginx信息[root@l">
+    <meta name="description" content="nginxnginx 安装1. yum安装123456789101112# 1.将nginx放到yum repro库中[root@localhost ~]# rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm# 2.查看nginx信息[root@loc">
 <meta name="keywords" content="linux,nginx">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nginx 配置">
-<meta property="og:url" content="https://luolizhi.github.io/2019/11/29/nginx/index.html">
+<meta property="og:title" content="nginx">
+<meta property="og:url" content="https://luolizhi.github.io/2018/12/01/nginx/index.html">
 <meta property="og:site_name" content="水果点心">
-<meta property="og:description" content="nginx配置nginx 安装1. yum安装123456789101112# 1.将nginx放到yum repro库中[root@localhost ~]# rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm# 2.查看nginx信息[root@l">
+<meta property="og:description" content="nginxnginx 安装1. yum安装123456789101112# 1.将nginx放到yum repro库中[root@localhost ~]# rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm# 2.查看nginx信息[root@loc">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://luolizhi.github.io/2019/11/29/images/nginx配置文件结构图.png">
-<meta property="og:updated_time" content="2019-11-29T11:45:41.532Z">
+<meta property="og:image" content="https://luolizhi.github.io/2018/12/01/images/nginx配置文件结构图.png">
+<meta property="og:updated_time" content="2019-11-30T03:47:11.954Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nginx 配置">
-<meta name="twitter:description" content="nginx配置nginx 安装1. yum安装123456789101112# 1.将nginx放到yum repro库中[root@localhost ~]# rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm# 2.查看nginx信息[root@l">
-<meta name="twitter:image" content="https://luolizhi.github.io/2019/11/29/images/nginx配置文件结构图.png">
+<meta name="twitter:title" content="nginx">
+<meta name="twitter:description" content="nginxnginx 安装1. yum安装123456789101112# 1.将nginx放到yum repro库中[root@localhost ~]# rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm# 2.查看nginx信息[root@loc">
+<meta name="twitter:image" content="https://luolizhi.github.io/2018/12/01/images/nginx配置文件结构图.png">
     
         <link rel="alternate" type="application/atom+xml" title="水果点心" href="/atom.xml">
     
@@ -136,7 +136,7 @@
         <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
-        <div class="flex-col header-title ellipsis">nginx 配置</div>
+        <div class="flex-col header-title ellipsis">nginx</div>
         
         <div class="search-wrap" id="search-wrap">
             <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
@@ -154,11 +154,11 @@
 <header class="content-header post-header">
 
     <div class="container fade-scale">
-        <h1 class="title">nginx 配置</h1>
+        <h1 class="title">nginx</h1>
         <h5 class="subtitle">
             
-                <time datetime="2019-11-29T11:45:41.531Z" itemprop="datePublished" class="page-time">
-  2019-11-29
+                <time datetime="2018-12-01T02:50:27.000Z" itemprop="datePublished" class="page-time">
+  2018-12-01
 </time>
 
 
@@ -177,7 +177,7 @@
     <aside class="post-widget">
         <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#nginx配置"><span class="post-toc-number">1.</span> <span class="post-toc-text">nginx配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nginx-安装"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">nginx 安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-yum安装"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1. yum安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-源码安装"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">2. 源码安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装其他模块"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">安装其他模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设置开机启动"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">设置开机启动</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nginx-配置"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">nginx 配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nginx-常用操作"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">nginx 常用操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#location-规则"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">location 规则</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#显示真实ip地址"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">显示真实ip地址</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nginx-try-files-用法"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">nginx try_files 用法</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#nginx"><span class="post-toc-number">1.</span> <span class="post-toc-text">nginx</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nginx-安装"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">nginx 安装</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-yum安装"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">1. yum安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-源码安装"><span class="post-toc-number">1.1.2.</span> <span class="post-toc-text">2. 源码安装</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#安装其他模块"><span class="post-toc-number">1.1.3.</span> <span class="post-toc-text">安装其他模块</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#设置开机启动"><span class="post-toc-number">1.1.4.</span> <span class="post-toc-text">设置开机启动</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nginx-配置"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">nginx 配置</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nginx-常用操作"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">nginx 常用操作</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#location-规则"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">location 规则</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#显示真实ip地址"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">显示真实ip地址</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#nginx-try-files-用法"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">nginx try_files 用法</span></a></li></ol></li></ol>
         </nav>
     </aside>
 
@@ -186,9 +186,9 @@
   class="post-article article-type-post fade" itemprop="blogPost">
 
     <div class="post-card">
-        <h1 class="post-card-title">nginx 配置</h1>
+        <h1 class="post-card-title">nginx</h1>
         <div class="post-meta">
-            <time class="post-time" title="2019-11-29 19:45:41" datetime="2019-11-29T11:45:41.531Z"  itemprop="datePublished">2019-11-29</time>
+            <time class="post-time" title="2018-12-01 10:50:27" datetime="2018-12-01T02:50:27.000Z"  itemprop="datePublished">2018-12-01</time>
 
             
 
@@ -201,7 +201,7 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h1 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a>nginx配置</h1><h2 id="nginx-安装"><a href="#nginx-安装" class="headerlink" title="nginx 安装"></a>nginx 安装</h2><h3 id="1-yum安装"><a href="#1-yum安装" class="headerlink" title="1. yum安装"></a>1. yum安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.将nginx放到yum repro库中</span></span><br><span class="line">[root@localhost ~]<span class="comment"># rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span></span><br><span class="line"><span class="comment"># 2.查看nginx信息</span></span><br><span class="line">[root@localhost ~]<span class="comment"># yum info nginx</span></span><br><span class="line"><span class="comment"># 3.使用yum安装ngnix</span></span><br><span class="line">[root@localhost ~]<span class="comment"># yum install nginx</span></span><br><span class="line"><span class="comment"># 4.启动nginx</span></span><br><span class="line">[root@localhost ~]<span class="comment"># service nginx start</span></span><br><span class="line"><span class="comment"># 5.查看nginx版本</span></span><br><span class="line">[root@localhost ~]<span class="comment"># nginx -v</span></span><br><span class="line"><span class="comment"># 6.访问nginx，现在你可以通过公网ip (本地可以通过 localhost /或 127.0.0.1 ) 查看nginx 服务返回的信息。</span></span><br><span class="line">[root@localhost ~]<span class="comment"># curl -i localhost</span></span><br></pre></td></tr></table></figure>
+            <h1 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h1><h2 id="nginx-安装"><a href="#nginx-安装" class="headerlink" title="nginx 安装"></a>nginx 安装</h2><h3 id="1-yum安装"><a href="#1-yum安装" class="headerlink" title="1. yum安装"></a>1. yum安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.将nginx放到yum repro库中</span></span><br><span class="line">[root@localhost ~]<span class="comment"># rpm -ivh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm</span></span><br><span class="line"><span class="comment"># 2.查看nginx信息</span></span><br><span class="line">[root@localhost ~]<span class="comment"># yum info nginx</span></span><br><span class="line"><span class="comment"># 3.使用yum安装ngnix</span></span><br><span class="line">[root@localhost ~]<span class="comment"># yum install nginx</span></span><br><span class="line"><span class="comment"># 4.启动nginx</span></span><br><span class="line">[root@localhost ~]<span class="comment"># service nginx start</span></span><br><span class="line"><span class="comment"># 5.查看nginx版本</span></span><br><span class="line">[root@localhost ~]<span class="comment"># nginx -v</span></span><br><span class="line"><span class="comment"># 6.访问nginx，现在你可以通过公网ip (本地可以通过 localhost /或 127.0.0.1 ) 查看nginx 服务返回的信息。</span></span><br><span class="line">[root@localhost ~]<span class="comment"># curl -i localhost</span></span><br></pre></td></tr></table></figure>
 <h3 id="2-源码安装"><a href="#2-源码安装" class="headerlink" title="2. 源码安装"></a>2. 源码安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.下载nginx包。</span></span><br><span class="line">[root@localhost ~]<span class="comment"># wget http://nginx.org/download/nginx-1.14.0.tar.gz</span></span><br><span class="line"><span class="comment">#2.复制包到你的安装目录</span></span><br><span class="line">[root@localhost ~]<span class="comment"># cp nginx-1.14.0.tar.gz /usr/local/</span></span><br><span class="line"><span class="comment"># 3.解压</span></span><br><span class="line">[root@localhost ~]<span class="comment"># tar -zxvf nginx-1.14.0.tar.gz</span></span><br><span class="line">[root@localhost ~]<span class="comment"># cd nginx-1.14.0</span></span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"><span class="comment"># 4.启动nginx</span></span><br><span class="line">[root@localhost ~]<span class="comment"># /usr/local/nginx/sbin/nginx</span></span><br><span class="line"><span class="comment"># 5.查看版本s</span></span><br><span class="line">[root@localhost ~]<span class="comment"># nginx -v</span></span><br><span class="line"><span class="comment">#6.url访问nginx localhost或127.0.0.1</span></span><br></pre></td></tr></table></figure>
 <h3 id="安装其他模块"><a href="#安装其他模块" class="headerlink" title="安装其他模块"></a>安装其他模块</h3><p>在上述第3步</p>
 <p><code>./configure --add-module=/path/to/module</code></p>
@@ -238,12 +238,12 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-11-29T11:45:41.532Z" itemprop="dateUpdated">2019-11-29 19:45:41</time>
+    最后更新时间：<time datetime="2019-11-30T03:47:11.954Z" itemprop="dateUpdated">2019-11-30 11:47:11</time>
 </span><br>
 
 
         
-        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2019/11/29/nginx/" target="_blank" rel="external">https://luolizhi.github.io/2019/11/29/nginx/</a>
+        这里可以写作者留言，标签和 hexo 中所有变量及辅助函数等均可调用，示例：<a href="/2018/12/01/nginx/" target="_blank" rel="external">https://luolizhi.github.io/2018/12/01/nginx/</a>
         
     </div>
     
@@ -277,18 +277,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2019/11/29/ubuntu16.04搭建nfs服务器/" id="post-prev" class="post-nav-link">
+      <a href="/2018/12/01/kubernetes-glusterfs/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">ubuntu16.04 搭建nfs服务器</h4>
+        <h4 class="title">kubernetes glusterfs</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2019/11/29/fastdfs集群/" id="post-next" class="post-nav-link">
+      <a href="/2018/12/01/fastdfs集群/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">No title</h4>
+        <h4 class="title">fastdfs 集群</h4>
       </a>
     </div>
   

@@ -20,19 +20,19 @@
     <meta name="theme-color" content="#3F51B5">
     
     
-    <meta name="keywords" content="api-gateway,微服务">
-    <meta name="description" content="开源API网关比较nginxzuul 是一种提供动态路由、监视、弹性、安全性等功能的边缘服务。Zuul 是 Netflix 出品的一个基于 JVM 路由和服务端的负载均衡器。kongspring cloud gatewayTraefik 是一个现代 HTTP 反向代理和负载均衡器，可以轻松部署微服务，Traeffik 可以与您现有的组件（Docker、Swarm，Kubernetes，Marath">
-<meta name="keywords" content="api-gateway,微服务">
+    <meta name="keywords" content="微服务,gateway">
+    <meta name="description" content="开源API网关比较   开源网关 简介     zuul Netflix 开源，基于 JVM 路由和服务端的负载均衡器。（已经停止维护）   kong 基于 OpenResty（Nginx + Lua 模块）编写的高可用、易扩展的，由 Mashape 公司开源的 API Gateway 项目 。   spring cloud gateway Spring Cloud 团队的一个全新项目，基于 Sp">
+<meta name="keywords" content="微服务,gateway">
 <meta property="og:type" content="article">
 <meta property="og:title" content="API-gateway">
 <meta property="og:url" content="https://luolizhi.github.io/2019/08/27/API-gateway/index.html">
 <meta property="og:site_name" content="水果点心">
-<meta property="og:description" content="开源API网关比较nginxzuul 是一种提供动态路由、监视、弹性、安全性等功能的边缘服务。Zuul 是 Netflix 出品的一个基于 JVM 路由和服务端的负载均衡器。kongspring cloud gatewayTraefik 是一个现代 HTTP 反向代理和负载均衡器，可以轻松部署微服务，Traeffik 可以与您现有的组件（Docker、Swarm，Kubernetes，Marath">
+<meta property="og:description" content="开源API网关比较   开源网关 简介     zuul Netflix 开源，基于 JVM 路由和服务端的负载均衡器。（已经停止维护）   kong 基于 OpenResty（Nginx + Lua 模块）编写的高可用、易扩展的，由 Mashape 公司开源的 API Gateway 项目 。   spring cloud gateway Spring Cloud 团队的一个全新项目，基于 Sp">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-11-29T11:45:41.522Z">
+<meta property="og:updated_time" content="2019-11-30T04:09:21.503Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="API-gateway">
-<meta name="twitter:description" content="开源API网关比较nginxzuul 是一种提供动态路由、监视、弹性、安全性等功能的边缘服务。Zuul 是 Netflix 出品的一个基于 JVM 路由和服务端的负载均衡器。kongspring cloud gatewayTraefik 是一个现代 HTTP 反向代理和负载均衡器，可以轻松部署微服务，Traeffik 可以与您现有的组件（Docker、Swarm，Kubernetes，Marath">
+<meta name="twitter:description" content="开源API网关比较   开源网关 简介     zuul Netflix 开源，基于 JVM 路由和服务端的负载均衡器。（已经停止维护）   kong 基于 OpenResty（Nginx + Lua 模块）编写的高可用、易扩展的，由 Mashape 公司开源的 API Gateway 项目 。   spring cloud gateway Spring Cloud 团队的一个全新项目，基于 Sp">
     
         <link rel="alternate" type="application/atom+xml" title="水果点心" href="/atom.xml">
     
@@ -199,7 +199,32 @@
 
         </div>
         <div class="post-content" id="post-content" itemprop="postContent">
-            <h2 id="开源API网关比较"><a href="#开源API网关比较" class="headerlink" title="开源API网关比较"></a>开源API网关比较</h2><p>nginx<br>zuul 是一种提供动态路由、监视、弹性、安全性等功能的边缘服务。Zuul 是 Netflix 出品的一个基于 JVM 路由和服务端的负载均衡器。<br>kong<br>spring cloud gateway<br>Traefik 是一个现代 HTTP 反向代理和负载均衡器，可以轻松部署微服务，Traeffik 可以与您现有的组件（Docker、Swarm，Kubernetes，Marathon，Consul，Etcd，…）集成，并自动动态配置。</p>
+            <h2 id="开源API网关比较"><a href="#开源API网关比较" class="headerlink" title="开源API网关比较"></a>开源API网关比较</h2><table>
+<thead>
+<tr>
+<th>开源网关</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>zuul</td>
+<td>Netflix 开源，基于 JVM 路由和服务端的负载均衡器。（已经停止维护）</td>
+</tr>
+<tr>
+<td>kong</td>
+<td>基于 OpenResty（Nginx + Lua 模块）编写的高可用、易扩展的，由 Mashape 公司开源的 API Gateway 项目 。</td>
+</tr>
+<tr>
+<td>spring cloud gateway</td>
+<td>Spring Cloud 团队的一个全新项目，基于 Spring 5.0、SpringBoot2.0、Project Reactor 等技术开发的网关， 目标是替代 Netflix Zuul 。</td>
+</tr>
+<tr>
+<td>Traefik</td>
+<td>一个现代 HTTP 反向代理和负载均衡器，可以轻松部署微服务，Traeffik 可以与您现有的组件（Docker、Swarm，Kubernetes，Marathon，Consul，Etcd，…）集成，并自动动态配置。</td>
+</tr>
+</tbody>
+</table>
 <p>从开源社区活跃度来看，无疑是Kong和Traefik较好；<br>从成熟度来看，较好的是Kong、Traefik；<br>从性能角度来看，Kong要比其他几个领先一些；<br>从架构优势的扩展性来看，Kong有丰富的插件，Ambassador也有插件但不多，而Zuul是完全需要自研，但Zuul由于与Spring Cloud深度集成，使用度也很高。</p>
 <h2 id="API-网关"><a href="#API-网关" class="headerlink" title="API 网关"></a>API 网关</h2><p><a href="https://zhaohuabing.com/post/2019-03-29-how-to-choose-ingress-for-service-mesh/" target="_blank" rel="noopener">选型参考,原理讲解</a></p>
 <p>API 网关出现的原因是微服务架构的出现，不同的微服务一般会有不同的网络地址，而外部客户端可能需要调用多个服务的接口才能完成一个业务需求，如果让客户端直接与各个微服务通信，会有以下的问题：</p>
@@ -220,7 +245,7 @@
     <div class="content">
         
 <span class="post-time">
-    最后更新时间：<time datetime="2019-11-29T11:45:41.522Z" itemprop="dateUpdated">2019-11-29 19:45:41</time>
+    最后更新时间：<time datetime="2019-11-30T04:09:21.503Z" itemprop="dateUpdated">2019-11-30 12:09:21</time>
 </span><br>
 
 
@@ -246,7 +271,7 @@
 
         <div class="post-footer">
             
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/api-gateway/">api-gateway</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微服务/">微服务</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gateway/">gateway</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/微服务/">微服务</a></li></ul>
 
 
             
@@ -259,18 +284,18 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2019/08/28/helm 安装 logstash/" id="post-prev" class="post-nav-link">
+      <a href="/2019/11/30/operator-user-guide-v0.12/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">helm 安装 logstash 同步mysql数据到elasticsearch</h4>
+        <h4 class="title">Operator SDK User Guide（翻译）</h4>
       </a>
     </div>
   
 
   
     <div class="waves-block waves-effect next">
-      <a href="/2019/08/23/kubesphere/" id="post-next" class="post-nav-link">
+      <a href="/2019/08/25/helm 安装 logstash/" id="post-next" class="post-nav-link">
         <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
-        <h4 class="title">kubesphere</h4>
+        <h4 class="title">helm 安装 logstash 同步mysql数据到elasticsearch</h4>
       </a>
     </div>
   
