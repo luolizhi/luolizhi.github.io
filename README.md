@@ -5,7 +5,7 @@
 在新的电脑上时，我们需要将项目先下载到本地，然后再进行hexo初始化。
 
 ```
-git clone https://github.com/luolizhi/luolizhi.github.io.git
+git clone https://github.com/luolizhi/luolizhi.github.io.git --recursive
 cd  luolizhi.github.io
 npm install hexo
 npm install hexo-cli -g
