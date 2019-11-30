@@ -9,6 +9,7 @@ git clone https://github.com/luolizhi/luolizhi.github.io.git --recursive
 cd  luolizhi.github.io
 npm install hexo
 npm install hexo-cli -g
+npm install
 npm install hexo-deployer-git --save
 ```
 
