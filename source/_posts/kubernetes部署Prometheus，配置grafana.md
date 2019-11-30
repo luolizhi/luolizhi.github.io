@@ -1,5 +1,6 @@
 ---
 title: prometheus部署
+date: 2018-12-1 18:29:38
 tags: [k8s, prometheus, grafana]
 ---
 # kubernetes部署Prometheus 注意事项

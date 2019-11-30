@@ -1,6 +1,6 @@
 ---
-title: Operator SDK User Guide
-date: 2019-11-29 18:29:38
+title: Operator SDK User Guide（翻译）
+date: 2019-11-30 10:29:38
 tags: [kubernetes, operator]
 ---
 
