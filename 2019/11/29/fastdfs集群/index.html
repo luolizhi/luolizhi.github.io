@@ -235,7 +235,13 @@
 </table>
 <h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>app25—tracker   192.168.77.76  fastdfs，fastcommon，nginx</p>
 <p>app26—storage   192.168.77.77  fastdfs，fastcommon，nginx，fastdfs-nginx-module<br>app27—storage   192.168.77.78  fastdfs，fastcommon，nginx，fastdfs-nginx-module</p>
-<p><img src="../images/fdfs架构图.jpg" alt="fdfs架构图"></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="../images/fdfs架构图.jpg" alt="fdfs架构图" title>
+                </div>
+                <div class="image-caption">fdfs架构图</div>
+            </figure>
 <h2 id="安装libfastcommon，fastdfs-（所有节点）"><a href="#安装libfastcommon，fastdfs-（所有节点）" class="headerlink" title="安装libfastcommon，fastdfs （所有节点）"></a>安装libfastcommon，fastdfs （所有节点）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># fastcommon</span><br><span class="line">wget https://github.com/happyfish100/libfastcommon.git </span><br><span class="line">#安装libfastcommon-master(与libfastcommon不同，里面多了很多头文件)</span><br><span class="line">tar zxvf libfastcommon-master.tar.gz</span><br><span class="line">cd libfastcommon-master/</span><br><span class="line">./make.sh</span><br><span class="line">./make.sh install</span><br><span class="line"></span><br><span class="line"># fastdfs安装</span><br><span class="line">wget https://github.com/happyfish100/fastdfs/archive/V5.11.tar.gz</span><br><span class="line">cd fastdfs-5.11/</span><br><span class="line">./make.sh</span><br><span class="line">./make.sh install</span><br></pre></td></tr></table></figure>
 <h2 id="tracker配置-（192-168-77-76）"><a href="#tracker配置-（192-168-77-76）" class="headerlink" title="tracker配置 （192.168.77.76）"></a>tracker配置 （192.168.77.76）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /data/fastdfs/</span><br><span class="line">cd /etc/fdfs/</span><br><span class="line">cp tracker.conf.sample tracker.conf</span><br><span class="line">vim tracker.conf</span><br><span class="line">#修改参数</span><br><span class="line">base_path=/data/fastdfs</span><br></pre></td></tr></table></figure>
 <ul>
@@ -254,8 +260,20 @@
 </ul>
 <h2 id="设置开机启动"><a href="#设置开机启动" class="headerlink" title="设置开机启动"></a>设置开机启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/rc.d/rc.local     </span><br><span class="line">#最后添加  </span><br><span class="line">/etc/init.d/fdfs_storaged start</span><br></pre></td></tr></table></figure>
 <p>省略软连接设置自启动<br><code>echo &#39;/usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart&#39; &gt;&gt; /etc/rc.d/rc.local</code></p>
-<h2 id="上传下载"><a href="#上传下载" class="headerlink" title="上传下载"></a>上传下载</h2><p>通常，对于图片和文件的访问，是不太可能走TCP，而是通过简单的HTTP访问，这时需要通过一些Web服务器(如nginx，apache)来代理，fastdfs也有了nginx的支持，下面则将通过安装nginx来完成文件访问，之前的开发环境将变为：<br><img src="../images/fdfs结合nginx配置图.jpg" alt><br>此时已经可以上传，下载还需要安装nginx和fastdfs-nginx-module，安装完成后一起测试</p>
-<h3 id="完整的文件服务器架构图："><a href="#完整的文件服务器架构图：" class="headerlink" title="完整的文件服务器架构图："></a>完整的文件服务器架构图：</h3><p><img src="../images/fdfs完整配置图.jpg" alt></p>
+<h2 id="上传下载"><a href="#上传下载" class="headerlink" title="上传下载"></a>上传下载</h2><p>通常，对于图片和文件的访问，是不太可能走TCP，而是通过简单的HTTP访问，这时需要通过一些Web服务器(如nginx，apache)来代理，fastdfs也有了nginx的支持，下面则将通过安装nginx来完成文件访问，之前的开发环境将变为：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="../images/fdfs结合nginx配置图.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure><br>此时已经可以上传，下载还需要安装nginx和fastdfs-nginx-module，安装完成后一起测试</p>
+<h3 id="完整的文件服务器架构图："><a href="#完整的文件服务器架构图：" class="headerlink" title="完整的文件服务器架构图："></a>完整的文件服务器架构图：</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="../images/fdfs完整配置图.jpg" alt title>
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <h2 id="nginx安装"><a href="#nginx安装" class="headerlink" title="nginx安装"></a>nginx安装</h2><ul>
 <li><h3 id="tracker上只安装nginx"><a href="#tracker上只安装nginx" class="headerlink" title="tracker上只安装nginx"></a>tracker上只安装nginx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 源码安装</span><br><span class="line">wget http://nginx.org/download/nginx-1.14.0.tar.gz</span><br><span class="line">sudo apt-get install -y  libpcre3 libpcre3-dev zlib1g-dev   openssl libssl-dev   //安装依赖库</span><br><span class="line">yum -y  install pcre-devel opensslopenssl-devel  zlib-devel  //centos7 安装依赖库</span><br><span class="line">cd  nginx-1.14.0/</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
 </li>
@@ -327,9 +345,9 @@
 <nav class="post-nav flex-row flex-justify-between">
   
     <div class="waves-block waves-effect prev">
-      <a href="/2019/11/29/kubernetes部署Prometheus，配置grafana/" id="post-prev" class="post-nav-link">
+      <a href="/2019/11/29/nginx/" id="post-prev" class="post-nav-link">
         <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
-        <h4 class="title">prometheus部署</h4>
+        <h4 class="title">nginx 配置</h4>
       </a>
     </div>
   
