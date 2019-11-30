@@ -169,6 +169,53 @@
     <ul class="post-list">
     
         <li class="post-list-item fade">
+            <article id="post-centos7安装apache文件下载服务器"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-12-01 10:50:27" datetime="2018-12-01T02:50:27.000Z"  itemprop="datePublished">2018-12-01</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/12/01/centos7安装apache文件下载服务器/">centos7安装apache文件下载服务器</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        centos7安装apache文件下载服务器part.1安装httpdyum install -y httpd
+part.2 设置开机启动项systemctl enable httpd`
+part.3 修改配置文件配置文件地址为：/etc/httpd/conf/httpd.conf修改配置文件Listen 80vim /etc/httpd/conf/httpd.conf例：Listen 80...
+    
+
+        <a href="/2018/12/01/centos7安装apache文件下载服务器/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-kubernetes-glusterfs"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -255,6 +302,53 @@
         </li>
     
         <li class="post-list-item fade">
+            <article id="post-centos7安装ansible"
+  class="article-card article-type-post" itemprop="blogPost">
+
+    <div class="post-meta">
+        <time class="post-time" title="2018-12-01 10:50:27" datetime="2018-12-01T02:50:27.000Z"  itemprop="datePublished">2018-12-01</time>
+
+        
+
+
+    </div>
+
+    
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2018/12/01/centos7安装ansible/">centos7 安装ansible</a>
+    </h3>
+  
+
+
+
+
+    <div class="post-content" id="post-content" itemprop="postContent">
+
+    
+        centos7 安装ansible1. 每个节点安装 依赖工具123456# 文档中脚本默认均以root用户执行# 安装 epel 源并更新yum install epel-release -yyum update# 安装pythonyum install python -y
+2. 在deploy 节点安装及准备ansible1yum install -y ansible
+3.在deploy...
+    
+
+        <a href="/2018/12/01/centos7安装ansible/" class="post-more waves-effect waves-button">
+            阅读全文…
+        </a>
+    </div>
+    
+    <div class="post-footer">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ansible/">ansible</a></li></ul>
+
+    </div>
+    
+</article>
+
+        </li>
+    
+        <li class="post-list-item fade">
             <article id="post-fastdfs集群"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -326,55 +420,6 @@ fast...
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-centos7安装ftp服务器"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-12-01 10:50:27" datetime="2018-12-01T02:50:27.000Z"  itemprop="datePublished">2018-12-01</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/12/01/centos7安装ftp服务器/">centos搭建ftp服务器</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        centos搭建ftp服务器系统环境Centos7.2
-安装步骤通过yum来安装vsftpdsudo yum -y install vsftpd
-设置为开机启动sudo chkconfig vsftpd on
-修改配置vim /etc/vsftpd/vsftpd.conf
-修改如下123456local_enable=YESwrite_enable=YESlocal_umask=022chr...
-    
-
-        <a href="/2018/12/01/centos7安装ftp服务器/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ftp/">ftp</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
             <article id="post-ansible基本语法"
   class="article-card article-type-post" itemprop="blogPost">
 
@@ -424,7 +469,7 @@ command模块：是Ansible默认执行模块，在远程主机执行 shell 指�
         </li>
     
         <li class="post-list-item fade">
-            <article id="post-centos7安装apache文件下载服务器"
+            <article id="post-centos7安装ftp服务器"
   class="article-card article-type-post" itemprop="blogPost">
 
     <div class="post-meta">
@@ -440,7 +485,7 @@ command模块：是Ansible默认执行模块，在远程主机执行 shell 指�
 
   
     <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/12/01/centos7安装apache文件下载服务器/">centos7安装apache文件下载服务器</a>
+      <a class="post-title-link" href="/2018/12/01/centos7安装ftp服务器/">centos搭建ftp服务器</a>
     </h3>
   
 
@@ -450,66 +495,21 @@ command模块：是Ansible默认执行模块，在远程主机执行 shell 指�
     <div class="post-content" id="post-content" itemprop="postContent">
 
     
-        centos7安装apache文件下载服务器part.1安装httpdyum install -y httpd
-part.2 设置开机启动项systemctl enable httpd`
-part.3 修改配置文件配置文件地址为：/etc/httpd/conf/httpd.conf修改配置文件Listen 80vim /etc/httpd/conf/httpd.conf例：Listen 80...
+        centos搭建ftp服务器系统环境Centos7.2
+安装步骤通过yum来安装vsftpdsudo yum -y install vsftpd
+设置为开机启动sudo chkconfig vsftpd on
+修改配置vim /etc/vsftpd/vsftpd.conf
+修改如下123456local_enable=YESwrite_enable=YESlocal_umask=022chr...
     
 
-        <a href="/2018/12/01/centos7安装apache文件下载服务器/" class="post-more waves-effect waves-button">
+        <a href="/2018/12/01/centos7安装ftp服务器/" class="post-more waves-effect waves-button">
             阅读全文…
         </a>
     </div>
     
     <div class="post-footer">
         
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li></ul>
-
-    </div>
-    
-</article>
-
-        </li>
-    
-        <li class="post-list-item fade">
-            <article id="post-centos7安装ansible"
-  class="article-card article-type-post" itemprop="blogPost">
-
-    <div class="post-meta">
-        <time class="post-time" title="2018-12-01 10:50:27" datetime="2018-12-01T02:50:27.000Z"  itemprop="datePublished">2018-12-01</time>
-
-        
-
-
-    </div>
-
-    
-
-
-  
-    <h3 class="post-title" itemprop="name">
-      <a class="post-title-link" href="/2018/12/01/centos7安装ansible/">centos7 安装ansible</a>
-    </h3>
-  
-
-
-
-
-    <div class="post-content" id="post-content" itemprop="postContent">
-
-    
-        centos7 安装ansible1. 每个节点安装 依赖工具123456# 文档中脚本默认均以root用户执行# 安装 epel 源并更新yum install epel-release -yyum update# 安装pythonyum install python -y
-2. 在deploy 节点安装及准备ansible1yum install -y ansible
-3.在deploy...
-    
-
-        <a href="/2018/12/01/centos7安装ansible/" class="post-more waves-effect waves-button">
-            阅读全文…
-        </a>
-    </div>
-    
-    <div class="post-footer">
-        
-	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ansible/">ansible</a></li></ul>
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ftp/">ftp</a></li></ul>
 
     </div>
     

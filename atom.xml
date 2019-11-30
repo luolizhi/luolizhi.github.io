@@ -269,6 +269,29 @@
   </entry>
   
   <entry>
+    <title>centos7安装apache文件下载服务器</title>
+    <link href="https://luolizhi.github.io/2018/12/01/centos7%E5%AE%89%E8%A3%85apache%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>https://luolizhi.github.io/2018/12/01/centos7安装apache文件下载服务器/</id>
+    <published>2018-12-01T02:50:27.000Z</published>
+    <updated>2019-11-30T03:54:49.615Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="centos7安装apache文件下载服务器"><a href="#centos7安装apache文件下载服务器" class="headerlink" title="centos7安装apache文件下载服务器"></a>centos7安装apache文件下载服务器</h1><h2 id="part-1安装httpd"><a href="#part-1安装httpd" class="headerlink" title="part.1安装httpd"></a>part.1安装httpd</h2><p><code>yum install -y httpd</code></p><h2 id="part-2-设置开机启动项"><a href="#part-2-设置开机启动项" class="headerlink" title="part.2 设置开机启动项"></a>part.2 设置开机启动项</h2><p><code>systemctl enable httpd`</code></p><h2 id="part-3-修改配置文件"><a href="#part-3-修改配置文件" class="headerlink" title="part.3 修改配置文件"></a>part.3 修改配置文件</h2><p>配置文件地址为：<br>/etc/httpd/conf/httpd.conf<br>修改配置文件Listen 80<br><code>vim /etc/httpd/conf/httpd.conf</code><br>例：Listen 8051 //80为默认访问端口,若该为其它端口，首先要保证端口没有被占用，访问时也需要加端口号</p><h2 id="part-4指定提供下载的目录地址"><a href="#part-4指定提供下载的目录地址" class="headerlink" title="part.4指定提供下载的目录地址"></a>part.4指定提供下载的目录地址</h2><p>因apache服务显示的地址默认为 /var/www/html<br>我们进入此地址</p><p>cd /var/www/html<br>建立文件目录软链接<br>输入ln -s 文件目录地址 下载地址<br>例：</p><p> ln -s /home/downloads downloads<br>即在/var/www/html目录建立新的文件夹downloads,并且链接到/home/downloads目录</p><h2 id="part-5-启动服务查看效果"><a href="#part-5-启动服务查看效果" class="headerlink" title="part.5 启动服务查看效果"></a>part.5 启动服务查看效果</h2><p><code>systemctl httpd start</code><br>访问此文件目录进行下载即在浏览器输入<br>http://[ip]/downloads<br>即可看到/home/downloads目录下的所有文件和文件夹</p><p>如果显示访问超时，需要把防火墙关闭。</p><p><code>systemctl stop firewalld.service</code><br>再次访问即可。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;centos7安装apache文件下载服务器&quot;&gt;&lt;a href=&quot;#centos7安装apache文件下载服务器&quot; class=&quot;headerlink&quot; title=&quot;centos7安装apache文件下载服务器&quot;&gt;&lt;/a&gt;centos7安装apache文件下载服
+      
+    
+    </summary>
+    
+    
+      <category term="apache" scheme="https://luolizhi.github.io/tags/apache/"/>
+    
+  </entry>
+  
+  <entry>
     <title>kubernetes glusterfs</title>
     <link href="https://luolizhi.github.io/2018/12/01/kubernetes-glusterfs/"/>
     <id>https://luolizhi.github.io/2018/12/01/kubernetes-glusterfs/</id>
@@ -314,6 +337,29 @@
   </entry>
   
   <entry>
+    <title>centos7 安装ansible</title>
+    <link href="https://luolizhi.github.io/2018/12/01/centos7%E5%AE%89%E8%A3%85ansible/"/>
+    <id>https://luolizhi.github.io/2018/12/01/centos7安装ansible/</id>
+    <published>2018-12-01T02:50:27.000Z</published>
+    <updated>2019-11-30T03:51:31.635Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="centos7-安装ansible"><a href="#centos7-安装ansible" class="headerlink" title="centos7 安装ansible"></a>centos7 安装ansible</h1><h2 id="1-每个节点安装-依赖工具"><a href="#1-每个节点安装-依赖工具" class="headerlink" title="1. 每个节点安装 依赖工具"></a>1. 每个节点安装 依赖工具</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 文档中脚本默认均以root用户执行</span><br><span class="line"># 安装 epel 源并更新</span><br><span class="line">yum install epel-release -y</span><br><span class="line">yum update</span><br><span class="line"># 安装python</span><br><span class="line">yum install python -y</span><br></pre></td></tr></table></figure><h2 id="2-在deploy-节点安装及准备ansible"><a href="#2-在deploy-节点安装及准备ansible" class="headerlink" title="2. 在deploy 节点安装及准备ansible"></a>2. 在deploy 节点安装及准备ansible</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y ansible</span><br></pre></td></tr></table></figure><h2 id="3-在deploy节点配置免密码登陆"><a href="#3-在deploy节点配置免密码登陆" class="headerlink" title="3.在deploy节点配置免密码登陆"></a>3.在deploy节点配置免密码登陆</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 2048 回车 回车 回车</span><br><span class="line">ssh-copy-id $IPs    #$IPs为所有节点地址包括自身，按照提示输入yes 和root密码</span><br></pre></td></tr></table></figure><p><strong>批量添加密码的脚本</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">for i in $(seq 111 116);</span><br><span class="line">do</span><br><span class="line">ip=&quot;10.0.1.&quot;$i;</span><br><span class="line">echo $ip</span><br><span class="line">sshpass -p &apos;123456&apos; ssh-copy-id -o StrictHostKeyChecking=no  $ip</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p><h2 id="4-验证ansible安装，正常能看到每个节点返回-SUCCESS"><a href="#4-验证ansible安装，正常能看到每个节点返回-SUCCESS" class="headerlink" title="4. 验证ansible安装，正常能看到每个节点返回 SUCCESS"></a>4. 验证ansible安装，正常能看到每个节点返回 SUCCESS</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m ping</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;centos7-安装ansible&quot;&gt;&lt;a href=&quot;#centos7-安装ansible&quot; class=&quot;headerlink&quot; title=&quot;centos7 安装ansible&quot;&gt;&lt;/a&gt;centos7 安装ansible&lt;/h1&gt;&lt;h2 id=&quot;1-每个节
+      
+    
+    </summary>
+    
+    
+      <category term="ansible" scheme="https://luolizhi.github.io/tags/ansible/"/>
+    
+  </entry>
+  
+  <entry>
     <title>fastdfs 集群</title>
     <link href="https://luolizhi.github.io/2018/12/01/fastdfs%E9%9B%86%E7%BE%A4/"/>
     <id>https://luolizhi.github.io/2018/12/01/fastdfs集群/</id>
@@ -333,29 +379,6 @@
     
     
       <category term="fastdfs" scheme="https://luolizhi.github.io/tags/fastdfs/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos搭建ftp服务器</title>
-    <link href="https://luolizhi.github.io/2018/12/01/centos7%E5%AE%89%E8%A3%85ftp%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    <id>https://luolizhi.github.io/2018/12/01/centos7安装ftp服务器/</id>
-    <published>2018-12-01T02:50:27.000Z</published>
-    <updated>2019-11-30T03:53:55.469Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="centos搭建ftp服务器"><a href="#centos搭建ftp服务器" class="headerlink" title="centos搭建ftp服务器"></a>centos搭建ftp服务器</h1><p>系统环境<br><code>Centos7.2</code></p><p>安装步骤<br>通过yum来安装vsftpd<br><code>sudo yum -y install vsftpd</code></p><p>设置为开机启动<br><code>sudo chkconfig vsftpd on</code></p><p>修改配置<br><code>vim /etc/vsftpd/vsftpd.conf</code></p><p>修改如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">local_enable=YES</span><br><span class="line">write_enable=YES</span><br><span class="line">local_umask=022</span><br><span class="line">chroot_local_user=YES      #这行可能需自己写</span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line">userlist_enable=YES</span><br></pre></td></tr></table></figure></p><blockquote><p>注：chroot_local_user #是否将所有用户限制在主目录,YES为启用 NO禁用.(该项默认值是NO,即在安装vsftpd后不做配置的话，ftp用户是可以向上切换到要目录之外的)</p></blockquote><p>配置保存后，重启vsftpd服务<br><code>sudo service vsftpd restart</code></p><p>添加用户<br>添加vsftpd账号,并制定ftp<br><code>sudo useradd d /home/ftpdir -s /sbin/nologin vsftpd</code></p><p>为账号设置密码，按提示操作<br>sudo passwd vsftpd<br>为用户的目录修改权限，实现上传和下载文件<br><code>sudo chmod o+w /home/ftpdir</code></p><p>配置Centos防火墙<br>添加ip_conntrack_ftp模块<br><code>sudo vi /etc/sysconfig/iptables-config</code></p><p>添加下面一行<br><code>IPTABLES_MODULES=&quot;ip_conntrack_ftp&quot;</code></p><p>打开ftp端口21<br><code>sudo vi /etc/sysconfig/iptables</code><br>添加下面一行</p><p><code>-A INPUT -m state --state NEW -m tcp -p tcp --dport 21 -j ACCEPT</code></p><p>重启iptables使新的规则生效<br><code>sudo service iptables restart</code></p><p>测试<br>可用WinSCP进行测试</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;centos搭建ftp服务器&quot;&gt;&lt;a href=&quot;#centos搭建ftp服务器&quot; class=&quot;headerlink&quot; title=&quot;centos搭建ftp服务器&quot;&gt;&lt;/a&gt;centos搭建ftp服务器&lt;/h1&gt;&lt;p&gt;系统环境&lt;br&gt;&lt;code&gt;Centos7.
-      
-    
-    </summary>
-    
-    
-      <category term="ftp" scheme="https://luolizhi.github.io/tags/ftp/"/>
     
   </entry>
   
@@ -385,48 +408,25 @@
   </entry>
   
   <entry>
-    <title>centos7安装apache文件下载服务器</title>
-    <link href="https://luolizhi.github.io/2018/12/01/centos7%E5%AE%89%E8%A3%85apache%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
-    <id>https://luolizhi.github.io/2018/12/01/centos7安装apache文件下载服务器/</id>
+    <title>centos搭建ftp服务器</title>
+    <link href="https://luolizhi.github.io/2018/12/01/centos7%E5%AE%89%E8%A3%85ftp%E6%9C%8D%E5%8A%A1%E5%99%A8/"/>
+    <id>https://luolizhi.github.io/2018/12/01/centos7安装ftp服务器/</id>
     <published>2018-12-01T02:50:27.000Z</published>
-    <updated>2019-11-30T03:54:49.615Z</updated>
+    <updated>2019-11-30T03:53:55.469Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="centos7安装apache文件下载服务器"><a href="#centos7安装apache文件下载服务器" class="headerlink" title="centos7安装apache文件下载服务器"></a>centos7安装apache文件下载服务器</h1><h2 id="part-1安装httpd"><a href="#part-1安装httpd" class="headerlink" title="part.1安装httpd"></a>part.1安装httpd</h2><p><code>yum install -y httpd</code></p><h2 id="part-2-设置开机启动项"><a href="#part-2-设置开机启动项" class="headerlink" title="part.2 设置开机启动项"></a>part.2 设置开机启动项</h2><p><code>systemctl enable httpd`</code></p><h2 id="part-3-修改配置文件"><a href="#part-3-修改配置文件" class="headerlink" title="part.3 修改配置文件"></a>part.3 修改配置文件</h2><p>配置文件地址为：<br>/etc/httpd/conf/httpd.conf<br>修改配置文件Listen 80<br><code>vim /etc/httpd/conf/httpd.conf</code><br>例：Listen 8051 //80为默认访问端口,若该为其它端口，首先要保证端口没有被占用，访问时也需要加端口号</p><h2 id="part-4指定提供下载的目录地址"><a href="#part-4指定提供下载的目录地址" class="headerlink" title="part.4指定提供下载的目录地址"></a>part.4指定提供下载的目录地址</h2><p>因apache服务显示的地址默认为 /var/www/html<br>我们进入此地址</p><p>cd /var/www/html<br>建立文件目录软链接<br>输入ln -s 文件目录地址 下载地址<br>例：</p><p> ln -s /home/downloads downloads<br>即在/var/www/html目录建立新的文件夹downloads,并且链接到/home/downloads目录</p><h2 id="part-5-启动服务查看效果"><a href="#part-5-启动服务查看效果" class="headerlink" title="part.5 启动服务查看效果"></a>part.5 启动服务查看效果</h2><p><code>systemctl httpd start</code><br>访问此文件目录进行下载即在浏览器输入<br>http://[ip]/downloads<br>即可看到/home/downloads目录下的所有文件和文件夹</p><p>如果显示访问超时，需要把防火墙关闭。</p><p><code>systemctl stop firewalld.service</code><br>再次访问即可。</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="centos搭建ftp服务器"><a href="#centos搭建ftp服务器" class="headerlink" title="centos搭建ftp服务器"></a>centos搭建ftp服务器</h1><p>系统环境<br><code>Centos7.2</code></p><p>安装步骤<br>通过yum来安装vsftpd<br><code>sudo yum -y install vsftpd</code></p><p>设置为开机启动<br><code>sudo chkconfig vsftpd on</code></p><p>修改配置<br><code>vim /etc/vsftpd/vsftpd.conf</code></p><p>修改如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">local_enable=YES</span><br><span class="line">write_enable=YES</span><br><span class="line">local_umask=022</span><br><span class="line">chroot_local_user=YES      #这行可能需自己写</span><br><span class="line">pam_service_name=vsftpd</span><br><span class="line">userlist_enable=YES</span><br></pre></td></tr></table></figure></p><blockquote><p>注：chroot_local_user #是否将所有用户限制在主目录,YES为启用 NO禁用.(该项默认值是NO,即在安装vsftpd后不做配置的话，ftp用户是可以向上切换到要目录之外的)</p></blockquote><p>配置保存后，重启vsftpd服务<br><code>sudo service vsftpd restart</code></p><p>添加用户<br>添加vsftpd账号,并制定ftp<br><code>sudo useradd d /home/ftpdir -s /sbin/nologin vsftpd</code></p><p>为账号设置密码，按提示操作<br>sudo passwd vsftpd<br>为用户的目录修改权限，实现上传和下载文件<br><code>sudo chmod o+w /home/ftpdir</code></p><p>配置Centos防火墙<br>添加ip_conntrack_ftp模块<br><code>sudo vi /etc/sysconfig/iptables-config</code></p><p>添加下面一行<br><code>IPTABLES_MODULES=&quot;ip_conntrack_ftp&quot;</code></p><p>打开ftp端口21<br><code>sudo vi /etc/sysconfig/iptables</code><br>添加下面一行</p><p><code>-A INPUT -m state --state NEW -m tcp -p tcp --dport 21 -j ACCEPT</code></p><p>重启iptables使新的规则生效<br><code>sudo service iptables restart</code></p><p>测试<br>可用WinSCP进行测试</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h1 id=&quot;centos7安装apache文件下载服务器&quot;&gt;&lt;a href=&quot;#centos7安装apache文件下载服务器&quot; class=&quot;headerlink&quot; title=&quot;centos7安装apache文件下载服务器&quot;&gt;&lt;/a&gt;centos7安装apache文件下载服
+        &lt;h1 id=&quot;centos搭建ftp服务器&quot;&gt;&lt;a href=&quot;#centos搭建ftp服务器&quot; class=&quot;headerlink&quot; title=&quot;centos搭建ftp服务器&quot;&gt;&lt;/a&gt;centos搭建ftp服务器&lt;/h1&gt;&lt;p&gt;系统环境&lt;br&gt;&lt;code&gt;Centos7.
       
     
     </summary>
     
     
-      <category term="apache" scheme="https://luolizhi.github.io/tags/apache/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos7 安装ansible</title>
-    <link href="https://luolizhi.github.io/2018/12/01/centos7%E5%AE%89%E8%A3%85ansible/"/>
-    <id>https://luolizhi.github.io/2018/12/01/centos7安装ansible/</id>
-    <published>2018-12-01T02:50:27.000Z</published>
-    <updated>2019-11-30T03:51:31.635Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="centos7-安装ansible"><a href="#centos7-安装ansible" class="headerlink" title="centos7 安装ansible"></a>centos7 安装ansible</h1><h2 id="1-每个节点安装-依赖工具"><a href="#1-每个节点安装-依赖工具" class="headerlink" title="1. 每个节点安装 依赖工具"></a>1. 每个节点安装 依赖工具</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 文档中脚本默认均以root用户执行</span><br><span class="line"># 安装 epel 源并更新</span><br><span class="line">yum install epel-release -y</span><br><span class="line">yum update</span><br><span class="line"># 安装python</span><br><span class="line">yum install python -y</span><br></pre></td></tr></table></figure><h2 id="2-在deploy-节点安装及准备ansible"><a href="#2-在deploy-节点安装及准备ansible" class="headerlink" title="2. 在deploy 节点安装及准备ansible"></a>2. 在deploy 节点安装及准备ansible</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y ansible</span><br></pre></td></tr></table></figure><h2 id="3-在deploy节点配置免密码登陆"><a href="#3-在deploy节点配置免密码登陆" class="headerlink" title="3.在deploy节点配置免密码登陆"></a>3.在deploy节点配置免密码登陆</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 2048 回车 回车 回车</span><br><span class="line">ssh-copy-id $IPs    #$IPs为所有节点地址包括自身，按照提示输入yes 和root密码</span><br></pre></td></tr></table></figure><p><strong>批量添加密码的脚本</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">for i in $(seq 111 116);</span><br><span class="line">do</span><br><span class="line">ip=&quot;10.0.1.&quot;$i;</span><br><span class="line">echo $ip</span><br><span class="line">sshpass -p &apos;123456&apos; ssh-copy-id -o StrictHostKeyChecking=no  $ip</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p><h2 id="4-验证ansible安装，正常能看到每个节点返回-SUCCESS"><a href="#4-验证ansible安装，正常能看到每个节点返回-SUCCESS" class="headerlink" title="4. 验证ansible安装，正常能看到每个节点返回 SUCCESS"></a>4. 验证ansible安装，正常能看到每个节点返回 SUCCESS</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ansible all -m ping</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;centos7-安装ansible&quot;&gt;&lt;a href=&quot;#centos7-安装ansible&quot; class=&quot;headerlink&quot; title=&quot;centos7 安装ansible&quot;&gt;&lt;/a&gt;centos7 安装ansible&lt;/h1&gt;&lt;h2 id=&quot;1-每个节
-      
-    
-    </summary>
-    
-    
-      <category term="ansible" scheme="https://luolizhi.github.io/tags/ansible/"/>
+      <category term="ftp" scheme="https://luolizhi.github.io/tags/ftp/"/>
     
   </entry>
   
