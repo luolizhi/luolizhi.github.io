@@ -137,10 +137,6 @@ When you define a target (with the `name` attribute) for your `IngressRoute`,
 
 下面是同时利用服务和 `TraefikServices` 并同时使用镜像和服务负载平衡的示例！
 
-![1576463361091](C:\Users\lukey\AppData\Local\Temp\1576463361091.png)
-
-
-
 ```yaml
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
